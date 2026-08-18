@@ -58,8 +58,8 @@ function HeroVisual() {
             key={i}
             x1="200"
             y1="200"
-            x2={200 + 190 * Math.cos((i / 7) * Math.PI * 2)}
-            y2={200 + 190 * Math.sin((i / 7) * Math.PI * 2)}
+            x2={+(200 + 190 * Math.cos((i / 7) * Math.PI * 2)).toFixed(3)}
+            y2={+(200 + 190 * Math.sin((i / 7) * Math.PI * 2)).toFixed(3)}
             stroke="var(--foreground)"
             strokeOpacity="0.08"
             strokeWidth="0.6"
@@ -71,8 +71,8 @@ function HeroVisual() {
         {[...Array(9)].map((_, i) => (
           <motion.circle
             key={`d${i}`}
-            cx={200 + (60 + (i % 4) * 40) * Math.cos((i / 9) * Math.PI * 2)}
-            cy={200 + (60 + (i % 4) * 40) * Math.sin((i / 9) * Math.PI * 2)}
+            cx={+(200 + (60 + (i % 4) * 40) * Math.cos((i / 9) * Math.PI * 2)).toFixed(3)}
+            cy={+(200 + (60 + (i % 4) * 40) * Math.sin((i / 9) * Math.PI * 2)).toFixed(3)}
             r="2"
             fill="var(--accent)"
             initial={{ opacity: 0, scale: 0 }}
