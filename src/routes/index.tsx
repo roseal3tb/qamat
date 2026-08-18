@@ -1,24 +1,54 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Navbar } from "@/components/qamat/Navbar";
+import { Hero } from "@/components/qamat/Hero";
+import { About } from "@/components/qamat/About";
+import { Objectives } from "@/components/qamat/Objectives";
+import { Audience } from "@/components/qamat/Audience";
+import { Journey } from "@/components/qamat/Journey";
+import { Fields } from "@/components/qamat/Fields";
+import { Partners } from "@/components/qamat/Partners";
+import { Outcomes } from "@/components/qamat/Outcomes";
+import { Transformation } from "@/components/qamat/Transformation";
+import { Impact } from "@/components/qamat/Impact";
+import { CTA } from "@/components/qamat/CTA";
+import { Footer } from "@/components/qamat/Footer";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+const title = "قامات | QAMAT — نبني الكفاءات، نصنع الخبرة، ونمكّن الأثر";
+const description =
+  "قامات مبادرة نوعية لتمكين الكفاءات الشابة عبر برامج تخصصية وتجارب تدريبية وتطبيقية بالشراكة مع جهات رائدة.";
+
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title },
+      { name: "description", content: description },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="min-h-screen bg-background">
+      <Navbar />
+      <main>
+        <Hero />
+        <About />
+        <Objectives />
+        <Audience />
+        <Journey />
+        <Fields />
+        <Partners />
+        <Outcomes />
+        <Transformation />
+        <Impact />
+        <CTA />
+      </main>
+      <Footer />
     </div>
   );
 }
