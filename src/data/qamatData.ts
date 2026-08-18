@@ -170,3 +170,51 @@ export const footerLinks = [
   { label: "المجالات", href: "#fields" },
   { label: "تواصل معنا", href: "#cta" },
 ];
+
+/**
+ * قاداتنا — بيانات القيادة واللجان.
+ * PLACEHOLDER: استبدل الأسماء والصور والمسميات بالبيانات الرسمية عند توفرها.
+ * photo: ضع رابط الصورة (أو اتركه فارغًا لعرض حرف الاسم كبديل).
+ */
+export type Leader = {
+  name: string;
+  role: string;
+  committee: string;
+  desc?: string;
+  photo?: string;
+};
+
+export const leadership: { committee: string; tint: string; leaders: Leader[] }[] = [
+  {
+    committee: "اللجنة التنفيذية",
+    tint: "38 62% 52%",
+    leaders: [
+      { name: "الاسم الكامل", role: "قائد/ة اللجنة التنفيذية", committee: "اللجنة التنفيذية", desc: "وصف مختصر — PLACEHOLDER", photo: "" },
+      { name: "الاسم الكامل", role: "نائب/ة قائد اللجنة التنفيذية", committee: "اللجنة التنفيذية", desc: "", photo: "" },
+    ],
+  },
+  {
+    committee: "اللجنة الإعلامية",
+    tint: "205 55% 50%",
+    leaders: [
+      { name: "الاسم الكامل", role: "قائد/ة اللجنة الإعلامية", committee: "اللجنة الإعلامية", desc: "وصف مختصر — PLACEHOLDER", photo: "" },
+      { name: "الاسم الكامل", role: "عضو/ة اللجنة الإعلامية", committee: "اللجنة الإعلامية", desc: "", photo: "" },
+    ],
+  },
+  {
+    committee: "لجنة الشراكات",
+    tint: "150 40% 42%",
+    leaders: [
+      { name: "الاسم الكامل", role: "قائد/ة لجنة الشراكات", committee: "لجنة الشراكات", desc: "وصف مختصر — PLACEHOLDER", photo: "" },
+      { name: "الاسم الكامل", role: "عضو/ة لجنة الشراكات", committee: "لجنة الشراكات", desc: "", photo: "" },
+    ],
+  },
+  {
+    committee: "اللجنة التنظيمية",
+    tint: "12 60% 52%",
+    leaders: [
+      { name: "الاسم الكامل", role: "قائد/ة اللجنة التنظيمية", committee: "اللجنة التنظيمية", desc: "وصف مختصر — PLACEHOLDER", photo: "" },
+      { name: "الاسم الكامل", role: "عضو/ة اللجنة التنظيمية", committee: "اللجنة التنظيمية", desc: "", photo: "" },
+    ],
+  },
+];
