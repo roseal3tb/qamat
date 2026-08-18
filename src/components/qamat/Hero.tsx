@@ -20,7 +20,7 @@ function HeroVisual() {
       />
       {/* أقواس متنامية */}
       <svg
-        className="absolute -left-[10%] top-1/2 h-[120vmin] w-[120vmin] -translate-y-1/2"
+        className="absolute -left-[14%] top-1/2 h-[86vmin] w-[86vmin] -translate-y-1/2 opacity-90"
         viewBox="0 0 400 400"
         fill="none"
       >
@@ -131,7 +131,7 @@ export function Hero() {
 
         <h1 className="mt-8 max-w-[18ch] text-[clamp(2.4rem,7.2vw,6rem)] font-semibold leading-[1.12] tracking-tight">
           {line.split(" ").map((w, i) => (
-            <span key={i} className="inline-block overflow-hidden align-bottom">
+            <span key={i} className="inline-block overflow-hidden pb-[0.18em] -mb-[0.18em] align-bottom">
               <motion.span
                 className={`inline-block ${w.includes("الأثر") ? "text-accent" : ""}`}
                 initial={{ y: "1em", opacity: 0 }}
