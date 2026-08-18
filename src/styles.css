@@ -5,77 +5,209 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * QAMAT — نظام التصميم
- * كل الألوان بصيغة oklch وقابلة للتغيير من هنا فقط.
+ * QAMAT — Visual Identity System
+ * --------------------------------
+ * Primary:   #19474C
+ * Accent:    #A88D68
+ * Secondary: #1B264A
+ *
+ * الهوية:
+ * أخضر بترولي عميق + ذهبي هادئ + كحلي مؤسسي
+ *
+ * جميع ألوان الموقع الرئيسية تتم إدارتها من هنا
+ * للحفاظ على اتساق الهوية البصرية.
  */
 
 @theme inline {
   --font-sans: "IBM Plex Sans Arabic", ui-sans-serif, system-ui, sans-serif;
+
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
   --radius-2xl: calc(var(--radius) + 8px);
+
+  /* Core */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  /* Surfaces */
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
+
+  /* Brand */
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
+
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+
+  /* Utility */
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
+
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+
+  /* QAMAT Dark System */
   --color-ink: var(--ink);
   --color-ink-foreground: var(--ink-foreground);
   --color-ink-muted: var(--ink-muted);
   --color-ink-border: var(--ink-border);
 }
 
+
+/* =========================================================
+   ROOT — QAMAT BRAND PALETTE
+   ========================================================= */
+
 :root {
-  --radius: 0.25rem;
+  --radius: 0.3rem;
 
-  /* الأساس: أبيض دافئ */
-  --background: oklch(0.976 0.006 85);
-  --foreground: oklch(0.19 0.008 60);
+  /*
+   * BRAND COLORS
+   *
+   * #19474C — Primary Teal
+   * #A88D68 — Sand Gold
+   * #1B264A — Institutional Navy
+   */
 
-  /* الفحمي الداكن */
-  --ink: oklch(0.155 0.006 60);
-  --ink-foreground: oklch(0.965 0.006 85);
-  --ink-muted: oklch(0.72 0.008 70);
-  --ink-border: oklch(1 0 0 / 12%);
+  /* -------------------------------------------------------
+     MAIN BACKGROUND
+     ------------------------------------------------------- */
 
-  --card: oklch(0.99 0.004 85);
+  --background: oklch(0.985 0.004 90);
+  --foreground: oklch(0.22 0.035 205);
+
+
+  /* -------------------------------------------------------
+     PRIMARY — QAMAT TEAL
+     #19474C
+     ------------------------------------------------------- */
+
+  --primary: oklch(0.31 0.065 201);
+  --primary-foreground: oklch(0.985 0.004 90);
+
+
+  /* -------------------------------------------------------
+     SECONDARY — QAMAT NAVY
+     #1B264A
+     ------------------------------------------------------- */
+
+  --secondary: oklch(0.24 0.065 260);
+  --secondary-foreground: oklch(0.985 0.004 90);
+
+
+  /* -------------------------------------------------------
+     ACCENT — QAMAT GOLD
+     #A88D68
+     ------------------------------------------------------- */
+
+  --accent: oklch(0.64 0.075 72);
+  --accent-foreground: oklch(0.18 0.025 70);
+
+
+  /* -------------------------------------------------------
+     DARK / INK SYSTEM
+     ------------------------------------------------------- */
+
+  --ink: oklch(0.24 0.065 260);
+  --ink-foreground: oklch(0.97 0.006 90);
+
+  --ink-muted: oklch(0.73 0.025 245);
+
+  --ink-border: oklch(0.97 0.006 90 / 14%);
+
+
+  /* -------------------------------------------------------
+     CARDS & SURFACES
+     ------------------------------------------------------- */
+
+  --card: oklch(0.995 0.002 90);
   --card-foreground: var(--foreground);
-  --popover: oklch(0.99 0.004 85);
+
+  --popover: oklch(0.995 0.002 90);
   --popover-foreground: var(--foreground);
 
-  --primary: oklch(0.155 0.006 60);
-  --primary-foreground: oklch(0.976 0.006 85);
-  --secondary: oklch(0.94 0.008 85);
-  --secondary-foreground: var(--foreground);
-  --muted: oklch(0.94 0.008 85);
-  --muted-foreground: oklch(0.5 0.01 70);
 
-  /* لون مميز واحد: ذهبي رملي */
-  --accent: oklch(0.72 0.145 72);
-  --accent-foreground: oklch(0.16 0.02 70);
+  /* -------------------------------------------------------
+     MUTED
+     ------------------------------------------------------- */
 
-  --destructive: oklch(0.577 0.245 27.325);
+  --muted: oklch(0.95 0.008 90);
+
+  --muted-foreground: oklch(0.48 0.025 205);
+
+
+  /* -------------------------------------------------------
+     BORDERS
+     ------------------------------------------------------- */
+
+  --border: oklch(0.31 0.065 201 / 14%);
+  --input: oklch(0.31 0.065 201 / 18%);
+
+  --ring: var(--accent);
+
+
+  /* -------------------------------------------------------
+     DESTRUCTIVE
+     ------------------------------------------------------- */
+
+  --destructive: oklch(0.58 0.20 28);
   --destructive-foreground: oklch(0.98 0 0);
-  --border: oklch(0.19 0.008 60 / 12%);
-  --input: oklch(0.19 0.008 60 / 16%);
+}
+
+
+/* =========================================================
+   DARK MODE
+   ========================================================= */
+
+.dark {
+  --background: oklch(0.24 0.065 260);
+  --foreground: oklch(0.965 0.006 90);
+
+  --card: oklch(0.27 0.055 255);
+  --card-foreground: oklch(0.965 0.006 90);
+
+  --popover: oklch(0.27 0.055 255);
+  --popover-foreground: oklch(0.965 0.006 90);
+
+  --primary: oklch(0.42 0.075 201);
+  --primary-foreground: oklch(0.98 0.004 90);
+
+  --secondary: oklch(0.31 0.065 201);
+  --secondary-foreground: oklch(0.98 0.004 90);
+
+  --accent: oklch(0.68 0.075 72);
+  --accent-foreground: oklch(0.18 0.025 70);
+
+  --muted: oklch(0.30 0.045 250);
+  --muted-foreground: oklch(0.76 0.025 245);
+
+  --border: oklch(0.95 0.006 90 / 13%);
+  --input: oklch(0.95 0.006 90 / 17%);
+
+  --ink: oklch(0.20 0.055 260);
+  --ink-foreground: oklch(0.97 0.006 90);
+  --ink-muted: oklch(0.72 0.025 245);
+  --ink-border: oklch(0.97 0.006 90 / 14%);
+
   --ring: var(--accent);
 }
+
+
+/* =========================================================
+   BASE
+   ========================================================= */
 
 @layer base {
   * {
@@ -91,8 +223,12 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
+
     overflow-x: hidden;
+
     text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   ::selection {
@@ -106,12 +242,24 @@
     line-height: 1.25;
     letter-spacing: -0.01em;
   }
+
+  button,
+  a {
+    -webkit-tap-highlight-color: transparent;
+  }
 }
+
+
+/* =========================================================
+   QAMAT CONTAINER
+   ========================================================= */
 
 @utility container-q {
   width: 100%;
   margin-inline: auto;
+
   max-width: 88rem;
+
   padding-inline: 1.25rem;
 }
 
@@ -121,24 +269,47 @@
   }
 }
 
+
+/* =========================================================
+   SECTION LABEL
+   ========================================================= */
+
 @utility label-q {
   display: inline-flex;
+
   align-items: center;
   gap: 0.5rem;
+
   font-size: 0.75rem;
+
   letter-spacing: 0.18em;
+
   color: var(--accent);
-  font-weight: 500;
+
+  font-weight: 600;
+
+  text-transform: uppercase;
 }
+
+
+/* =========================================================
+   SECTION RULE
+   ========================================================= */
 
 @utility rule-q {
   border-top: 1px solid var(--border);
 }
 
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
+
   *,
   *::before,
   *::after {
@@ -146,4 +317,41 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
+}
+
+
+/* =========================================================
+   SUBTLE BRAND DETAILS
+   ========================================================= */
+
+/*
+ * تحسين مظهر التركيز بدون تغيير الـ functionality
+ */
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+
+/*
+ * روابط الموقع
+ * لا نغيّر سلوكها، فقط نعطيها انتقالًا بصريًا أنعم.
+ */
+
+a {
+  transition:
+    color 300ms ease,
+    border-color 300ms ease,
+    background-color 300ms ease;
+}
+
+
+/*
+ * تحديد النص
+ */
+
+::selection {
+  background-color: var(--accent);
+  color: var(--accent-foreground);
 }
