@@ -54,7 +54,7 @@ export function Journey() {
                 transition={{ duration: 0.5 }}
                 className="block text-[7rem] font-semibold leading-none text-accent"
               >
-                {journey[active].num}
+                {journey[active]?.num}
               </motion.span>
               <motion.h3
                 key={`t${active}`}
@@ -63,7 +63,7 @@ export function Journey() {
                 transition={{ duration: 0.5, delay: 0.05 }}
                 className="mt-4 text-2xl font-medium"
               >
-                {journey[active].title}
+                {journey[active]?.title}
               </motion.h3>
               <div className="mt-8 space-y-2">
                 {journey.map((s, i) => (
