@@ -1,382 +1,578 @@
-import {
-  AnimatePresence,
-  motion,
-  useMotionValueEvent,
-  useScroll,
-} from "framer-motion";
-import { Menu, X } from "lucide-react";
-import { useState } from "react";
-import { navLinks } from "@/data/qamatData";
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
 
-export function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [open, setOpen] = useState(false);
+@custom-variant dark (&:is(.dark *));
 
-  const { scrollY } = useScroll();
+/*
+ * =========================================================
+ * QAMAT — VISUAL IDENTITY SYSTEM
+ * =========================================================
+ *
+ * Primary   : #19474C
+ * Accent    : #A88D68
+ * Secondary : #1B264A
+ *
+ * Premium / Institutional / Modern / Elegant
+ *
+ * IMPORTANT:
+ * --background remains a COLOR.
+ * The visual gradient is applied to body separately.
+ * This keeps Tailwind classes such as:
+ *
+ * bg-background
+ * bg-primary
+ * bg-secondary
+ *
+ * working correctly.
+ * =========================================================
+ */
 
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    setScrolled(latest > 40);
-  });
+@theme inline {
+  --font-sans: "IBM Plex Sans Arabic", ui-sans-serif, system-ui, sans-serif;
 
-  return (
-    <>
-      {/* =====================================================
-          NAVBAR
-          ===================================================== */}
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
 
-      <motion.header
-        initial={{ y: -30, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{
-          duration: 0.7,
-          ease: [0.22, 1, 0.36, 1],
-        }}
-        className="fixed inset-x-0 top-0 z-50"
-      >
-        <div className="container-q">
-          <div
-            className={[
-              "mt-3 flex items-center justify-between",
-              "rounded-sm border",
-              "transition-all duration-500",
-              scrolled
-                ? [
-                    "border-white/10",
-                    "bg-[#1B264A]/85",
-                    "px-4 py-2.5",
-                    "shadow-[0_18px_60px_-25px_rgba(0,0,0,0.7)]",
-                    "backdrop-blur-xl",
-                    "md:px-6",
-                  ].join(" ")
-                : [
-                    "border-transparent",
-                    "bg-transparent",
-                    "px-2 py-4",
-                    "md:px-3 md:py-5",
-                  ].join(" "),
-            ].join(" ")}
-          >
+  /* Background / text */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
 
-            {/* =================================================
-                LOGO — RIGHT
-                ================================================= */}
+  /* Cards */
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
 
-            <a
-              href="#hero"
-              aria-label="قامات"
-              className="group flex shrink-0 items-center"
-            >
-              <img
-                src="/logo.png"
-                alt="قامات"
-                className={[
-                  "w-auto object-contain",
-                  "transition-all duration-500",
-                  scrolled
-                    ? "h-9 md:h-10"
-                    : "h-11 md:h-13",
-                ].join(" ")}
-              />
-            </a>
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  /* Brand */
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  /* Utilities */
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Ink */
+  --color-ink: var(--ink);
+  --color-ink-foreground: var(--ink-foreground);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-border: var(--ink-border);
+}
 
 
-            {/* =================================================
-                DESKTOP NAVIGATION
-                ================================================= */}
+/* =========================================================
+   ROOT
+   ========================================================= */
 
-            <nav
-              aria-label="التنقل الرئيسي"
-              className="hidden items-center gap-7 lg:flex"
-            >
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="
-                    group
-                    relative
-                    py-2
-                    text-sm
-                    font-medium
-                    text-foreground/75
-                    transition-colors
-                    duration-300
-                    hover:text-accent
-                  "
-                >
-                  {link.label}
+:root {
+  --radius: 0.35rem;
 
-                  <span
-                    aria-hidden
-                    className="
-                      absolute
-                      bottom-0
-                      right-0
-                      h-px
-                      w-0
-                      bg-accent
-                      transition-all
-                      duration-300
-                      group-hover:w-full
-                    "
-                  />
-                </a>
-              ))}
-            </nav>
+  /* =======================================================
+     QAMAT OFFICIAL COLORS
+     ======================================================= */
+
+  --qamat-teal: #19474c;
+  --qamat-gold: #a88d68;
+  --qamat-navy: #1b264a;
 
 
-            {/* =================================================
-                RIGHT ACTIONS
-                ================================================= */}
+  /* =======================================================
+     IMPORTANT
+     Keep this as a SOLID COLOR.
+     Gradient is applied to body below.
+     ======================================================= */
 
-            <div className="flex items-center gap-2">
+  --background: #19474c;
 
-              {/* Desktop CTA */}
-
-              <a
-                href="#cta"
-                className="
-                  hidden
-                  items-center
-                  justify-center
-                  rounded-sm
-                  border
-                  border-accent/50
-                  bg-primary
-                  px-5
-                  py-2.5
-                  text-sm
-                  font-medium
-                  text-primary-foreground
-                  transition-all
-                  duration-300
-                  hover:border-accent
-                  hover:bg-accent
-                  hover:text-accent-foreground
-                  sm:inline-flex
-                "
-              >
-                انضم إلى قامات
-              </a>
+  --foreground: #f7f4ed;
 
 
-              {/* Mobile menu button */}
+  /* =======================================================
+     PRIMARY
+     ======================================================= */
 
-              <button
-                type="button"
-                aria-label="فتح القائمة"
-                aria-expanded={open}
-                onClick={() => setOpen(true)}
-                className="
-                  grid
-                  size-10
-                  place-items-center
-                  rounded-sm
-                  border
-                  border-white/10
-                  bg-[#1B264A]/50
-                  text-foreground
-                  transition-all
-                  duration-300
-                  hover:border-accent
-                  hover:text-accent
-                  lg:hidden
-                "
-              >
-                <Menu className="size-5" />
-              </button>
-            </div>
-          </div>
-        </div>
-      </motion.header>
+  --primary: #19474c;
+  --primary-foreground: #ffffff;
 
 
-      {/* =====================================================
-          MOBILE MENU
-          ===================================================== */}
+  /* =======================================================
+     SECONDARY
+     ======================================================= */
 
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="
-              fixed
-              inset-0
-              z-[60]
-              bg-[#1B264A]
-              text-foreground
-            "
-          >
-            {/* Ambient gold light */}
-
-            <div
-              aria-hidden
-              className="
-                pointer-events-none
-                absolute
-                -right-32
-                -top-32
-                size-[28rem]
-                rounded-full
-                bg-[#A88D68]/10
-                blur-3xl
-              "
-            />
-
-            <div className="container-q relative flex h-full flex-col">
-
-              {/* =================================================
-                  MOBILE HEADER
-                  ================================================= */}
-
-              <div className="flex items-center justify-between py-5">
-
-                {/* Logo */}
-
-                <a
-                  href="#hero"
-                  aria-label="قامات"
-                  onClick={() => setOpen(false)}
-                  className="flex items-center"
-                >
-                  <img
-                    src="/qamat-logo.png"
-                    alt="قامات"
-                    className="h-10 w-auto object-contain"
-                  />
-                </a>
+  --secondary: #1b264a;
+  --secondary-foreground: #ffffff;
 
 
-                {/* Close button */}
+  /* =======================================================
+     ACCENT / GOLD
+     ======================================================= */
 
-                <button
-                  type="button"
-                  aria-label="إغلاق القائمة"
-                  onClick={() => setOpen(false)}
-                  className="
-                    grid
-                    size-10
-                    place-items-center
-                    rounded-sm
-                    border
-                    border-white/10
-                    transition-all
-                    duration-300
-                    hover:border-accent
-                    hover:text-accent
-                  "
-                >
-                  <X className="size-5" />
-                </button>
-              </div>
+  --accent: #a88d68;
+  --accent-foreground: #1b264a;
 
 
-              {/* =================================================
-                  MOBILE NAVIGATION
-                  ================================================= */}
+  /* =======================================================
+     CARDS
+     ======================================================= */
 
-              <nav
-                aria-label="القائمة"
-                className="mt-8 flex flex-col"
-              >
-                {navLinks.map((link, index) => (
-                  <motion.a
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setOpen(false)}
-                    initial={{
-                      opacity: 0,
-                      y: 18,
-                    }}
-                    animate={{
-                      opacity: 1,
-                      y: 0,
-                    }}
-                    transition={{
-                      duration: 0.45,
-                      delay: index * 0.07,
-                    }}
-                    className="
-                      group
-                      flex
-                      items-center
-                      border-b
-                      border-white/10
-                      py-5
-                      text-2xl
-                      font-medium
-                      transition-colors
-                      duration-300
-                      hover:text-accent
-                    "
-                  >
-                    <span
-                      className="
-                        ml-3
-                        text-xs
-                        font-medium
-                        tracking-[0.18em]
-                        text-accent
-                      "
-                    >
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-
-                    {link.label}
-                  </motion.a>
-                ))}
-              </nav>
+  --card: rgba(255, 255, 255, 0.045);
+  --card-foreground: #f7f4ed;
 
 
-              {/* =================================================
-                  MOBILE CTA
-                  ================================================= */}
+  /* =======================================================
+     POPOVERS
+     ======================================================= */
 
-              <div className="mt-auto pb-8">
+  --popover: #1b264a;
+  --popover-foreground: #f7f4ed;
 
-                <a
-                  href="#cta"
-                  onClick={() => setOpen(false)}
-                  className="
-                    flex
-                    w-full
-                    items-center
-                    justify-center
-                    rounded-sm
-                    border
-                    border-accent
-                    bg-accent
-                    px-6
-                    py-4
-                    text-sm
-                    font-semibold
-                    text-[#1B264A]
-                    transition-all
-                    duration-300
-                    hover:bg-transparent
-                    hover:text-accent
-                  "
-                >
-                  انضم إلى قامات
-                </a>
 
-                <div className="mt-5 flex items-center gap-3">
-                  <div className="h-px flex-1 bg-white/10" />
+  /* =======================================================
+     MUTED
+     ======================================================= */
 
-                  <span className="text-[10px] tracking-[0.25em] text-white/35">
-                    QAMAT
-                  </span>
+  --muted: rgba(255, 255, 255, 0.055);
 
-                  <div className="h-px flex-1 bg-white/10" />
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>
+  --muted-foreground: rgba(247, 244, 237, 0.68);
+
+
+  /* =======================================================
+     BORDERS
+     ======================================================= */
+
+  --border: rgba(247, 244, 237, 0.14);
+
+  --input: rgba(247, 244, 237, 0.18);
+
+
+  /* =======================================================
+     FOCUS
+     ======================================================= */
+
+  --ring: #a88d68;
+
+
+  /* =======================================================
+     INK
+     ======================================================= */
+
+  --ink: #10182f;
+
+  --ink-foreground: #f7f4ed;
+
+  --ink-muted: rgba(247, 244, 237, 0.64);
+
+  --ink-border: rgba(247, 244, 237, 0.14);
+
+
+  /* =======================================================
+     DESTRUCTIVE
+     ======================================================= */
+
+  --destructive: #b94a48;
+
+  --destructive-foreground: #ffffff;
+}
+
+
+/* =========================================================
+   DARK MODE
+   ========================================================= */
+
+.dark {
+  --background: #19474c;
+
+  --foreground: #f7f4ed;
+
+  --card: rgba(255, 255, 255, 0.045);
+
+  --card-foreground: #f7f4ed;
+
+  --popover: #1b264a;
+
+  --popover-foreground: #f7f4ed;
+
+  --primary: #19474c;
+
+  --primary-foreground: #ffffff;
+
+  --secondary: #1b264a;
+
+  --secondary-foreground: #ffffff;
+
+  --accent: #a88d68;
+
+  --accent-foreground: #1b264a;
+
+  --muted: rgba(255, 255, 255, 0.055);
+
+  --muted-foreground: rgba(247, 244, 237, 0.68);
+
+  --border: rgba(247, 244, 237, 0.14);
+
+  --input: rgba(247, 244, 237, 0.18);
+
+  --ring: #a88d68;
+
+  --ink: #10182f;
+
+  --ink-foreground: #f7f4ed;
+
+  --ink-muted: rgba(247, 244, 237, 0.64);
+
+  --ink-border: rgba(247, 244, 237, 0.14);
+}
+
+
+/* =========================================================
+   BASE
+   ========================================================= */
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+
+  html {
+    scroll-behavior: smooth;
+
+    -webkit-text-size-adjust: 100%;
+
+    background-color: #1b264a;
+  }
+
+
+  body {
+    /*
+     * =====================================================
+     * QAMAT PREMIUM BACKGROUND
+     * =====================================================
+     *
+     * Deep Navy
+     *      ↓
+     * QAMAT Teal
+     *      ↓
+     * Deep Teal
+     *
+     * With subtle gold ambient light.
+     * =====================================================
+     */
+
+    background-color: #19474c;
+
+    background-image:
+      radial-gradient(
+        circle at 88% 7%,
+        rgba(168, 141, 104, 0.24) 0%,
+        rgba(168, 141, 104, 0.09) 17%,
+        transparent 36%
+      ),
+      radial-gradient(
+        circle at 7% 20%,
+        rgba(25, 71, 76, 0.5) 0%,
+        rgba(25, 71, 76, 0.18) 25%,
+        transparent 42%
+      ),
+      radial-gradient(
+        circle at 50% 105%,
+        rgba(168, 141, 104, 0.07) 0%,
+        transparent 32%
+      ),
+      linear-gradient(
+        135deg,
+        #1b264a 0%,
+        #19474c 48%,
+        #143d41 100%
+      );
+
+    background-attachment: fixed;
+
+    background-repeat: no-repeat;
+
+    background-size: cover;
+
+    color: var(--color-foreground);
+
+    font-family: var(--font-sans);
+
+    overflow-x: hidden;
+
+    min-height: 100vh;
+
+    text-rendering: optimizeLegibility;
+
+    -webkit-font-smoothing: antialiased;
+
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+
+  /* =======================================================
+     SELECTION
+     ======================================================= */
+
+  ::selection {
+    background: var(--accent);
+
+    color: var(--accent-foreground);
+  }
+
+
+  /* =======================================================
+     HEADINGS
+     ======================================================= */
+
+  h1,
+  h2,
+  h3 {
+    line-height: 1.25;
+
+    letter-spacing: -0.018em;
+  }
+
+
+  /* =======================================================
+     LINKS
+     ======================================================= */
+
+  a {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+
+  /* =======================================================
+     FOCUS
+     ======================================================= */
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+
+    outline-offset: 3px;
+  }
+}
+
+
+/* =========================================================
+   QAMAT CONTAINER
+   ========================================================= */
+
+@utility container-q {
+  width: 100%;
+
+  margin-inline: auto;
+
+  max-width: 88rem;
+
+  padding-inline: 1.25rem;
+}
+
+
+@media (min-width: 768px) {
+  .container-q {
+    padding-inline: 2.5rem;
+  }
+}
+
+
+/* =========================================================
+   SECTION LABEL
+   ========================================================= */
+
+@utility label-q {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 0.55rem;
+
+  font-size: 0.72rem;
+
+  letter-spacing: 0.18em;
+
+  color: var(--accent);
+
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   SECTION RULE
+   ========================================================= */
+
+@utility rule-q {
+  border-top: 1px solid var(--border);
+}
+
+
+/* =========================================================
+   PREMIUM GLASS SURFACE
+   ========================================================= */
+
+.qamat-surface {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.07),
+      rgba(255, 255, 255, 0.018)
+    );
+
+  border: 1px solid rgba(255, 255, 255, 0.11);
+
+  backdrop-filter: blur(14px);
+
+  -webkit-backdrop-filter: blur(14px);
+}
+
+
+/* =========================================================
+   GOLD GLOW
+   ========================================================= */
+
+.qamat-glow {
+  background:
+    radial-gradient(
+      circle,
+      rgba(168, 141, 104, 0.22),
+      transparent 68%
+    );
+}
+
+
+/* =========================================================
+   TEAL GLOW
+   ========================================================= */
+
+.qamat-teal-glow {
+  background:
+    radial-gradient(
+      circle,
+      rgba(25, 71, 76, 0.22),
+      transparent 70%
+    );
+}
+
+
+/* =========================================================
+   GOLD DIVIDER
+   ========================================================= */
+
+.qamat-gold-line {
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(168, 141, 104, 0.7),
+      transparent
+    );
+}
+
+
+/* =========================================================
+   SUBTLE GRID / PATTERN
+   ========================================================= */
+
+.qamat-grid {
+  background-image:
+    linear-gradient(
+      rgba(247, 244, 237, 0.035) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(247, 244, 237, 0.035) 1px,
+      transparent 1px
+    );
+
+  background-size: 48px 48px;
+
+  mask-image: linear-gradient(
+    to bottom,
+    black,
+    transparent 90%
   );
+
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    black,
+    transparent 90%
+  );
+}
+
+
+/* =========================================================
+   SMOOTH SCROLL OFFSET
+   ========================================================= */
+
+section[id] {
+  scroll-margin-top: 6rem;
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+
+    animation-iteration-count: 1 !important;
+
+    transition-duration: 0.001ms !important;
+  }
+}
+
+
+/* =========================================================
+   MOBILE BACKGROUND
+   ========================================================= */
+
+@media (max-width: 767px) {
+  body {
+    background-attachment: scroll;
+
+    background-image:
+      radial-gradient(
+        circle at 90% 5%,
+        rgba(168, 141, 104, 0.20) 0%,
+        transparent 32%
+      ),
+      radial-gradient(
+        circle at 0% 25%,
+        rgba(25, 71, 76, 0.35) 0%,
+        transparent 40%
+      ),
+      linear-gradient(
+        150deg,
+        #1b264a 0%,
+        #19474c 52%,
+        #143d41 100%
+      );
+  }
 }
