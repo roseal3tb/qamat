@@ -234,7 +234,7 @@ export function Navbar() {
                   className="flex items-center"
                 >
                   <img
-                    src="/qamat-logo.png"
+                    src="/logo.png"
                     alt="قامات"
                     className="h-10 w-auto object-contain"
                   />
