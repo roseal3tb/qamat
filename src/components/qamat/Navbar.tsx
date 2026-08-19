@@ -66,7 +66,7 @@ export function Navbar() {
               className="group flex shrink-0 items-center"
             >
               <img
-                src="/qamat-logo.png"
+                src="/logo.png"
                 alt="قامات"
                 className={[
                   "w-auto object-contain",
