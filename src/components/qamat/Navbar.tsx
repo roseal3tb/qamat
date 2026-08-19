@@ -56,7 +56,6 @@ export function Navbar() {
                   ].join(" "),
             ].join(" ")}
           >
-
             {/* =================================================
                 LOGO — RIGHT
                 ================================================= */}
@@ -67,18 +66,15 @@ export function Navbar() {
               className="group flex shrink-0 items-center"
             >
               <img
-                src="qamat/public/qamat-logo.png"
+                src="/qamat-logo.png"
                 alt="قامات"
                 className={[
                   "w-auto object-contain",
                   "transition-all duration-500",
-                  scrolled
-                    ? "h-9 md:h-10"
-                    : "h-11 md:h-13",
+                  scrolled ? "h-9 md:h-10" : "h-11 md:h-13",
                 ].join(" ")}
               />
             </a>
-
 
             {/* =================================================
                 DESKTOP NAVIGATION
@@ -124,13 +120,11 @@ export function Navbar() {
               ))}
             </nav>
 
-
             {/* =================================================
                 RIGHT ACTIONS
                 ================================================= */}
 
             <div className="flex items-center gap-2">
-
               {/* Desktop CTA */}
 
               <a
@@ -158,7 +152,6 @@ export function Navbar() {
               >
                 انضم إلى قامات
               </a>
-
 
               {/* Mobile menu button */}
 
@@ -189,7 +182,6 @@ export function Navbar() {
           </div>
         </div>
       </motion.header>
-
 
       {/* =====================================================
           MOBILE MENU
@@ -227,13 +219,11 @@ export function Navbar() {
             />
 
             <div className="container-q relative flex h-full flex-col">
-
               {/* =================================================
                   MOBILE HEADER
                   ================================================= */}
 
               <div className="flex items-center justify-between py-5">
-
                 {/* Logo */}
 
                 <a
@@ -248,7 +238,6 @@ export function Navbar() {
                     className="h-10 w-auto object-contain"
                   />
                 </a>
-
 
                 {/* Close button */}
 
@@ -272,7 +261,6 @@ export function Navbar() {
                   <X className="size-5" />
                 </button>
               </div>
-
 
               {/* =================================================
                   MOBILE NAVIGATION
@@ -330,13 +318,11 @@ export function Navbar() {
                 ))}
               </nav>
 
-
               {/* =================================================
                   MOBILE CTA
                   ================================================= */}
 
               <div className="mt-auto pb-8">
-
                 <a
                   href="#cta"
                   onClick={() => setOpen(false)}
