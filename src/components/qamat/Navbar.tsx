@@ -1,3 +1,4 @@
+import logoImg from "@/assets/logo.png";
 import {
   AnimatePresence,
   motion,
