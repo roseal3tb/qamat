@@ -13,15 +13,20 @@
  * Accent    : #A88D68
  * Secondary : #1B264A
  *
- * Style:
  * Premium / Institutional / Modern / Elegant
  *
- * This file controls VISUAL STYLING ONLY.
- * No functionality, routing, animations or component logic
- * is changed here.
+ * IMPORTANT:
+ * --background remains a COLOR.
+ * The visual gradient is applied to body separately.
+ * This keeps Tailwind classes such as:
+ *
+ * bg-background
+ * bg-primary
+ * bg-secondary
+ *
+ * working correctly.
  * =========================================================
  */
-
 
 @theme inline {
   --font-sans: "IBM Plex Sans Arabic", ui-sans-serif, system-ui, sans-serif;
@@ -32,11 +37,11 @@
   --radius-xl: calc(var(--radius) + 4px);
   --radius-2xl: calc(var(--radius) + 8px);
 
-  /* Core */
+  /* Background / text */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
-  /* Surfaces */
+  /* Cards */
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
 
@@ -53,7 +58,7 @@
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
 
-  /* Utility */
+  /* Utilities */
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
 
@@ -64,7 +69,7 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  /* Dark / Ink */
+  /* Ink */
   --color-ink: var(--ink);
   --color-ink-foreground: var(--ink-foreground);
   --color-ink-muted: var(--ink-muted);
@@ -73,15 +78,14 @@
 
 
 /* =========================================================
-   QAMAT ROOT PALETTE
+   ROOT
    ========================================================= */
 
 :root {
   --radius: 0.35rem;
 
-
   /* =======================================================
-     OFFICIAL BRAND COLORS
+     QAMAT OFFICIAL COLORS
      ======================================================= */
 
   --qamat-teal: #19474c;
@@ -90,45 +94,12 @@
 
 
   /* =======================================================
-     MAIN BACKGROUND
-     =======================================================
-
-     Deep Navy
-          ↓
-     QAMAT Teal
-          ↓
-     Deep Teal
-
-     Gold is used subtly as ambient light.
+     IMPORTANT
+     Keep this as a SOLID COLOR.
+     Gradient is applied to body below.
      ======================================================= */
 
-  --background:
-    radial-gradient(
-      circle at 84% 8%,
-      rgba(168, 141, 104, 0.22),
-      transparent 27%
-    ),
-    radial-gradient(
-      circle at 8% 20%,
-      rgba(25, 71, 76, 0.42),
-      transparent 34%
-    ),
-    radial-gradient(
-      circle at 50% 100%,
-      rgba(168, 141, 104, 0.06),
-      transparent 32%
-    ),
-    linear-gradient(
-      135deg,
-      #1b264a 0%,
-      #19474c 52%,
-      #143d41 100%
-    );
-
-
-  /* =======================================================
-     MAIN TEXT
-     ======================================================= */
+  --background: #19474c;
 
   --foreground: #f7f4ed;
 
@@ -138,7 +109,6 @@
      ======================================================= */
 
   --primary: #19474c;
-
   --primary-foreground: #ffffff;
 
 
@@ -147,16 +117,14 @@
      ======================================================= */
 
   --secondary: #1b264a;
-
   --secondary-foreground: #ffffff;
 
 
   /* =======================================================
-     ACCENT
+     ACCENT / GOLD
      ======================================================= */
 
   --accent: #a88d68;
-
   --accent-foreground: #1b264a;
 
 
@@ -165,16 +133,14 @@
      ======================================================= */
 
   --card: rgba(255, 255, 255, 0.045);
-
   --card-foreground: #f7f4ed;
 
 
   /* =======================================================
-     POPOVER
+     POPOVERS
      ======================================================= */
 
   --popover: #1b264a;
-
   --popover-foreground: #f7f4ed;
 
 
@@ -197,7 +163,7 @@
 
 
   /* =======================================================
-     FOCUS / RING
+     FOCUS
      ======================================================= */
 
   --ring: #a88d68;
@@ -231,27 +197,11 @@
    ========================================================= */
 
 .dark {
-  --background:
-    radial-gradient(
-      circle at 84% 8%,
-      rgba(168, 141, 104, 0.20),
-      transparent 28%
-    ),
-    radial-gradient(
-      circle at 8% 20%,
-      rgba(25, 71, 76, 0.45),
-      transparent 35%
-    ),
-    linear-gradient(
-      135deg,
-      #10182f 0%,
-      #1b264a 48%,
-      #163f43 100%
-    );
+  --background: #19474c;
 
   --foreground: #f7f4ed;
 
-  --card: rgba(255, 255, 255, 0.05);
+  --card: rgba(255, 255, 255, 0.045);
 
   --card-foreground: #f7f4ed;
 
@@ -263,9 +213,9 @@
 
   --primary-foreground: #ffffff;
 
-  --secondary: #a88d68;
+  --secondary: #1b264a;
 
-  --secondary-foreground: #1b264a;
+  --secondary-foreground: #ffffff;
 
   --accent: #a88d68;
 
@@ -281,7 +231,7 @@
 
   --ring: #a88d68;
 
-  --ink: #0d1428;
+  --ink: #10182f;
 
   --ink-foreground: #f7f4ed;
 
@@ -306,26 +256,66 @@
 
     -webkit-text-size-adjust: 100%;
 
-    background: #1b264a;
+    background-color: #1b264a;
   }
 
 
   body {
     /*
-     * IMPORTANT:
-     * Use background instead of background-color
-     * because the QAMAT identity uses a gradient.
+     * =====================================================
+     * QAMAT PREMIUM BACKGROUND
+     * =====================================================
+     *
+     * Deep Navy
+     *      ↓
+     * QAMAT Teal
+     *      ↓
+     * Deep Teal
+     *
+     * With subtle gold ambient light.
+     * =====================================================
      */
 
-    background: var(--background);
+    background-color: #19474c;
+
+    background-image:
+      radial-gradient(
+        circle at 88% 7%,
+        rgba(168, 141, 104, 0.24) 0%,
+        rgba(168, 141, 104, 0.09) 17%,
+        transparent 36%
+      ),
+      radial-gradient(
+        circle at 7% 20%,
+        rgba(25, 71, 76, 0.5) 0%,
+        rgba(25, 71, 76, 0.18) 25%,
+        transparent 42%
+      ),
+      radial-gradient(
+        circle at 50% 105%,
+        rgba(168, 141, 104, 0.07) 0%,
+        transparent 32%
+      ),
+      linear-gradient(
+        135deg,
+        #1b264a 0%,
+        #19474c 48%,
+        #143d41 100%
+      );
 
     background-attachment: fixed;
+
+    background-repeat: no-repeat;
+
+    background-size: cover;
 
     color: var(--color-foreground);
 
     font-family: var(--font-sans);
 
     overflow-x: hidden;
+
+    min-height: 100vh;
 
     text-rendering: optimizeLegibility;
 
@@ -336,7 +326,7 @@
 
 
   /* =======================================================
-     TEXT SELECTION
+     SELECTION
      ======================================================= */
 
   ::selection {
@@ -433,54 +423,50 @@
 
 
 /* =========================================================
-   BRAND GLOW UTILITIES
-   ========================================================= */
-
-/*
- * Gold glow
- */
-
-.qamat-glow {
-  background:
-    radial-gradient(
-      circle,
-      rgba(168, 141, 104, 0.20),
-      transparent 68%
-    );
-}
-
-
-/*
- * Teal glow
- */
-
-.qamat-teal-glow {
-  background:
-    radial-gradient(
-      circle,
-      rgba(25, 71, 76, 0.18),
-      transparent 70%
-    );
-}
-
-
-/* =========================================================
-   PREMIUM SURFACE
+   PREMIUM GLASS SURFACE
    ========================================================= */
 
 .qamat-surface {
   background:
     linear-gradient(
       135deg,
-      rgba(255, 255, 255, 0.055),
+      rgba(255, 255, 255, 0.07),
       rgba(255, 255, 255, 0.018)
     );
 
-  border: 1px solid rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.11);
 
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(14px);
 
-  -webkit-backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+
+/* =========================================================
+   GOLD GLOW
+   ========================================================= */
+
+.qamat-glow {
+  background:
+    radial-gradient(
+      circle,
+      rgba(168, 141, 104, 0.22),
+      transparent 68%
+    );
+}
+
+
+/* =========================================================
+   TEAL GLOW
+   ========================================================= */
+
+.qamat-teal-glow {
+  background:
+    radial-gradient(
+      circle,
+      rgba(25, 71, 76, 0.22),
+      transparent 70%
+    );
 }
 
 
@@ -495,14 +481,55 @@
     linear-gradient(
       90deg,
       transparent,
-      rgba(168, 141, 104, 0.65),
+      rgba(168, 141, 104, 0.7),
       transparent
     );
 }
 
 
 /* =========================================================
-   ACCESSIBILITY / REDUCED MOTION
+   SUBTLE GRID / PATTERN
+   ========================================================= */
+
+.qamat-grid {
+  background-image:
+    linear-gradient(
+      rgba(247, 244, 237, 0.035) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(247, 244, 237, 0.035) 1px,
+      transparent 1px
+    );
+
+  background-size: 48px 48px;
+
+  mask-image: linear-gradient(
+    to bottom,
+    black,
+    transparent 90%
+  );
+
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    black,
+    transparent 90%
+  );
+}
+
+
+/* =========================================================
+   SMOOTH SCROLL OFFSET
+   ========================================================= */
+
+section[id] {
+  scroll-margin-top: 6rem;
+}
+
+
+/* =========================================================
+   REDUCED MOTION
    ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
@@ -518,5 +545,34 @@
     animation-iteration-count: 1 !important;
 
     transition-duration: 0.001ms !important;
+  }
+}
+
+
+/* =========================================================
+   MOBILE BACKGROUND
+   ========================================================= */
+
+@media (max-width: 767px) {
+  body {
+    background-attachment: scroll;
+
+    background-image:
+      radial-gradient(
+        circle at 90% 5%,
+        rgba(168, 141, 104, 0.20) 0%,
+        transparent 32%
+      ),
+      radial-gradient(
+        circle at 0% 25%,
+        rgba(25, 71, 76, 0.35) 0%,
+        transparent 40%
+      ),
+      linear-gradient(
+        150deg,
+        #1b264a 0%,
+        #19474c 52%,
+        #143d41 100%
+      );
   }
 }
