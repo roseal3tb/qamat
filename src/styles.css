@@ -5,17 +5,22 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * QAMAT — Visual Identity System
- * --------------------------------
- * Primary:   #19474C
- * Accent:    #A88D68
- * Secondary: #1B264A
+ * =========================================================
+ * QAMAT — VISUAL IDENTITY SYSTEM
+ * =========================================================
  *
- * الهوية:
- * أخضر بترولي عميق + ذهبي هادئ + كحلي مؤسسي
+ * Primary   : #19474C
+ * Accent    : #A88D68
+ * Secondary : #1B264A
  *
- * جميع ألوان الموقع الرئيسية تتم إدارتها من هنا
- * للحفاظ على اتساق الهوية البصرية.
+ * Style:
+ * Premium / Institutional / Modern / Elegant
+ *
+ * NOTE:
+ * This file controls the visual identity only.
+ * No functionality, routing, animations or component logic
+ * are changed.
+ * =========================================================
  */
 
 @theme inline {
@@ -58,7 +63,7 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  /* QAMAT Dark System */
+  /* Dark system */
   --color-ink: var(--ink);
   --color-ink-foreground: var(--ink-foreground);
   --color-ink-muted: var(--ink-muted);
@@ -67,103 +72,133 @@
 
 
 /* =========================================================
-   ROOT — QAMAT BRAND PALETTE
+   ROOT
    ========================================================= */
 
 :root {
-  --radius: 0.3rem;
+  --radius: 0.35rem;
+
+  /* =======================================================
+     BRAND COLORS
+     ======================================================= */
+
+  --qamat-teal: #19474c;
+  --qamat-gold: #a88d68;
+  --qamat-navy: #1b264a;
+
+
+  /* =======================================================
+     BACKGROUND
+     ======================================================= */
 
   /*
-   * BRAND COLORS
+   * Soft premium gradient.
    *
-   * #19474C — Primary Teal
-   * #A88D68 — Sand Gold
-   * #1B264A — Institutional Navy
+   * The background is intentionally very subtle so the
+   * website stays professional and readable.
    */
 
-  /* -------------------------------------------------------
-     MAIN BACKGROUND
-     ------------------------------------------------------- */
+  --background:
+    radial-gradient(
+      circle at 12% 0%,
+      rgba(168, 141, 104, 0.10),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 88% 12%,
+      rgba(25, 71, 76, 0.10),
+      transparent 34%
+    ),
+    linear-gradient(
+      135deg,
+      #faf9f6 0%,
+      #f5f6f2 48%,
+      #f3f4f6 100%
+    );
 
-  --background: oklch(0.985 0.004 90);
-  --foreground: oklch(0.22 0.035 205);
-
-
-  /* -------------------------------------------------------
-     PRIMARY — QAMAT TEAL
-     #19474C
-     ------------------------------------------------------- */
-
-  --primary: oklch(0.31 0.065 201);
-  --primary-foreground: oklch(0.985 0.004 90);
-
-
-  /* -------------------------------------------------------
-     SECONDARY — QAMAT NAVY
-     #1B264A
-     ------------------------------------------------------- */
-
-  --secondary: oklch(0.24 0.065 260);
-  --secondary-foreground: oklch(0.985 0.004 90);
+  --foreground: #1b264a;
 
 
-  /* -------------------------------------------------------
-     ACCENT — QAMAT GOLD
-     #A88D68
-     ------------------------------------------------------- */
+  /* =======================================================
+     PRIMARY
+     ======================================================= */
 
-  --accent: oklch(0.64 0.075 72);
-  --accent-foreground: oklch(0.18 0.025 70);
+  --primary: #19474c;
 
-
-  /* -------------------------------------------------------
-     DARK / INK SYSTEM
-     ------------------------------------------------------- */
-
-  --ink: oklch(0.24 0.065 260);
-  --ink-foreground: oklch(0.97 0.006 90);
-
-  --ink-muted: oklch(0.73 0.025 245);
-
-  --ink-border: oklch(0.97 0.006 90 / 14%);
+  --primary-foreground: #ffffff;
 
 
-  /* -------------------------------------------------------
-     CARDS & SURFACES
-     ------------------------------------------------------- */
+  /* =======================================================
+     SECONDARY
+     ======================================================= */
 
-  --card: oklch(0.995 0.002 90);
-  --card-foreground: var(--foreground);
+  --secondary: #1b264a;
 
-  --popover: oklch(0.995 0.002 90);
-  --popover-foreground: var(--foreground);
+  --secondary-foreground: #ffffff;
 
 
-  /* -------------------------------------------------------
+  /* =======================================================
+     ACCENT
+     ======================================================= */
+
+  --accent: #a88d68;
+
+  --accent-foreground: #1b264a;
+
+
+  /* =======================================================
+     SURFACES
+     ======================================================= */
+
+  --card: rgba(255, 255, 255, 0.70);
+
+  --card-foreground: #1b264a;
+
+  --popover: rgba(255, 255, 255, 0.96);
+
+  --popover-foreground: #1b264a;
+
+
+  /* =======================================================
      MUTED
-     ------------------------------------------------------- */
+     ======================================================= */
 
-  --muted: oklch(0.95 0.008 90);
+  --muted: rgba(25, 71, 76, 0.055);
 
-  --muted-foreground: oklch(0.48 0.025 205);
+  --muted-foreground: rgba(27, 38, 74, 0.62);
 
 
-  /* -------------------------------------------------------
+  /* =======================================================
      BORDERS
-     ------------------------------------------------------- */
+     ======================================================= */
 
-  --border: oklch(0.31 0.065 201 / 14%);
-  --input: oklch(0.31 0.065 201 / 18%);
+  --border: rgba(25, 71, 76, 0.13);
 
-  --ring: var(--accent);
+  --input: rgba(25, 71, 76, 0.16);
+
+  --ring: #a88d68;
 
 
-  /* -------------------------------------------------------
+  /* =======================================================
+     DARK / INK
+     ======================================================= */
+
+  --ink: #1b264a;
+
+  --ink-foreground: #faf9f6;
+
+  --ink-muted: rgba(250, 249, 246, 0.62);
+
+  --ink-border: rgba(250, 249, 246, 0.14);
+
+
+  /* =======================================================
      DESTRUCTIVE
-     ------------------------------------------------------- */
+     ======================================================= */
 
-  --destructive: oklch(0.58 0.20 28);
-  --destructive-foreground: oklch(0.98 0 0);
+  --destructive: #a94442;
+
+  --destructive-foreground: #ffffff;
 }
 
 
@@ -172,36 +207,63 @@
    ========================================================= */
 
 .dark {
-  --background: oklch(0.24 0.065 260);
-  --foreground: oklch(0.965 0.006 90);
+  --background:
+    radial-gradient(
+      circle at 12% 0%,
+      rgba(168, 141, 104, 0.12),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 88% 15%,
+      rgba(25, 71, 76, 0.20),
+      transparent 38%
+    ),
+    linear-gradient(
+      135deg,
+      #111b32 0%,
+      #1b264a 52%,
+      #172f35 100%
+    );
 
-  --card: oklch(0.27 0.055 255);
-  --card-foreground: oklch(0.965 0.006 90);
+  --foreground: #f8f7f3;
 
-  --popover: oklch(0.27 0.055 255);
-  --popover-foreground: oklch(0.965 0.006 90);
+  --card: rgba(255, 255, 255, 0.055);
 
-  --primary: oklch(0.42 0.075 201);
-  --primary-foreground: oklch(0.98 0.004 90);
+  --card-foreground: #f8f7f3;
 
-  --secondary: oklch(0.31 0.065 201);
-  --secondary-foreground: oklch(0.98 0.004 90);
+  --popover: #1b264a;
 
-  --accent: oklch(0.68 0.075 72);
-  --accent-foreground: oklch(0.18 0.025 70);
+  --popover-foreground: #f8f7f3;
 
-  --muted: oklch(0.30 0.045 250);
-  --muted-foreground: oklch(0.76 0.025 245);
+  --primary: #19474c;
 
-  --border: oklch(0.95 0.006 90 / 13%);
-  --input: oklch(0.95 0.006 90 / 17%);
+  --primary-foreground: #ffffff;
 
-  --ink: oklch(0.20 0.055 260);
-  --ink-foreground: oklch(0.97 0.006 90);
-  --ink-muted: oklch(0.72 0.025 245);
-  --ink-border: oklch(0.97 0.006 90 / 14%);
+  --secondary: #a88d68;
 
-  --ring: var(--accent);
+  --secondary-foreground: #1b264a;
+
+  --accent: #a88d68;
+
+  --accent-foreground: #1b264a;
+
+  --muted: rgba(255, 255, 255, 0.055);
+
+  --muted-foreground: rgba(248, 247, 243, 0.64);
+
+  --border: rgba(248, 247, 243, 0.13);
+
+  --input: rgba(248, 247, 243, 0.16);
+
+  --ring: #a88d68;
+
+  --ink: #101a30;
+
+  --ink-foreground: #f8f7f3;
+
+  --ink-muted: rgba(248, 247, 243, 0.62);
+
+  --ink-border: rgba(248, 247, 243, 0.14);
 }
 
 
@@ -217,35 +279,64 @@
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
+    background: #faf9f6;
   }
 
   body {
-    background-color: var(--color-background);
+    background: var(--background);
+    background-attachment: fixed;
+
     color: var(--color-foreground);
+
     font-family: var(--font-sans);
 
     overflow-x: hidden;
 
     text-rendering: optimizeLegibility;
+
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+
+
+  /* =======================================================
+     SELECTION
+     ======================================================= */
 
   ::selection {
     background: var(--accent);
     color: var(--accent-foreground);
   }
 
+
+  /* =======================================================
+     HEADINGS
+     ======================================================= */
+
   h1,
   h2,
   h3 {
     line-height: 1.25;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.018em;
   }
 
-  button,
+
+  /* =======================================================
+     LINKS
+     ======================================================= */
+
   a {
     -webkit-tap-highlight-color: transparent;
+  }
+
+
+  /* =======================================================
+     FOCUS
+     ======================================================= */
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
   }
 }
 
@@ -256,6 +347,7 @@
 
 @utility container-q {
   width: 100%;
+
   margin-inline: auto;
 
   max-width: 88rem;
@@ -278,17 +370,16 @@
   display: inline-flex;
 
   align-items: center;
-  gap: 0.5rem;
 
-  font-size: 0.75rem;
+  gap: 0.55rem;
+
+  font-size: 0.72rem;
 
   letter-spacing: 0.18em;
 
   color: var(--accent);
 
   font-weight: 600;
-
-  text-transform: uppercase;
 }
 
 
@@ -302,7 +393,40 @@
 
 
 /* =========================================================
-   ACCESSIBILITY
+   BRAND DECORATION
+   ========================================================= */
+
+/*
+ * Very subtle gold glow.
+ * Used only where the design already has decorative layers.
+ */
+
+.qamat-glow {
+  background:
+    radial-gradient(
+      circle,
+      rgba(168, 141, 104, 0.20),
+      transparent 68%
+    );
+}
+
+
+/*
+ * Very subtle teal glow.
+ */
+
+.qamat-teal-glow {
+  background:
+    radial-gradient(
+      circle,
+      rgba(25, 71, 76, 0.16),
+      transparent 70%
+    );
+}
+
+
+/* =========================================================
+   REDUCED MOTION
    ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
@@ -317,41 +441,4 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
-}
-
-
-/* =========================================================
-   SUBTLE BRAND DETAILS
-   ========================================================= */
-
-/*
- * تحسين مظهر التركيز بدون تغيير الـ functionality
- */
-
-:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
-}
-
-
-/*
- * روابط الموقع
- * لا نغيّر سلوكها، فقط نعطيها انتقالًا بصريًا أنعم.
- */
-
-a {
-  transition:
-    color 300ms ease,
-    border-color 300ms ease,
-    background-color 300ms ease;
-}
-
-
-/*
- * تحديد النص
- */
-
-::selection {
-  background-color: var(--accent);
-  color: var(--accent-foreground);
 }
