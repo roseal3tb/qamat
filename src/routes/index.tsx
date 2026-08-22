@@ -1,17 +1,18 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { Navbar } from "@/components/qamat/Navbar";
-import { Hero } from "@/components/qamat/Hero";
 import { About } from "@/components/qamat/About";
-import { Objectives } from "@/components/qamat/Objectives";
 import { Audience } from "@/components/qamat/Audience";
-import { Journey } from "@/components/qamat/Journey";
-import { Fields } from "@/components/qamat/Fields";
-import { Partners } from "@/components/qamat/Partners";
-import { Outcomes } from "@/components/qamat/Outcomes";
-import { Transformation } from "@/components/qamat/Transformation";
-import { Impact } from "@/components/qamat/Impact";
 import { CTA } from "@/components/qamat/CTA";
+import { FeaturedMembers } from "@/components/qamat/FeaturedMembers";
+import { Fields } from "@/components/qamat/Fields";
 import { Footer } from "@/components/qamat/Footer";
+import { Hero } from "@/components/qamat/Hero";
+import { Impact } from "@/components/qamat/Impact";
+import { Journey } from "@/components/qamat/Journey";
+import { Navbar } from "@/components/qamat/Navbar";
+import { Objectives } from "@/components/qamat/Objectives";
+import { Outcomes } from "@/components/qamat/Outcomes";
+import { Partners } from "@/components/qamat/Partners";
+import { Transformation } from "@/components/qamat/Transformation";
+import { createFileRoute } from "@tanstack/react-router";
 
 const title = "قامات | QAMAT — نبني الكفاءات، نصنع الخبرة، ونمكّن الأثر";
 const description =
@@ -46,6 +47,7 @@ function Index() {
         <Outcomes />
         <Transformation />
         <Impact />
+        <FeaturedMembers />
         <CTA />
       </main>
       <Footer />

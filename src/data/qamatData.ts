@@ -17,8 +17,8 @@ export const navLinks = [
   { label: "عن قامات", href: "#about" },
   { label: "الأهداف", href: "#objectives" },
   { label: "الرحلة", href: "#journey" },
-  { label: "البرامج", href: "#fields" },
-  { label: "المخرجات", href: "#outcomes" },
+  { label: "المجالات", href: "#fields" },
+  { label: "قاماتنا", href: "/team" },
 ];
 
 export const objectives = [
@@ -134,7 +134,7 @@ export const outcomes = [
 
 export const transformation = ["معرفة", "تجربة", "تطبيق", "مهارة", "جاهزية", "أثر"];
 
-/** أرقام تجريبية — PLACEHOLDER: استبدلها بالأرقام الفعلية للمبادرة. */
+/** أرقام تجريبية — غير مستخدمة حاليًا (حُذفت الإحصائيات من الموقع). */
 export const stats = [
   { value: 0, prefix: "+", label: "مشارك" },
   { value: 0, prefix: "", label: "مجالات" },
@@ -152,15 +152,35 @@ export const partners = [
   { name: "شريك ٠٦", logo: "" },
 ];
 
-/** روابط تجريبية — PLACEHOLDER */
+/** حسابات التواصل الرسمية لمبادرة قامات */
 export const socials = [
-  { name: "Instagram", href: "#" },
-  { name: "X", href: "#" },
-  { name: "LinkedIn", href: "#" },
+  {
+    name: "Instagram",
+    href: "https://www.instagram.com/qamatinitiative",
+  },
+  {
+    name: "X",
+    href: "https://x.com/qamatinitiative",
+  },
+  {
+    name: "LinkedIn",
+    href: "https://www.linkedin.com/company/qamat-initiative-%D9%85%D8%A8%D8%A7%D8%AF%D8%B1%D8%A9-%D9%82%D8%A7%D9%85%D8%A7%D8%AA/",
+  },
 ];
 
 /** رابط التسجيل — PLACEHOLDER */
 export const joinUrl = "#cta";
+
+/** بيانات صفحة التواصل */
+export const contact = {
+  headline: "دَعنا نصنع الأثر معاً.",
+  intro: "إذا كان لديك استفسار، أو رغبة في بناء شراكة — نحن هنا.",
+  emailLabel: "البريد الإلكتروني",
+  emailNote: "لأي استفسارات رسمية أو شراكات",
+  email: "qamatinitiative@gmail.com",
+  socialLabel: "منصاتنا الرقمية",
+  socialNote: "تابع رحلتنا، وكن أول من يعرف عن برامجنا القادمة",
+};
 
 export const footerLinks = [
   { label: "الرئيسية", href: "#hero" },
@@ -168,53 +188,104 @@ export const footerLinks = [
   { label: "الأهداف", href: "#objectives" },
   { label: "الرحلة", href: "#journey" },
   { label: "المجالات", href: "#fields" },
-  { label: "تواصل معنا", href: "#cta" },
+  { label: "قاماتنا", href: "/team" },
+  { label: "تواصل معنا", href: "/contact" },
 ];
 
-/**
- * قاداتنا — بيانات القيادة واللجان.
- * PLACEHOLDER: استبدل الأسماء والصور والمسميات بالبيانات الرسمية عند توفرها.
- * photo: ضع رابط الصورة (أو اتركه فارغًا لعرض حرف الاسم كبديل).
- */
+/* =========================================================================
+   قاماتنا — فريق المبادرة
+   -------------------------------------------------------------------------
+   photo: ضع رابط الصورة (أو اتركه فارغًا لعرض أيقونة شخص بدلًا منها).
+   مثال: photo: "/team/haya.png"  ← بعد وضع الصورة في public/team/
+   ========================================================================= */
+
 export type Leader = {
   name: string;
   role: string;
-  committee: string;
-  desc?: string;
   photo?: string;
 };
 
-export const leadership: { committee: string; tint: string; leaders: Leader[] }[] = [
+export type Department = {
+  /** اسم الإدارة كما يظهر في العنوان */
+  name: string;
+  /** درجة لون من هوية قامات */
+  tint: string;
+  /** قائد الإدارة ثم النائب */
+  leadership: Leader[];
+  /** قادة اللجان التابعة للإدارة */
+  committees: Leader[];
+};
+
+/* ألوان الهوية بصيغة HSL */
+const TEAL = "186 50% 20%"; /* #19474C */
+const GOLD = "35 27% 53%"; /* #A88D68 */
+const NAVY = "226 47% 20%"; /* #1B264A */
+
+/** العبارة الافتتاحية لصفحة قاماتنا */
+export const teamIntro = {
+  line: "لأن الكفاءات لا تُبنى إلا بأيدي صُنّاعها",
+  highlight: "هؤلاء هم صُنّاع الأثر",
+};
+
+/** مؤسسو المبادرة — أعلى الهرم */
+export const founders: Leader[] = [
+  { name: "هيا آل شافي", role: "قائدة المبادرة", photo: "" },
+  { name: "موسى العتيبي", role: "نائب قائدة المبادرة", photo: "" },
+];
+
+/** الإدارات واللجان */
+export const departments: Department[] = [
   {
-    committee: "اللجنة التنفيذية",
-    tint: "38 62% 52%",
-    leaders: [
-      { name: "الاسم الكامل", role: "قائد/ة اللجنة التنفيذية", committee: "اللجنة التنفيذية", desc: "وصف مختصر — PLACEHOLDER", photo: "" },
-      { name: "الاسم الكامل", role: "نائب/ة قائد اللجنة التنفيذية", committee: "اللجنة التنفيذية", desc: "", photo: "" },
+    name: "إدارة الموارد البشرية",
+    tint: TEAL,
+    leadership: [
+      { name: "فيّ الشلوي", role: "قائدة الإدارة", photo: "" },
+      { name: "رهف العريفي", role: "نائبة الإدارة", photo: "" },
+    ],
+    committees: [
+      { name: "فواز الغامدي", role: "قائد لجنة الاستقطاب", photo: "" },
+      { name: "عبدالرحمن الشنيفي", role: "قائد لجنة متابعة الأداء", photo: "" },
     ],
   },
   {
-    committee: "اللجنة الإعلامية",
-    tint: "205 55% 50%",
-    leaders: [
-      { name: "الاسم الكامل", role: "قائد/ة اللجنة الإعلامية", committee: "اللجنة الإعلامية", desc: "وصف مختصر — PLACEHOLDER", photo: "" },
-      { name: "الاسم الكامل", role: "عضو/ة اللجنة الإعلامية", committee: "اللجنة الإعلامية", desc: "", photo: "" },
+    name: "اللجنة التقنية",
+    tint: NAVY,
+    leadership: [
+      { name: "روز العتيبي", role: "قائدة اللجنة التقنية", photo: "" },
+      { name: "بارعه الطيار", role: "نائبة قائدة اللجنة التقنية", photo: "" },
+    ],
+    committees: [],
+  },
+  {
+    name: "إدارة الإعلام والمحتوى",
+    tint: GOLD,
+    leadership: [
+      { name: "حلا خالد حملي", role: "قائدة الإدارة", photo: "" },
+      { name: "جود العجيمي", role: "نائبة الإدارة", photo: "" },
+    ],
+    committees: [
+      { name: "حنين الصالحي", role: "قائدة لجنة كتابة المحتوى والتسويق", photo: "" },
+      { name: "وسن الجهني", role: "نائبة قائدة لجنة كتابة المحتوى والتسويق", photo: "" },
+      { name: "شهد سعود", role: "قائدة لجنة التصاميم", photo: "" },
+      { name: "طلال الصالح", role: "قائد لجنة التصوير والمونتاج", photo: "" },
     ],
   },
   {
-    committee: "لجنة الشراكات",
-    tint: "150 40% 42%",
-    leaders: [
-      { name: "الاسم الكامل", role: "قائد/ة لجنة الشراكات", committee: "لجنة الشراكات", desc: "وصف مختصر — PLACEHOLDER", photo: "" },
-      { name: "الاسم الكامل", role: "عضو/ة لجنة الشراكات", committee: "لجنة الشراكات", desc: "", photo: "" },
+    name: "إدارة العلاقات العامة",
+    tint: TEAL,
+    leadership: [
+      { name: "صبا العجمي", role: "قائدة الإدارة", photo: "" },
+      { name: "غيدا العصيمي", role: "نائبة الإدارة", photo: "" },
+    ],
+    committees: [
+      { name: "دانه الصالح", role: "قائدة لجنة الشراكات", photo: "" },
+      { name: "نوف العتيبي", role: "قائدة لجنة التعاونات", photo: "" },
     ],
   },
   {
-    committee: "اللجنة التنظيمية",
-    tint: "12 60% 52%",
-    leaders: [
-      { name: "الاسم الكامل", role: "قائد/ة اللجنة التنظيمية", committee: "اللجنة التنظيمية", desc: "وصف مختصر — PLACEHOLDER", photo: "" },
-      { name: "الاسم الكامل", role: "عضو/ة اللجنة التنظيمية", committee: "اللجنة التنظيمية", desc: "", photo: "" },
-    ],
+    name: "إدارة التشغيل والتطوير",
+    tint: NAVY,
+    leadership: [{ name: "بندر الحرامله", role: "قائد الإدارة", photo: "" }],
+    committees: [],
   },
 ];

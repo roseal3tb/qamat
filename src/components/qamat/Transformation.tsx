@@ -1,44 +1,111 @@
-import { motion } from "framer-motion";
 import { transformation } from "@/data/qamatData";
-import { WordsReveal } from "./Reveal";
+import { motion } from "framer-motion";
+import { SectionLabel, WordsReveal } from "./Reveal";
 
+/**
+ * سكشن التحوّل — المراحل ترتفع تدريجيًا كقامة،
+ * وتشتدّ درجة اللون من التيل الهادئ إلى الذهبي في المرحلة الأخيرة.
+ */
 export function Transformation() {
-  return (
-    <section className="border-t border-border bg-secondary/40 py-24 md:py-36">
-      <div className="container-q">
-        <h2 className="max-w-[18ch] text-[clamp(1.6rem,3.4vw,2.75rem)] font-semibold leading-[1.3]">
-          <WordsReveal text="من المعرفة إلى الأثر — هكذا تعمل قامات." />
-        </h2>
+  const last = transformation.length - 1;
 
-        <div className="mt-16 flex flex-col items-start gap-0 md:flex-row md:flex-wrap md:items-center md:gap-4">
-          {transformation.map((t, i) => (
-            <div key={t} className="flex items-center gap-4 md:contents">
-              <motion.span
-                initial={{ opacity: 0, y: 24, filter: "blur(6px)" }}
-                whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                viewport={{ once: true, margin: "-70px" }}
-                transition={{ duration: 0.7, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                className={`py-3 text-[clamp(1.8rem,5.4vw,4rem)] font-semibold leading-none ${
-                  i === transformation.length - 1 ? "text-accent" : "text-foreground"
-                }`}
-              >
-                {t}
-              </motion.span>
-              {i < transformation.length - 1 && (
-                <motion.span
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: i * 0.08 + 0.15 }}
-                  className="text-lg text-accent md:text-2xl"
-                  aria-hidden
+  return (
+    <section className="overflow-hidden border-t border-border py-24 md:py-32">
+      <div className="container-q">
+        <div className="text-center">
+          <SectionLabel>التحوّل</SectionLabel>
+          <h2 className="mx-auto mt-6 max-w-[22ch] text-[clamp(1.9rem,4.4vw,3.2rem)] font-semibold leading-[1.25]">
+            <WordsReveal text="من المعرفة إلى الأثر — هكذا تعمل قامات." />
+          </h2>
+        </div>
+
+        <div className="mx-auto mt-16 max-w-4xl md:mt-20">
+          <div className="relative flex items-end justify-center gap-2 sm:gap-4 md:gap-6">
+            {/* خط الأرضية */}
+            <span
+              aria-hidden
+              className="absolute inset-x-0 bottom-0 h-px"
+              style={{
+                background:
+                  "linear-gradient(90deg, transparent, var(--border) 15%, var(--border) 85%, transparent)",
+              }}
+            />
+
+            {transformation.map((word, i) => {
+              const isLast = i === last;
+              /* نسبة التقدّم — تحدد الارتفاع وشدّة اللون */
+              const t = i / last;
+              const rise = 14 + t * 62;
+
+              return (
+                <motion.div
+                  key={word}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{
+                    duration: 1.1,
+                    delay: i * 0.13,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
+                  className="flex flex-1 flex-col items-center"
                 >
-                  <span className="md:hidden">↓</span>
-                  <span className="hidden md:inline">←</span>
-                </motion.span>
-              )}
-            </div>
-          ))}
+                  {/* رقم المرحلة */}
+                  <span
+                    className={`mb-3 text-[0.62rem] tracking-[0.16em] transition-colors duration-500 ${
+                      isLast ? "text-accent-strong" : "text-muted-foreground/60"
+                    }`}
+                  >
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+
+                  {/* الكبسولة */}
+                  <span
+                    className={`inline-flex w-full items-center justify-center rounded-full border px-2 py-2.5 text-center text-[0.78rem] font-medium leading-tight transition-all duration-500 sm:px-4 sm:py-3 sm:text-sm md:text-base ${
+                      isLast
+                        ? "border-accent text-accent-foreground shadow-[0_8px_24px_rgba(168,141,104,0.28)]"
+                        : "text-foreground"
+                    }`}
+                    style={
+                      isLast
+                        ? { background: "var(--accent)" }
+                        : {
+                            borderColor: `color-mix(in srgb, var(--primary) ${
+                              12 + t * 30
+                            }%, transparent)`,
+                            background: `color-mix(in srgb, var(--primary) ${
+                              3 + t * 9
+                            }%, var(--card))`,
+                          }
+                    }
+                  >
+                    {word}
+                  </span>
+
+                  {/* العمود الرافع — يجسّد الارتفاع */}
+                  <motion.span
+                    aria-hidden
+                    initial={{ height: 0 }}
+                    whileInView={{ height: rise }}
+                    viewport={{ once: true, margin: "-80px" }}
+                    transition={{
+                      duration: 1.3,
+                      delay: i * 0.13 + 0.2,
+                      ease: [0.16, 1, 0.3, 1],
+                    }}
+                    className="mt-3 w-px"
+                    style={{
+                      background: isLast
+                        ? "linear-gradient(to bottom, var(--accent), transparent)"
+                        : `linear-gradient(to bottom, color-mix(in srgb, var(--primary) ${
+                            18 + t * 32
+                          }%, transparent), transparent)`,
+                    }}
+                  />
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>

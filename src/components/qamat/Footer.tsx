@@ -1,44 +1,56 @@
-import { Instagram, Linkedin } from "lucide-react";
 import { brand, footerLinks, socials } from "@/data/qamatData";
+import { Instagram, Linkedin } from "lucide-react";
 
 function SocialIcon({ name }: { name: string }) {
-  if (name === "Instagram") return <Instagram className="size-4" />;
-  if (name === "LinkedIn") return <Linkedin className="size-4" />;
+  if (name === "Instagram") return <Instagram className="size-[18px]" />;
+  if (name === "LinkedIn") return <Linkedin className="size-[18px]" />;
   return <span className="text-sm font-semibold leading-none">X</span>;
 }
 
 export function Footer() {
-  return (
-    <footer className="bg-ink py-14 text-ink-foreground md:py-16">
-      <div className="container-q">
-        <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
-          <div>
-            <span className="text-2xl font-semibold">
-              {brand.nameAr} <span className="text-ink-muted">|</span>{" "}
-              <span className="text-base tracking-[0.2em] text-ink-muted">{brand.nameEn}</span>
-            </span>
-            <p className="mt-3 max-w-xs text-sm text-ink-muted">{brand.tagline}</p>
-          </div>
+  const year = new Date().getFullYear();
 
-          <nav className="grid grid-cols-2 gap-x-10 gap-y-3 sm:grid-cols-3 md:gap-x-14">
+  return (
+    <footer className="border-t border-border bg-muted py-14 md:py-16">
+      <div className="container-q">
+        <div className="flex flex-col items-center gap-8 text-center">
+          {/* الشعار */}
+          <a href="#hero" aria-label={brand.nameAr} className="inline-block">
+            <img
+              src="/logo.png"
+              alt={brand.nameAr}
+              className="h-16 w-auto object-contain md:h-20"
+            />
+          </a>
+
+          {/* الشعار النصي */}
+          <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">
+            {brand.tagline}
+          </p>
+
+          {/* روابط التنقّل */}
+          <nav className="flex flex-wrap items-center justify-center gap-x-7 gap-y-3">
             {footerLinks.map((l) => (
               <a
                 key={l.label}
                 href={l.href}
-                className="text-sm text-ink-muted transition-colors hover:text-accent"
+                className="text-sm text-muted-foreground transition-colors hover:text-primary"
               >
                 {l.label}
               </a>
             ))}
           </nav>
 
-          <div className="flex gap-2">
+          {/* حسابات التواصل — دائرية */}
+          <div className="flex items-center justify-center gap-3">
             {socials.map((s) => (
               <a
                 key={s.name}
                 href={s.href}
                 aria-label={s.name}
-                className="grid size-10 place-items-center rounded-sm border border-ink-border transition-colors hover:border-accent hover:text-accent"
+                target="_blank"
+                rel="noreferrer"
+                className="grid size-11 place-items-center rounded-full border border-border bg-card text-muted-foreground transition-all duration-300 hover:-translate-y-0.5 hover:border-accent hover:bg-accent hover:text-accent-foreground"
               >
                 <SocialIcon name={s.name} />
               </a>
@@ -46,8 +58,11 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 border-t border-ink-border pt-6 text-xs text-ink-muted">
-          © 2026 قامات. جميع الحقوق محفوظة.
+        {/* الحقوق — في المنتصف */}
+        <div className="mt-12 border-t border-border pt-6">
+          <p className="text-center text-xs text-muted-foreground">
+            © {year} {brand.nameAr}. جميع الحقوق محفوظة.
+          </p>
         </div>
       </div>
     </footer>

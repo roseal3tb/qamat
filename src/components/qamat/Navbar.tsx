@@ -1,382 +1,139 @@
-import {
-  AnimatePresence,
-  motion,
-  useMotionValueEvent,
-  useScroll,
-} from "framer-motion";
-import { Menu, X } from "lucide-react";
-import { useState } from "react";
-import { navLinks } from "@/data/qamatData";
+import { brand, navLinks } from "@/data/qamatData";
+import { Link, useLocation } from "@tanstack/react-router";
+import { X as CloseIcon, Menu } from "lucide-react";
+import { useEffect, useState } from "react";
+
+/** يحوّل رابط المرساة إلى رابط مطلق عندما لا نكون في الصفحة الرئيسية */
+function resolveHref(href: string, isHome: boolean) {
+  if (href.startsWith("#")) return isHome ? href : `/${href}`;
+  return href;
+}
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const { pathname } = useLocation();
+  const isHome = pathname === "/";
 
-  const { scrollY } = useScroll();
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    setScrolled(latest > 40);
-  });
+  /* إغلاق القائمة عند تغيّر الصفحة */
+  useEffect(() => setOpen(false), [pathname]);
 
   return (
-    <>
-      {/* =====================================================
-          NAVBAR
-          ===================================================== */}
+    <header className="fixed inset-x-0 top-0 z-50 pt-3 md:pt-4">
+      <div className="container-q">
+        <nav
+          className={`flex items-center justify-between gap-4 rounded-full px-4 py-2.5 transition-all duration-400 md:px-5 ${
+            scrolled
+              ? "border border-border bg-card/85 shadow-[0_4px_24px_rgba(20,48,46,0.07)] backdrop-blur-xl"
+              : "border border-transparent bg-transparent"
+          }`}
+        >
+          {/* الشعار */}
+          <Link to="/" aria-label={brand.nameAr} className="shrink-0">
+            <img
+              src="/logo.png"
+              alt={brand.nameAr}
+              className="h-10 w-auto object-contain md:h-11"
+            />
+          </Link>
 
-      <motion.header
-        initial={{ y: -30, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{
-          duration: 0.7,
-          ease: [0.22, 1, 0.36, 1],
-        }}
-        className="fixed inset-x-0 top-0 z-50"
-      >
-        <div className="container-q">
-          <div
-            className={[
-              "mt-3 flex items-center justify-between",
-              "rounded-sm border",
-              "transition-all duration-500",
-              scrolled
-                ? [
-                    "border-white/10",
-                    "bg-[#1B264A]/85",
-                    "px-4 py-2.5",
-                    "shadow-[0_18px_60px_-25px_rgba(0,0,0,0.7)]",
-                    "backdrop-blur-xl",
-                    "md:px-6",
-                  ].join(" ")
-                : [
-                    "border-transparent",
-                    "bg-transparent",
-                    "px-2 py-4",
-                    "md:px-3 md:py-5",
-                  ].join(" "),
-            ].join(" ")}
-          >
+          {/* الروابط — سطح المكتب */}
+          <ul className="hidden items-center gap-1 lg:flex">
+            {navLinks.map((l) => {
+              const isRoute = !l.href.startsWith("#");
+              const active = isRoute && pathname === l.href;
 
-            {/* =================================================
-                LOGO — RIGHT
-                ================================================= */}
+              return (
+                <li key={l.label}>
+                  {isRoute ? (
+                    <Link
+                      to={l.href}
+                      className={`rounded-full px-4 py-2 text-sm transition-colors duration-300 hover:bg-muted hover:text-primary ${
+                        active ? "text-primary font-medium" : "text-muted-foreground"
+                      }`}
+                    >
+                      {l.label}
+                    </Link>
+                  ) : (
+                    <a
+                      href={resolveHref(l.href, isHome)}
+                      className="rounded-full px-4 py-2 text-sm text-muted-foreground transition-colors duration-300 hover:bg-muted hover:text-primary"
+                    >
+                      {l.label}
+                    </a>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
 
+          {/* زر الانضمام + زر القائمة */}
+          <div className="flex shrink-0 items-center gap-2">
             <a
-              href="#hero"
-              aria-label="قامات"
-              className="group flex shrink-0 items-center"
+              href={isHome ? "#cta" : "/#cta"}
+              className="hidden rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-all duration-300 hover:brightness-110 sm:inline-flex"
             >
-              <img
-                src="/logo.png"
-                alt="قامات"
-                className={[
-                  "w-auto object-contain",
-                  "transition-all duration-500",
-                  scrolled
-                    ? "h-9 md:h-10"
-                    : "h-11 md:h-13",
-                ].join(" ")}
-              />
+              انضم إلى قامات
             </a>
 
-
-            {/* =================================================
-                DESKTOP NAVIGATION
-                ================================================= */}
-
-            <nav
-              aria-label="التنقل الرئيسي"
-              className="hidden items-center gap-7 lg:flex"
+            <button
+              type="button"
+              onClick={() => setOpen((v) => !v)}
+              aria-label={open ? "إغلاق القائمة" : "فتح القائمة"}
+              aria-expanded={open}
+              className="grid size-10 place-items-center rounded-full border border-border text-foreground transition-colors hover:bg-muted lg:hidden"
             >
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="
-                    group
-                    relative
-                    py-2
-                    text-sm
-                    font-medium
-                    text-foreground/75
-                    transition-colors
-                    duration-300
-                    hover:text-accent
-                  "
-                >
-                  {link.label}
-
-                  <span
-                    aria-hidden
-                    className="
-                      absolute
-                      bottom-0
-                      right-0
-                      h-px
-                      w-0
-                      bg-accent
-                      transition-all
-                      duration-300
-                      group-hover:w-full
-                    "
-                  />
-                </a>
-              ))}
-            </nav>
-
-
-            {/* =================================================
-                RIGHT ACTIONS
-                ================================================= */}
-
-            <div className="flex items-center gap-2">
-
-              {/* Desktop CTA */}
-
-              <a
-                href="#cta"
-                className="
-                  hidden
-                  items-center
-                  justify-center
-                  rounded-sm
-                  border
-                  border-accent/50
-                  bg-primary
-                  px-5
-                  py-2.5
-                  text-sm
-                  font-medium
-                  text-primary-foreground
-                  transition-all
-                  duration-300
-                  hover:border-accent
-                  hover:bg-accent
-                  hover:text-accent-foreground
-                  sm:inline-flex
-                "
-              >
-                انضم إلى قامات
-              </a>
-
-
-              {/* Mobile menu button */}
-
-              <button
-                type="button"
-                aria-label="فتح القائمة"
-                aria-expanded={open}
-                onClick={() => setOpen(true)}
-                className="
-                  grid
-                  size-10
-                  place-items-center
-                  rounded-sm
-                  border
-                  border-white/10
-                  bg-[#1B264A]/50
-                  text-foreground
-                  transition-all
-                  duration-300
-                  hover:border-accent
-                  hover:text-accent
-                  lg:hidden
-                "
-              >
-                <Menu className="size-5" />
-              </button>
-            </div>
+              {open ? <CloseIcon className="size-5" /> : <Menu className="size-5" />}
+            </button>
           </div>
-        </div>
-      </motion.header>
+        </nav>
 
-
-      {/* =====================================================
-          MOBILE MENU
-          ===================================================== */}
-
-      <AnimatePresence>
+        {/* القائمة — الجوال */}
         {open && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="
-              fixed
-              inset-0
-              z-[60]
-              bg-[#1B264A]
-              text-foreground
-            "
-          >
-            {/* Ambient gold light */}
+          <div className="mt-2 overflow-hidden rounded-3xl border border-border bg-card p-3 shadow-[0_8px_32px_rgba(20,48,46,0.1)] lg:hidden">
+            <ul className="flex flex-col">
+              {navLinks.map((l) => {
+                const isRoute = !l.href.startsWith("#");
+                return (
+                  <li key={l.label}>
+                    {isRoute ? (
+                      <Link
+                        to={l.href}
+                        className="block rounded-2xl px-4 py-3 text-sm text-foreground transition-colors hover:bg-muted"
+                      >
+                        {l.label}
+                      </Link>
+                    ) : (
+                      <a
+                        href={resolveHref(l.href, isHome)}
+                        onClick={() => setOpen(false)}
+                        className="block rounded-2xl px-4 py-3 text-sm text-foreground transition-colors hover:bg-muted"
+                      >
+                        {l.label}
+                      </a>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
 
-            <div
-              aria-hidden
-              className="
-                pointer-events-none
-                absolute
-                -right-32
-                -top-32
-                size-[28rem]
-                rounded-full
-                bg-[#A88D68]/10
-                blur-3xl
-              "
-            />
-
-            <div className="container-q relative flex h-full flex-col">
-
-              {/* =================================================
-                  MOBILE HEADER
-                  ================================================= */}
-
-              <div className="flex items-center justify-between py-5">
-
-                {/* Logo */}
-
-                <a
-                  href="#hero"
-                  aria-label="قامات"
-                  onClick={() => setOpen(false)}
-                  className="flex items-center"
-                >
-                  <img
-                    src="/qamat-logo.png"
-                    alt="قامات"
-                    className="h-10 w-auto object-contain"
-                  />
-                </a>
-
-
-                {/* Close button */}
-
-                <button
-                  type="button"
-                  aria-label="إغلاق القائمة"
-                  onClick={() => setOpen(false)}
-                  className="
-                    grid
-                    size-10
-                    place-items-center
-                    rounded-sm
-                    border
-                    border-white/10
-                    transition-all
-                    duration-300
-                    hover:border-accent
-                    hover:text-accent
-                  "
-                >
-                  <X className="size-5" />
-                </button>
-              </div>
-
-
-              {/* =================================================
-                  MOBILE NAVIGATION
-                  ================================================= */}
-
-              <nav
-                aria-label="القائمة"
-                className="mt-8 flex flex-col"
-              >
-                {navLinks.map((link, index) => (
-                  <motion.a
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setOpen(false)}
-                    initial={{
-                      opacity: 0,
-                      y: 18,
-                    }}
-                    animate={{
-                      opacity: 1,
-                      y: 0,
-                    }}
-                    transition={{
-                      duration: 0.45,
-                      delay: index * 0.07,
-                    }}
-                    className="
-                      group
-                      flex
-                      items-center
-                      border-b
-                      border-white/10
-                      py-5
-                      text-2xl
-                      font-medium
-                      transition-colors
-                      duration-300
-                      hover:text-accent
-                    "
-                  >
-                    <span
-                      className="
-                        ml-3
-                        text-xs
-                        font-medium
-                        tracking-[0.18em]
-                        text-accent
-                      "
-                    >
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-
-                    {link.label}
-                  </motion.a>
-                ))}
-              </nav>
-
-
-              {/* =================================================
-                  MOBILE CTA
-                  ================================================= */}
-
-              <div className="mt-auto pb-8">
-
-                <a
-                  href="#cta"
-                  onClick={() => setOpen(false)}
-                  className="
-                    flex
-                    w-full
-                    items-center
-                    justify-center
-                    rounded-sm
-                    border
-                    border-accent
-                    bg-accent
-                    px-6
-                    py-4
-                    text-sm
-                    font-semibold
-                    text-[#1B264A]
-                    transition-all
-                    duration-300
-                    hover:bg-transparent
-                    hover:text-accent
-                  "
-                >
-                  انضم إلى قامات
-                </a>
-
-                <div className="mt-5 flex items-center gap-3">
-                  <div className="h-px flex-1 bg-white/10" />
-
-                  <span className="text-[10px] tracking-[0.25em] text-white/35">
-                    QAMAT
-                  </span>
-
-                  <div className="h-px flex-1 bg-white/10" />
-                </div>
-              </div>
-            </div>
-          </motion.div>
+            <a
+              href={isHome ? "#cta" : "/#cta"}
+              onClick={() => setOpen(false)}
+              className="mt-2 block rounded-full bg-primary px-5 py-3 text-center text-sm font-medium text-primary-foreground sm:hidden"
+            >
+              انضم إلى قامات
+            </a>
+          </div>
         )}
-      </AnimatePresence>
-    </>
+      </div>
+    </header>
   );
 }
