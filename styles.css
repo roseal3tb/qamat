@@ -1,0 +1,561 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * =========================================================
+ * QAMAT — VISUAL IDENTITY SYSTEM  (v2)
+ * =========================================================
+ *
+ * ألوان الهوية الرسمية:
+ *   Primary   : #19474C   (تيل)
+ *   Accent    : #A88D68   (ذهبي)
+ *   Secondary : #1B264A   (كحلي)
+ *
+ * ---------------------------------------------------------
+ * التغيير الجوهري في هذي النسخة:
+ * ---------------------------------------------------------
+ * قبل: الموقع كله خلفية غامقة (body gradient) → مرهق للعين.
+ * الآن: الموقع فاتح ومريح، والهوية الغامقة محصورة في
+ *       نطاق واحد اسمه ‎.surface-dark‎ نلفّ فيه الهيرو فقط
+ *       (وممكن الفوتر / CTA لو حبيت).
+ *
+ * ‎.surface-dark‎ يعيد تعريف نفس المتغيرات محلياً، يعني
+ * أي كومبوننت جواه يكمل يشتغل بنفس كلاسات Tailwind
+ * (bg-card / text-muted-foreground / border...) بدون تعديل.
+ * =========================================================
+ */
+
+@theme inline {
+  --font-sans: "IBM Plex Sans Arabic", ui-sans-serif, system-ui, sans-serif;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  /* ذهبي غامق — للنصوص الذهبية على خلفية فاتحة (تباين مقروء) */
+  --color-accent-strong: var(--accent-strong);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-ink: var(--ink);
+  --color-ink-foreground: var(--ink-foreground);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-border: var(--ink-border);
+}
+
+
+/* =========================================================
+   ROOT — الوضع الفاتح (الافتراضي لكل الموقع)
+   ========================================================= */
+
+:root {
+  /* الحدود صارت ناعمة: كانت 0.35rem (حادة) */
+  --radius: 1rem;
+
+  /* ---- ألوان الهوية الخام ---- */
+  --qamat-teal: #19474c;
+  --qamat-gold: #a88d68;
+  --qamat-navy: #1b264a;
+  --qamat-cream: #f7f4ed;
+
+  /* ---- الخلفية: ورقي فاتح مشتق من التيل ---- */
+  --background: #dde5e1;
+  --foreground: #1d3a38;
+
+  /* ---- البطاقات: أبيض نقي فوق الورقي ---- */
+  --card: #eef3f1;
+  --card-foreground: #1d3a38;
+
+  --popover: #eef3f1;
+  --popover-foreground: #1d3a38;
+
+  /* ---- الأساسي ---- */
+  --primary: #19474c;
+  --primary-foreground: #ffffff;
+
+  /* ---- الثانوي ---- */
+  --secondary: #1b264a;
+  --secondary-foreground: #ffffff;
+
+  /* ---- الذهبي ---- */
+  --accent: #a88d68;
+  --accent-foreground: #14202a;
+  --accent-strong: #8a7150;
+
+  /* ---- الأسطح الهادئة ---- */
+  --muted: #d2ddd9;
+  --muted-foreground: #5b6d6b;
+
+  /* ---- الحدود ---- */
+  --border: rgba(20, 48, 46, 0.12);
+  --input: rgba(20, 48, 46, 0.18);
+
+  --ring: #a88d68;
+
+  /* ---- الحبر (للبلوكات الغامقة داخل صفحة فاتحة) ---- */
+  --ink: #10182f;
+  --ink-foreground: #f7f4ed;
+  --ink-muted: rgba(247, 244, 237, 0.7);
+  --ink-border: rgba(247, 244, 237, 0.16);
+
+  --destructive: #b94a48;
+  --destructive-foreground: #ffffff;
+
+  /* ---- ظلال ناعمة ---- */
+  --shadow-soft: 0 1px 2px rgba(20, 48, 46, 0.03),
+                 0 8px 24px rgba(20, 48, 46, 0.05);
+  --shadow-lift: 0 2px 4px rgba(18, 41, 44, 0.05),
+                 0 16px 40px rgba(18, 41, 44, 0.1);
+}
+
+
+/* =========================================================
+   SURFACE DARK — نطاق هوية قامات الغامقة
+   ---------------------------------------------------------
+   لفّ الهيرو بهذا الكلاس:
+     <section className="surface-dark ...">
+   وكل شي جواه يصير على الوضع الغامق تلقائياً.
+   ========================================================= */
+
+.surface-dark,
+.dark {
+  --background: #19474c;
+  --foreground: #e9e5db;
+
+  --card: rgba(255, 255, 255, 0.06);
+  --card-foreground: #e9e5db;
+
+  --popover: #1b264a;
+  --popover-foreground: #e9e5db;
+
+  /* على الغامق: الزر الأساسي يصير ذهبي عشان يبان */
+  --primary: #a88d68;
+  --primary-foreground: #14202a;
+
+  --secondary: rgba(255, 255, 255, 0.1);
+  --secondary-foreground: #e9e5db;
+
+  --accent: #a88d68;
+  --accent-foreground: #14202a;
+  --accent-strong: #c4a87e;
+
+  --muted: rgba(255, 255, 255, 0.07);
+  --muted-foreground: rgba(233, 229, 219, 0.68);
+
+  --border: rgba(233, 229, 219, 0.15);
+  --input: rgba(233, 229, 219, 0.2);
+
+  --ring: #a88d68;
+
+  color: var(--foreground);
+}
+
+
+/* =========================================================
+   BASE
+   ========================================================= */
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    background-color: #dde5e1;
+  }
+
+  body {
+    /*
+     * خلفية فاتحة مريحة — تدرّج خفيف جداً مشتق من التيل والذهبي.
+     * لا يوجد أي غامق هنا؛ الغامق صار داخل ‎.surface-dark‎ فقط.
+     */
+    background-color: #dde5e1;
+
+    /*
+     * نسيج ناعم: خطوط مائلة رفيعة جدًا + لمستا دفء ذهبي وتيل.
+     * الخطوط شبه غير مرئية — تعطي عمقًا دون تشتيت.
+     */
+    background-image:
+      repeating-linear-gradient(
+        135deg,
+        rgba(20, 48, 46, 0.022) 0px,
+        rgba(20, 48, 46, 0.022) 1px,
+        transparent 1px,
+        transparent 26px
+      ),
+      radial-gradient(
+        circle at 90% 0%,
+        rgba(168, 141, 104, 0.13) 0%,
+        transparent 42%
+      ),
+      radial-gradient(
+        circle at 0% 12%,
+        rgba(25, 71, 76, 0.06) 0%,
+        transparent 40%
+      );
+
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+
+    overflow-x: hidden;
+    min-height: 100vh;
+
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background: var(--qamat-teal);
+    color: #f7f4ed;
+  }
+
+  h1,
+  h2,
+  h3 {
+    line-height: 1.25;
+    letter-spacing: -0.018em;
+  }
+
+  a {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent-strong);
+    outline-offset: 3px;
+    border-radius: 0.5rem;
+  }
+
+  .surface-dark :focus-visible {
+    outline-color: var(--qamat-gold);
+  }
+}
+
+
+/* =========================================================
+   CONTAINER
+   ========================================================= */
+
+@utility container-q {
+  width: 100%;
+  margin-inline: auto;
+  max-width: 84rem;
+  padding-inline: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .container-q {
+    padding-inline: 4rem;
+  }
+}
+
+
+/* =========================================================
+   SECTION LABEL  (الإيبرو فوق عنوان السكشن)
+   ========================================================= */
+
+@utility label-q {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  color: var(--accent-strong);
+  font-weight: 600;
+}
+
+
+@utility rule-q {
+  border-top: 1px solid var(--border);
+}
+
+
+/* =========================================================
+   HERO — بلوك هوية قامات الغامق
+   ---------------------------------------------------------
+   استعمال:
+   <section className="surface-dark qamat-hero container-q ...">
+   ========================================================= */
+
+.qamat-hero {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+
+  border-radius: 2rem;
+  border: 1px solid rgba(168, 141, 104, 0.28);
+
+  background-color: #19474c;
+  background-image:
+    radial-gradient(
+      circle at 85% 8%,
+      rgba(168, 141, 104, 0.3) 0%,
+      rgba(168, 141, 104, 0.1) 20%,
+      transparent 42%
+    ),
+    radial-gradient(
+      circle at 6% 88%,
+      rgba(27, 38, 74, 0.55) 0%,
+      transparent 46%
+    ),
+    linear-gradient(135deg, #1b264a 0%, #19474c 52%, #143d41 100%);
+
+  box-shadow: 0 24px 64px rgba(18, 41, 44, 0.18);
+}
+
+/* خط ذهبي رفيع أعلى الهيرو */
+.qamat-hero::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(168, 141, 104, 0.85),
+    transparent
+  );
+}
+
+@media (max-width: 767px) {
+  .qamat-hero {
+    border-radius: 1.5rem;
+  }
+}
+
+
+/* =========================================================
+   SURFACES
+   ========================================================= */
+
+/* بطاقة فاتحة ناعمة — البديل الافتراضي في الوضع الفاتح */
+.qamat-surface {
+  background: #eef3f1;
+  border: 1px solid var(--border);
+  border-radius: 1.25rem;
+  box-shadow: var(--shadow-soft);
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.qamat-surface:hover {
+  box-shadow: var(--shadow-lift);
+  transform: translateY(-2px);
+}
+
+/* نفس الكلاس داخل النطاق الغامق → زجاج */
+.surface-dark .qamat-surface {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.09),
+    rgba(255, 255, 255, 0.02)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: none;
+}
+
+.surface-dark .qamat-surface:hover {
+  box-shadow: none;
+  transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   ACCENTS
+   ========================================================= */
+
+.qamat-glow {
+  background: radial-gradient(
+    circle,
+    rgba(168, 141, 104, 0.22),
+    transparent 68%
+  );
+}
+
+.qamat-teal-glow {
+  background: radial-gradient(
+    circle,
+    rgba(25, 71, 76, 0.14),
+    transparent 70%
+  );
+}
+
+.qamat-gold-line {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(168, 141, 104, 0.75),
+    transparent
+  );
+}
+
+.qamat-grid {
+  background-image:
+    linear-gradient(rgba(18, 41, 44, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(18, 41, 44, 0.045) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(to bottom, black, transparent 90%);
+  -webkit-mask-image: linear-gradient(to bottom, black, transparent 90%);
+}
+
+.surface-dark .qamat-grid {
+  background-image:
+    linear-gradient(rgba(247, 244, 237, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(247, 244, 237, 0.04) 1px, transparent 1px);
+}
+
+
+/* =========================================================
+   MARQUEE — سكشن الأعضاء المتميزين (شريط يلف)
+   ---------------------------------------------------------
+   الاستعمال: كرّر المصفوفة مرتين داخل ‎.marquee-track‎
+   عشان اللفّة تكون سلسة بدون قطع.
+   ========================================================= */
+
+.marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent,
+    black 8%,
+    black 92%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    black 8%,
+    black 92%,
+    transparent
+  );
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 1.25rem;
+  animation: qamat-marquee 42s linear infinite;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes qamat-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    /* نصف المسافة لأن المحتوى مكرر مرتين */
+    transform: translateX(-50%);
+  }
+}
+
+
+/* =========================================================
+   REVEAL — ظهور بسيط عند التمرير
+   ========================================================= */
+
+@keyframes qamat-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-rise {
+  animation: qamat-rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+
+/* =========================================================
+   SCROLL OFFSET
+   ========================================================= */
+
+section[id] {
+  scroll-margin-top: 6rem;
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  .marquee-track {
+    animation: none;
+    transform: none;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 767px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .marquee-track {
+    animation-duration: 30s;
+  }
+}
