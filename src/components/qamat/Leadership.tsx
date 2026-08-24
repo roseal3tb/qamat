@@ -9,21 +9,16 @@ interface LeadershipBox {
 }
 
 const leadershipBoxes: LeadershipBox[] = [
-  // 1. قادة المبادرة (أول ناس)
   {
     category: "قادة المبادرة",
     members: ["هيا آل شافي", "موسى العتيبي"],
     highlight: true,
   },
-
-  // 2. اللجنة التقنية
   {
     category: "اللجنة التقنية",
     members: ["روز العتيبي", "بارعه"],
     highlight: true,
   },
-
-  // 3. إدارة الموارد ولجانها
   {
     category: "إدارة الموارد",
     members: ["فيّ الشلوي", "رهف العريفي"],
@@ -36,8 +31,6 @@ const leadershipBoxes: LeadershipBox[] = [
     category: "لجنة متابعة الأداء",
     members: ["عبدالرحمن الشنيفي"],
   },
-
-  // 4. إدارة الإعلام والمحتوى ولجانها
   {
     category: "إدارة الإعلام والمحتوى",
     members: ["حلا خالد حملي", "جود العجيمي"],
@@ -54,8 +47,6 @@ const leadershipBoxes: LeadershipBox[] = [
     category: "لجنة التصوير والمونتاج",
     members: ["طلال الصالح"],
   },
-
-  // 5. إدارة العلاقات العامة ولجانها
   {
     category: "إدارة العلاقات العامة",
     members: ["صبا العجمي", "غيدا العصيمي"],
@@ -68,8 +59,6 @@ const leadershipBoxes: LeadershipBox[] = [
     category: "لجنة التعاونات",
     members: ["نوف العتيبي"],
   },
-
-  // 6. إدارة التشغيل والتطوير
   {
     category: "إدارة التشغيل والتطوير",
     members: ["بندر الحرامله"],
@@ -98,7 +87,6 @@ export function Leadership() {
         </div>
       </div>
 
-      {/* شريط المربعات المتحرك من اليسار إلى اليمين */}
       <div className="relative w-full overflow-hidden py-4">
         <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-[#FBFBFC] to-transparent" />
         <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-[#FBFBFC] to-transparent" />
