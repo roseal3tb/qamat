@@ -75,18 +75,19 @@ export function Leadership() {
           <div>
             <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-[#15274E]/5 text-[#15274E] mb-3">
               <Users2 className="size-3.5" />
-              الهيكل القيادي
+              فريق العمل
             </span>
             <h2 className="text-[clamp(1.9rem,4.4vw,3.5rem)] font-bold leading-[1.2] text-[#15274E]">
               <WordsReveal text="قاماتنا" />
             </h2>
           </div>
           <p className="max-w-md text-sm text-[#64748B] leading-relaxed">
-            الكوادر واللجان القيادية القائمة على تمكين المبادرة وصناعة الأثر في كل مرحلة.
+            قادة المبادرة واللجان التنفيذية القائمة على صناعة التجربة وبناء الأثر.
           </p>
         </div>
       </div>
 
+      {/* شريط المربعات المتحرك يسار إلى يمين */}
       <div className="relative w-full overflow-hidden py-4">
         <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-[#FBFBFC] to-transparent" />
         <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-[#FBFBFC] to-transparent" />
@@ -95,7 +96,7 @@ export function Leadership() {
           className="flex gap-5 w-max"
           animate={{ x: ["-50%", "0%"] }}
           transition={{
-            duration: 35,
+            duration: 30,
             repeat: Infinity,
             ease: "linear",
           }}
@@ -105,7 +106,7 @@ export function Leadership() {
             <div
               key={idx}
               dir="rtl"
-              className={`flex h-44 w-72 flex-col justify-between rounded-2xl p-6 transition-all duration-300 shadow-sm ${
+              className={`flex h-40 w-72 flex-col justify-between rounded-2xl p-6 transition-all duration-300 shadow-sm ${
                 box.highlight
                   ? "border-2 border-[#15274E] bg-white shadow-md shadow-[#15274E]/10"
                   : "border border-slate-200/90 bg-white hover:border-[#15274E]/30 hover:shadow-md"
@@ -124,7 +125,7 @@ export function Leadership() {
                 {box.members.map((name, i) => (
                   <span
                     key={i}
-                    className="text-sm font-semibold text-slate-700 hover:text-[#15274E] transition-colors"
+                    className="text-sm font-semibold text-slate-800"
                   >
                     {name}
                   </span>
