@@ -12,37 +12,37 @@ export function Hero() {
 
   const line = "نبني الكفاءات، نصنع الخبرة، ونمكّن الأثر.";
 
-  // تقسيم الشعار إلى 3 أعمدة رأسية تطابق رسمة اللوجو الهندسية
-  const logoPillars = [
+  // مسارات القص الدقيقة بمحاذاة الفراغ والخط الأبيض الفاصل
+  const logoPieces = [
     {
-      id: "left-pillar",
-      // العمود الأيسر (الجزء المنحني والنقطتين)
-      clip: "polygon(0% 0%, 37.5% 0%, 37.5% 100%, 0% 100%)",
-      initialY: 260,
-      delay: 0.35,
+      id: "left-piece",
+      // الكتلة اليسرى مع الميلان حتى الخط الفاصل الأول
+      clip: "polygon(0% 0%, 36.8% 0%, 36.8% 100%, 0% 100%)",
+      initialY: 280,
+      delay: 0.3,
       duration: 1.1,
     },
     {
-      id: "center-tall-pillar",
-      // العمود الأوسط الأطول (حرف قامات الأساسي)
-      clip: "polygon(37.5% 0%, 60% 0%, 60% 100%, 37.5% 100%)",
-      initialY: 340,
-      delay: 0.55,
+      id: "center-piece",
+      // الكتلة الوسطى (البرج الأطول وحرف قامات) المحصورة بين الخطين
+      clip: "polygon(37.4% 0%, 60.6% 0%, 60.6% 100%, 37.4% 100%)",
+      initialY: 360,
+      delay: 0.5,
       duration: 1.25,
     },
     {
-      id: "right-pillar",
-      // العمود الأيمن (الجزء الجانبي المتمم)
-      clip: "polygon(60% 0%, 100% 0%, 100% 100%, 60% 100%)",
-      initialY: 420,
-      delay: 0.75,
+      id: "right-piece",
+      // الكتلة اليمنى بعد الخط الفاصل الثاني
+      clip: "polygon(61.2% 0%, 100% 0%, 100% 100%, 61.2% 100%)",
+      initialY: 440,
+      delay: 0.7,
       duration: 1.35,
     },
   ];
 
   return (
     <section id="hero" ref={ref} className="relative min-h-[100svh] overflow-hidden bg-[#FBFBFC]">
-      {/* خلفية وشبكة هادئة */}
+      {/* شبكة خفيفة */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
         <div
           className="absolute inset-0 opacity-[0.35]"
@@ -54,7 +54,7 @@ export function Hero() {
           }}
         />
 
-        {/* أعمدة قامات الجانبية المتنامية */}
+        {/* أعمدة قامات الجانبية */}
         <div className="absolute bottom-0 left-[5%] hidden items-end gap-3 md:flex">
           {[42, 72, 108, 148, 190, 130].map((h, i) => (
             <motion.span
@@ -76,7 +76,7 @@ export function Hero() {
         style={{ y, opacity }}
         className="container-q relative flex min-h-[100svh] flex-col justify-between pt-32 pb-20 lg:flex-row lg:items-center"
       >
-        {/* نصوص ومعلومات الهيرو */}
+        {/* نصوص الهيرو */}
         <div className="max-w-2xl">
           <motion.div
             initial={{ opacity: 0, y: 12 }}
@@ -146,13 +146,13 @@ export function Hero() {
           </motion.div>
         </div>
 
-        {/* تجمع الأعمدة الثلاثة لشعار قامات من الأسفل */}
+        {/* صعود القطع الثلاث بدقة حول الخطوط البيضاء */}
         <div className="relative mt-12 flex h-[360px] w-[300px] items-center justify-center lg:mt-0 lg:h-[460px] lg:w-[400px]">
-          {logoPillars.map((pillar) => (
+          {logoPieces.map((piece) => (
             <motion.div
-              key={pillar.id}
+              key={piece.id}
               initial={{
-                y: pillar.initialY,
+                y: piece.initialY,
                 opacity: 0,
               }}
               animate={{
@@ -160,13 +160,13 @@ export function Hero() {
                 opacity: 1,
               }}
               transition={{
-                duration: pillar.duration,
-                delay: pillar.delay,
+                duration: piece.duration,
+                delay: piece.delay,
                 ease: [0.16, 1, 0.3, 1],
               }}
               style={{
-                clipPath: pillar.clip,
-                WebkitClipPath: pillar.clip,
+                clipPath: piece.clip,
+                WebkitClipPath: piece.clip,
               }}
               className="absolute inset-0 flex items-center justify-center pointer-events-none select-none"
             >
