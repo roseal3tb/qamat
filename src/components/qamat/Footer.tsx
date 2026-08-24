@@ -13,28 +13,26 @@ export function Footer() {
       <div className="container-q">
         <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
           <div className="space-y-4">
-            <div className="flex items-center gap-4">
+            <div>
               <span className="text-2xl font-bold tracking-tight">
                 {brand.nameAr} <span className="text-white/40">|</span>{" "}
                 <span className="text-base font-normal tracking-[0.2em] text-white/70">{brand.nameEn}</span>
               </span>
+              <p className="mt-3 max-w-xs text-sm leading-relaxed text-white/70">{brand.tagline}</p>
             </div>
-            <p className="max-w-xs text-sm leading-relaxed text-white/70">{brand.tagline}</p>
-            
-            {/* قسم شعار النادي المنظم */}
+
+            {/* لوقو النادي المنظم بالفوتر */}
             <div className="pt-2">
-              <span className="block text-xs font-medium text-white/50 mb-2">بتنظيم / إشراف:</span>
+              <span className="block text-xs font-medium text-white/50 mb-2">النادي المنظم:</span>
               <div className="flex items-center gap-3">
                 <img
                   src="/club-logo.png"
                   alt="شعار النادي"
-                  className="h-10 w-auto object-contain brightness-0 invert opacity-85 hover:opacity-100 transition-opacity"
+                  className="h-10 w-auto object-contain brightness-0 invert opacity-90 hover:opacity-100 transition-opacity"
                   onError={(e) => {
-                    // إخفاء الصورة في حال لم يتم رفع ملف club-logo.png بعد
                     e.currentTarget.style.display = 'none';
                   }}
                 />
-                <span className="text-xs font-semibold text-white/80">النادي الطلابي المنظم</span>
               </div>
             </div>
           </div>
