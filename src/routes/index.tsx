@@ -11,7 +11,6 @@ import { Outcomes } from "@/components/qamat/Outcomes";
 import { Transformation } from "@/components/qamat/Transformation";
 import { Leadership } from "@/components/qamat/Leadership";
 import { Impact } from "@/components/qamat/Impact";
-import { CTA } from "@/components/qamat/CTA";
 import { Footer } from "@/components/qamat/Footer";
 
 const title = "قامات | QAMAT — نبني الكفاءات، نصنع الخبرة، ونمكّن الأثر";
@@ -48,7 +47,6 @@ function Index() {
         <Transformation />
         <Leadership />
         <Impact />
-        <CTA />
       </main>
       <Footer />
     </div>
