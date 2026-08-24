@@ -7,6 +7,7 @@ import {
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { navLinks } from "@/data/qamatData";
+import { Link } from "@tanstack/react-router";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -20,10 +21,6 @@ export function Navbar() {
 
   return (
     <>
-      {/* =====================================================
-          NAVBAR
-          ===================================================== */}
-
       <motion.header
         initial={{ y: -30, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -44,29 +41,21 @@ export function Navbar() {
                     "border-[#15274E]/15",
                     "bg-[#15274E]/90",
                     "px-4 py-2.5",
-                    "shadow-[0_12px_36px_-15px_rgba(21,39,78,0.25)]",
+                    "shadow-[0_18px_60px_-25px_rgba(21,39,78,0.3)]",
                     "backdrop-blur-xl",
-                    "text-white",
                     "md:px-6",
                   ].join(" ")
                 : [
-                    "border-[#15274E]/10",
-                    "bg-white/70",
-                    "backdrop-blur-md",
-                    "px-4 py-3.5",
-                    "text-[#15274E]",
-                    "shadow-sm",
-                    "md:px-6 md:py-4",
+                    "border-transparent",
+                    "bg-transparent",
+                    "px-2 py-4",
+                    "md:px-3 md:py-5",
                   ].join(" "),
             ].join(" ")}
           >
-
-            {/* =================================================
-                LOGO — RIGHT
-                ================================================= */}
-
-            <a
-              href="#hero"
+            {/* اللوقو بحركته الأصلية */}
+            <Link
+              to="/"
               aria-label="قامات"
               className="group flex shrink-0 items-center"
             >
@@ -78,15 +67,10 @@ export function Navbar() {
                   "transition-all duration-500",
                   scrolled
                     ? "h-9 md:h-10 brightness-0 invert"
-                    : "h-10 md:h-12",
+                    : "h-11 md:h-13",
                 ].join(" ")}
               />
-            </a>
-
-
-            {/* =================================================
-                DESKTOP NAVIGATION
-                ================================================= */}
+            </Link>
 
             <nav
               aria-label="التنقل الرئيسي"
@@ -116,17 +100,9 @@ export function Navbar() {
               ))}
             </nav>
 
-
-            {/* =================================================
-                RIGHT ACTIONS
-                ================================================= */}
-
             <div className="flex items-center gap-2">
-
-              {/* Desktop CTA */}
-
-              <a
-                href="#register"
+              <Link
+                to="/register"
                 className={[
                   "hidden items-center justify-center rounded-md px-5 py-2.5 text-sm font-semibold transition-all duration-300 sm:inline-flex",
                   scrolled
@@ -135,10 +111,7 @@ export function Navbar() {
                 ].join(" ")}
               >
                 انضم إلينا
-              </a>
-
-
-              {/* Mobile menu button */}
+              </Link>
 
               <button
                 type="button"
@@ -159,11 +132,6 @@ export function Navbar() {
         </div>
       </motion.header>
 
-
-      {/* =====================================================
-          MOBILE MENU
-          ===================================================== */}
-
       <AnimatePresence>
         {open && (
           <motion.div
@@ -174,17 +142,9 @@ export function Navbar() {
             className="fixed inset-0 z-[60] bg-[#15274E] text-white"
           >
             <div className="container-q relative flex h-full flex-col">
-
-              {/* =================================================
-                  MOBILE HEADER
-                  ================================================= */}
-
               <div className="flex items-center justify-between py-5">
-
-                {/* Logo */}
-
-                <a
-                  href="#hero"
+                <Link
+                  to="/"
                   aria-label="قامات"
                   onClick={() => setOpen(false)}
                   className="flex items-center"
@@ -194,10 +154,7 @@ export function Navbar() {
                     alt="قامات"
                     className="h-10 w-auto object-contain brightness-0 invert"
                   />
-                </a>
-
-
-                {/* Close button */}
+                </Link>
 
                 <button
                   type="button"
@@ -209,67 +166,33 @@ export function Navbar() {
                 </button>
               </div>
 
-
-              {/* =================================================
-                  MOBILE NAVIGATION
-                  ================================================= */}
-
-              <nav
-                aria-label="القائمة"
-                className="mt-8 flex flex-col"
-              >
+              <nav aria-label="القائمة" className="mt-8 flex flex-col">
                 {navLinks.map((link, index) => (
                   <motion.a
                     key={link.href}
                     href={link.href}
                     onClick={() => setOpen(false)}
-                    initial={{
-                      opacity: 0,
-                      y: 18,
-                    }}
-                    animate={{
-                      opacity: 1,
-                      y: 0,
-                    }}
-                    transition={{
-                      duration: 0.45,
-                      delay: index * 0.07,
-                    }}
+                    initial={{ opacity: 0, y: 18 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.45, delay: index * 0.07 }}
                     className="group flex items-center border-b border-white/10 py-5 text-xl font-medium text-white/90 transition-colors duration-300 hover:text-white"
                   >
                     <span className="ml-3 text-xs font-semibold tracking-wider text-white/50">
                       {String(index + 1).padStart(2, "0")}
                     </span>
-
                     {link.label}
                   </motion.a>
                 ))}
               </nav>
 
-
-              {/* =================================================
-                  MOBILE CTA
-                  ================================================= */}
-
               <div className="mt-auto pb-8">
-
-                <a
-                  href="#register"
+                <Link
+                  to="/register"
                   onClick={() => setOpen(false)}
                   className="flex w-full items-center justify-center rounded-md bg-white px-6 py-4 text-sm font-bold text-[#15274E] shadow-lg transition-all duration-300 hover:bg-white/95"
                 >
                   انضم إلينا
-                </a>
-
-                <div className="mt-5 flex items-center gap-3">
-                  <div className="h-px flex-1 bg-white/10" />
-
-                  <span className="text-[10px] font-semibold tracking-[0.25em] text-white/40">
-                    QAMAT
-                  </span>
-
-                  <div className="h-px flex-1 bg-white/10" />
-                </div>
+                </Link>
               </div>
             </div>
           </motion.div>
