@@ -1,68 +1,76 @@
-import { brand, footerLinks, socials } from "@/data/qamatData";
 import { Instagram, Linkedin } from "lucide-react";
+import { brand, footerLinks, socials } from "@/data/qamatData";
 
 function SocialIcon({ name }: { name: string }) {
-  if (name === "Instagram") return <Instagram className="size-[18px]" />;
-  if (name === "LinkedIn") return <Linkedin className="size-[18px]" />;
+  if (name === "Instagram") return <Instagram className="size-4" />;
+  if (name === "LinkedIn") return <Linkedin className="size-4" />;
   return <span className="text-sm font-semibold leading-none">X</span>;
 }
 
 export function Footer() {
-  const year = new Date().getFullYear();
-
   return (
-    <footer className="border-t border-border bg-muted py-14 md:py-16">
+    <footer className="bg-[#15274E] py-14 text-white md:py-16">
       <div className="container-q">
-        <div className="flex flex-col items-center gap-8 text-center">
-          {/* الشعار */}
-          <a href="#hero" aria-label={brand.nameAr} className="inline-block">
-            <img
-              src="/logo.png"
-              alt={brand.nameAr}
-              className="h-16 w-auto object-contain md:h-20"
-            />
-          </a>
+        <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
+          <div className="space-y-4">
+            <div className="flex items-center gap-4">
+              <span className="text-2xl font-bold tracking-tight">
+                {brand.nameAr} <span className="text-white/40">|</span>{" "}
+                <span className="text-base font-normal tracking-[0.2em] text-white/70">{brand.nameEn}</span>
+              </span>
+            </div>
+            <p className="max-w-xs text-sm leading-relaxed text-white/70">{brand.tagline}</p>
+            
+            {/* قسم شعار النادي المنظم */}
+            <div className="pt-2">
+              <span className="block text-xs font-medium text-white/50 mb-2">بتنظيم / إشراف:</span>
+              <div className="flex items-center gap-3">
+                <img
+                  src="/club-logo.png"
+                  alt="شعار النادي"
+                  className="h-10 w-auto object-contain brightness-0 invert opacity-85 hover:opacity-100 transition-opacity"
+                  onError={(e) => {
+                    // إخفاء الصورة في حال لم يتم رفع ملف club-logo.png بعد
+                    e.currentTarget.style.display = 'none';
+                  }}
+                />
+                <span className="text-xs font-semibold text-white/80">النادي الطلابي المنظم</span>
+              </div>
+            </div>
+          </div>
 
-          {/* الشعار النصي */}
-          <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">
-            {brand.tagline}
-          </p>
-
-          {/* روابط التنقّل */}
-          <nav className="flex flex-wrap items-center justify-center gap-x-7 gap-y-3">
+          <nav className="grid grid-cols-2 gap-x-10 gap-y-3 sm:grid-cols-3 md:gap-x-14">
             {footerLinks.map((l) => (
               <a
                 key={l.label}
                 href={l.href}
-                className="text-sm text-muted-foreground transition-colors hover:text-primary"
+                className="text-sm text-white/70 transition-colors duration-200 hover:text-white"
               >
                 {l.label}
               </a>
             ))}
           </nav>
 
-          {/* حسابات التواصل — دائرية */}
-          <div className="flex items-center justify-center gap-3">
-            {socials.map((s) => (
-              <a
-                key={s.name}
-                href={s.href}
-                aria-label={s.name}
-                target="_blank"
-                rel="noreferrer"
-                className="grid size-11 place-items-center rounded-full border border-border bg-card text-muted-foreground transition-all duration-300 hover:-translate-y-0.5 hover:border-accent hover:bg-accent hover:text-accent-foreground"
-              >
-                <SocialIcon name={s.name} />
-              </a>
-            ))}
+          <div className="flex flex-col gap-3">
+            <span className="text-xs font-medium text-white/50">تابعنا على</span>
+            <div className="flex gap-2">
+              {socials.map((s) => (
+                <a
+                  key={s.name}
+                  href={s.href}
+                  aria-label={s.name}
+                  className="grid size-10 place-items-center rounded-md border border-white/15 bg-white/5 text-white/80 transition-all duration-300 hover:border-white/40 hover:bg-white/10 hover:text-white"
+                >
+                  <SocialIcon name={s.name} />
+                </a>
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* الحقوق — في المنتصف */}
-        <div className="mt-12 border-t border-border pt-6">
-          <p className="text-center text-xs text-muted-foreground">
-            © {year} {brand.nameAr}. جميع الحقوق محفوظة.
-          </p>
+        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 text-xs text-white/50 sm:flex-row">
+          <p>© ٢٠٢٦ قامات. جميع الحقوق محفوظة.</p>
+          <p>صُنع لتمكين الكفاءات وبناء الأثر</p>
         </div>
       </div>
     </footer>
