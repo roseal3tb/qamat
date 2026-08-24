@@ -1,13 +1,12 @@
 import { ArrowLeft, Compass } from "lucide-react";
 import { fields } from "@/data/qamatData";
 import { Reveal, WordsReveal } from "./Reveal";
+import { Link } from "@tanstack/react-router";
 
 export function Fields() {
   return (
     <section id="fields" className="relative border-t border-[#15274E]/10 bg-[#FBFBFC] py-24 md:py-32">
       <div className="container-q">
-        
-        {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
           <div>
             <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-[#15274E]/5 text-[#15274E] mb-3">
@@ -23,12 +22,11 @@ export function Fields() {
           </p>
         </div>
 
-        {/* Fields Grid Cards */}
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {fields.map((f, i) => (
             <Reveal key={f.num || i} delay={i * 0.06}>
-              <a
-                href="#register"
+              <Link
+                to="/register"
                 className="group relative flex h-full flex-col justify-between rounded-2xl border border-slate-200/90 bg-white p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#15274E]/30 hover:shadow-xl hover:shadow-[#15274E]/5"
               >
                 <div>
@@ -54,11 +52,10 @@ export function Fields() {
                   <span>سجل في هذا المسار</span>
                   <ArrowLeft className="size-3.5 transition-transform duration-300 group-hover:-translate-x-1" />
                 </div>
-              </a>
+              </Link>
             </Reveal>
           ))}
         </div>
-
       </div>
     </section>
   );
