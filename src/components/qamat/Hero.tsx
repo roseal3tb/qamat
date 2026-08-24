@@ -12,43 +12,34 @@ export function Hero() {
 
   const line = "نبني الكفاءات، نصنع الخبرة، ونمكّن الأثر.";
 
-  // إعدادات الطبقات الثلاث المنفصلة لشعار قامات
-  const logoLayers = [
+  // إعدادات تقسيم شعار قامات إلى 3 أجزاء وصعود كل جزء من الأسفل
+  const segments = [
     {
-      id: "base-back",
-      scale: 0.86,
-      yStart: 280,
-      opacityTarget: 0.3,
+      id: "bottom-segment",
+      clip: "polygon(0% 66%, 100% 66%, 100% 100%, 0% 100%)",
+      initialY: 260,
       delay: 0.3,
-      rotate: -4,
-      blur: "blur(2px)",
-      zIndex: 10,
+      duration: 1.1,
     },
     {
-      id: "middle-elevated",
-      scale: 0.94,
-      yStart: 240,
-      opacityTarget: 0.65,
+      id: "middle-segment",
+      clip: "polygon(0% 33%, 100% 33%, 100% 66%, 0% 66%)",
+      initialY: 340,
       delay: 0.5,
-      rotate: -2,
-      blur: "blur(0px)",
-      zIndex: 20,
+      duration: 1.2,
     },
     {
-      id: "front-sharp",
-      scale: 1,
-      yStart: 200,
-      opacityTarget: 1,
+      id: "top-segment",
+      clip: "polygon(0% 0%, 100% 0%, 100% 33%, 0% 33%)",
+      initialY: 420,
       delay: 0.7,
-      rotate: 0,
-      blur: "blur(0px)",
-      zIndex: 30,
+      duration: 1.3,
     },
   ];
 
   return (
     <section id="hero" ref={ref} className="relative min-h-[100svh] overflow-hidden bg-[#FBFBFC]">
-      {/* خلفية وشبكة هادئة */}
+      {/* شبكة خفيفة وأعمدة قامات */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
         <div
           className="absolute inset-0 opacity-[0.35]"
@@ -60,7 +51,6 @@ export function Hero() {
           }}
         />
 
-        {/* أعمدة قامات الصاعدة */}
         <div className="absolute bottom-0 left-[5%] hidden items-end gap-3 md:flex">
           {[42, 72, 108, 148, 190, 130].map((h, i) => (
             <motion.span
@@ -82,7 +72,7 @@ export function Hero() {
         style={{ y, opacity }}
         className="container-q relative flex min-h-[100svh] flex-col justify-between pt-32 pb-20 lg:flex-row lg:items-center"
       >
-        {/* نصوص ومحتوى الهيرو */}
+        {/* النصوص والأزرار */}
         <div className="max-w-2xl">
           <motion.div
             initial={{ opacity: 0, y: 12 }}
@@ -152,49 +142,35 @@ export function Hero() {
           </motion.div>
         </div>
 
-        {/* عرض الشعار كـ 3 طبقات هندسية منفصلة تنبثق من الأسفل */}
-        <div className="relative mt-12 flex h-[400px] w-full items-center justify-center lg:mt-0 lg:h-[480px] lg:w-[420px]">
-          {logoLayers.map((layer, index) => (
+        {/* تفكك الشعار الواحد إلى 3 أجزاء تصعد من الأسفل وتلتحم في مكانها */}
+        <div className="relative mt-12 flex h-[380px] w-[320px] items-center justify-center lg:mt-0 lg:h-[440px] lg:w-[380px]">
+          {segments.map((seg) => (
             <motion.div
-              key={layer.id}
+              key={seg.id}
               initial={{
-                y: layer.yStart,
+                y: seg.initialY,
                 opacity: 0,
-                rotate: layer.rotate * 2,
-                scale: 0.7,
               }}
               animate={{
                 y: 0,
-                opacity: layer.opacityTarget,
-                rotate: layer.rotate,
-                scale: layer.scale,
+                opacity: 1,
               }}
               transition={{
-                duration: 1.4,
-                delay: layer.delay,
+                duration: seg.duration,
+                delay: seg.delay,
                 ease: [0.16, 1, 0.3, 1],
               }}
               style={{
-                zIndex: layer.zIndex,
-                filter: layer.blur,
+                clipPath: seg.clip,
+                WebkitClipPath: seg.clip,
               }}
-              className="absolute flex items-center justify-center transition-transform hover:scale-105"
+              className="absolute inset-0 flex items-center justify-center pointer-events-none select-none"
             >
-              <div
-                className={`relative rounded-3xl p-6 ${
-                  index === 2
-                    ? "bg-white/80 shadow-2xl shadow-[#15274E]/15 backdrop-blur-sm border border-[#15274E]/10"
-                    : index === 1
-                    ? "bg-slate-100/60 shadow-lg border border-[#15274E]/5"
-                    : "bg-[#15274E]/5"
-                }`}
-              >
-                <img
-                  src="/logo.png"
-                  alt={`شعار قامات - طبقة ${index + 1}`}
-                  className="h-44 w-auto object-contain select-none md:h-56 lg:h-64"
-                />
-              </div>
+              <img
+                src="/logo.png"
+                alt="شعار قامات"
+                className="h-full w-auto object-contain"
+              />
             </motion.div>
           ))}
         </div>
