@@ -1,10 +1,9 @@
 import { useRef } from "react";
-import { Users2, Crown, ChevronRight, ChevronLeft } from "lucide-react";
+import { Users2, ChevronRight, ChevronLeft } from "lucide-react";
 
 interface LeadershipBox {
   category: string;
   members: string[];
-  highlight?: boolean;
 }
 
 const leadershipBoxes: LeadershipBox[] = [
@@ -12,14 +11,12 @@ const leadershipBoxes: LeadershipBox[] = [
   {
     category: "قادة المبادرة",
     members: ["هيا آل شافي", "موسى العتيبي"],
-    highlight: true,
   },
 
   // 2. اللجنة التقنية
   {
     category: "اللجنة التقنية",
     members: ["روز العتيبي", "بارعه"],
-    highlight: true,
   },
 
   // 3. إدارة الموارد ولجانها
@@ -89,7 +86,7 @@ export function Leadership() {
   };
 
   return (
-    <section id="leadership" className="relative border-t border-[#15274E]/10 bg-[#FBFBFC] py-20">
+    <section id="leadership" className="relative bg-[#FBFBFC] py-20">
       <div className="container-q mb-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div>
@@ -107,14 +104,14 @@ export function Leadership() {
             <button
               onClick={() => scroll("right")}
               aria-label="السابق"
-              className="grid size-10 place-items-center rounded-full border border-slate-200 bg-white text-[#15274E] shadow-sm transition-all hover:bg-slate-50 active:scale-95"
+              className="grid size-10 place-items-center rounded-full bg-white text-[#15274E] shadow-sm transition-all hover:bg-slate-50 active:scale-95"
             >
               <ChevronRight className="size-5" />
             </button>
             <button
               onClick={() => scroll("left")}
               aria-label="التالي"
-              className="grid size-10 place-items-center rounded-full border border-slate-200 bg-white text-[#15274E] shadow-sm transition-all hover:bg-slate-50 active:scale-95"
+              className="grid size-10 place-items-center rounded-full bg-white text-[#15274E] shadow-sm transition-all hover:bg-slate-50 active:scale-95"
             >
               <ChevronLeft className="size-5" />
             </button>
@@ -122,7 +119,7 @@ export function Leadership() {
         </div>
       </div>
 
-      {/* شريط المربعات الثابت القابل للتمرير اليدوي */}
+      {/* شريط المربعات بدون أي أوتلاين أو نجوم */}
       <div className="container-q">
         <div
           ref={scrollRef}
@@ -132,19 +129,12 @@ export function Leadership() {
           {leadershipBoxes.map((box, idx) => (
             <div
               key={idx}
-              className={`flex h-44 w-72 shrink-0 snap-start flex-col justify-between rounded-2xl p-6 shadow-sm transition-all duration-200 ${
-                box.highlight
-                  ? "border-2 border-[#15274E] bg-white shadow-md shadow-[#15274E]/10"
-                  : "border border-slate-200 bg-white hover:border-[#15274E]/40 hover:shadow-md"
-              }`}
+              className="flex h-44 w-72 shrink-0 snap-start flex-col justify-between rounded-2xl bg-white p-6 shadow-sm transition-all duration-200 hover:shadow-md"
             >
-              <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-                <h3 className="text-sm font-bold text-[#15274E]">
+              <div className="border-b border-slate-100 pb-3">
+                <h3 className="text-base font-bold text-[#15274E]">
                   {box.category}
                 </h3>
-                {box.highlight && (
-                  <Crown className="size-4 text-amber-600" />
-                )}
               </div>
 
               <div className="flex flex-col gap-1.5 pt-2">
