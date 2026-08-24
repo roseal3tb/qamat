@@ -14,10 +14,10 @@ export function Hero() {
 
   return (
     <section id="hero" ref={ref} className="relative min-h-[100svh] overflow-hidden bg-[#FBFBFC]">
-      {/* شبكة خفيفة وأعمدة قامات المتنامية فقط بدون أي دوائر */}
+      {/* خلفية وشبكة هادئة */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
         <div
-          className="absolute inset-0 opacity-[0.4]"
+          className="absolute inset-0 opacity-[0.35]"
           style={{
             backgroundImage:
               "linear-gradient(to left, rgba(21, 39, 78, 0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(21, 39, 78, 0.08) 1px, transparent 1px)",
@@ -26,8 +26,8 @@ export function Hero() {
           }}
         />
 
-        {/* حركة أعمدة قامات المتنامية من الأسفل */}
-        <div className="absolute bottom-0 left-[8%] hidden items-end gap-3 md:flex">
+        {/* أعمدة قامات الصاعدة من الأسفل */}
+        <div className="absolute bottom-0 left-[6%] hidden items-end gap-3 md:flex">
           {[42, 72, 108, 148, 190, 130].map((h, i) => (
             <motion.span
               key={i}
@@ -42,6 +42,20 @@ export function Hero() {
             />
           ))}
         </div>
+
+        {/* حركة صعود وظهور لوقو قامات الكحلي من الأسفل في الخلفية */}
+        <motion.div
+          initial={{ y: 150, opacity: 0, scale: 0.9 }}
+          animate={{ y: 0, opacity: 0.08, scale: 1 }}
+          transition={{ duration: 1.4, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          className="absolute -bottom-10 left-[5%] hidden lg:block"
+        >
+          <img
+            src="/logo.png"
+            alt="قامات"
+            className="h-[480px] w-auto object-contain select-none pointer-events-none"
+          />
+        </motion.div>
       </div>
 
       <motion.div
@@ -60,7 +74,7 @@ export function Hero() {
           ٢٠٢٦
         </motion.div>
 
-        {/* خروج النص بحركة الصعود الأصلية من الأسفل */}
+        {/* حركة صعود النصوص من الأسفل */}
         <h1 className="mt-8 max-w-[19ch] text-[clamp(2.6rem,7.4vw,6.4rem)] font-bold leading-[1.08] tracking-tight text-[#15274E]">
           {line.split(" ").map((w, i) => (
             <span key={i} className="inline-block overflow-hidden pb-[0.18em] -mb-[0.18em] align-bottom">
