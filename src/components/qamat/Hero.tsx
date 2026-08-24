@@ -6,51 +6,41 @@ import { Link } from "@tanstack/react-router";
 
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
+
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+
   const y = useTransform(scrollYProgress, [0, 1], [0, 100]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   const line = "نبني الكفاءات، نصنع الخبرة، ونمكّن الأثر.";
 
-  // مسار القص الدقيق للكتل الثلاث المتتبع للخطوط البيضاء الأصلية للشعار
-  const logoPillars = [
-    {
-      id: "left-pillar",
-      // الكتلة اليسرى مع النقطتين والميلان
-      clip: "polygon(0% 0%, 39% 0%, 39% 60%, 40% 70%, 39% 100%, 0% 100%)",
-      initialY: 300,
-      delay: 0.35,
-      duration: 1.15,
-    },
-    {
-      id: "center-pillar",
-      // الكتلة الوسطى الأطول متداخلة لحماية حواف الحرف
-      clip: "polygon(38.5% 0%, 61.5% 0%, 61.5% 100%, 38.5% 100%)",
-      initialY: 380,
-      delay: 0.55,
-      duration: 1.25,
-    },
-    {
-      id: "right-pillar",
-      // الكتلة اليمنى بعد الفاصل الثاني
-      clip: "polygon(61% 0%, 100% 0%, 100% 100%, 61% 100%)",
-      initialY: 460,
-      delay: 0.75,
-      duration: 1.35,
-    },
-  ];
-
   return (
-    <section id="hero" ref={ref} className="relative min-h-[100svh] overflow-hidden bg-[#FBFBFC]">
-      {/* خلفية وشبكة هادئة */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
+    <section
+      id="hero"
+      ref={ref}
+      className="relative min-h-[100svh] overflow-hidden bg-[#FBFBFC]"
+    >
+      {/* =========================
+          الخلفية والشبكة
+      ========================== */}
+      <div
+        className="pointer-events-none absolute inset-0 overflow-hidden"
+        aria-hidden
+      >
         <div
           className="absolute inset-0 opacity-[0.35]"
           style={{
             backgroundImage:
               "linear-gradient(to left, rgba(21, 39, 78, 0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(21, 39, 78, 0.08) 1px, transparent 1px)",
-            backgroundSize: "clamp(60px, 8vw, 120px) clamp(60px, 8vw, 120px)",
-            maskImage: "radial-gradient(ellipse at 50% 50%, black, transparent 80%)",
+            backgroundSize:
+              "clamp(60px, 8vw, 120px) clamp(60px, 8vw, 120px)",
+            maskImage:
+              "radial-gradient(ellipse at 50% 50%, black, transparent 80%)",
+            WebkitMaskImage:
+              "radial-gradient(ellipse at 50% 50%, black, transparent 80%)",
           }}
         />
 
@@ -66,38 +56,69 @@ export function Hero() {
                 delay: 0.8 + i * 0.1,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              className={i === 4 ? "w-[3px] bg-[#15274E]" : "w-[3px] bg-[#15274E]/20"}
+              className={
+                i === 4
+                  ? "w-[3px] bg-[#15274E]"
+                  : "w-[3px] bg-[#15274E]/20"
+              }
             />
           ))}
         </div>
       </div>
 
+      {/* =========================
+          المحتوى الرئيسي
+      ========================== */}
       <motion.div
         style={{ y, opacity }}
         className="container-q relative flex min-h-[100svh] flex-col justify-between pt-32 pb-20 lg:flex-row lg:items-center"
       >
-        {/* نصوص ومعلومات الهيرو */}
+        {/* =========================
+            النصوص
+        ========================== */}
         <div className="max-w-2xl">
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.7 }}
+            transition={{
+              delay: 0.4,
+              duration: 0.7,
+            }}
             className="inline-flex items-center gap-2 text-xs font-semibold tracking-wider text-[#15274E]/80"
           >
             <span className="inline-block h-px w-10 bg-[#15274E]" />
+
             مبادرة {brand.nameAr} — {brand.nameEn}
+
             <span className="mx-1 h-1 w-1 rounded-full bg-[#15274E]/70" />
+
             ٢٠٢٦
           </motion.div>
 
+          {/* العنوان */}
           <h1 className="mt-8 text-[clamp(2.5rem,6.8vw,5.5rem)] font-bold leading-[1.1] tracking-tight text-[#15274E]">
             {line.split(" ").map((w, i) => (
-              <span key={i} className="inline-block overflow-hidden pb-[0.18em] -mb-[0.18em] align-bottom">
+              <span
+                key={i}
+                className="inline-block overflow-hidden pb-[0.18em] -mb-[0.18em] align-bottom"
+              >
                 <motion.span
-                  className={`inline-block ${w.includes("الأثر") ? "text-[#15274E]" : ""}`}
-                  initial={{ y: "1.2em", opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.5 + i * 0.08, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+                  className={`inline-block ${
+                    w.includes("الأثر") ? "text-[#15274E]" : ""
+                  }`}
+                  initial={{
+                    y: "1.2em",
+                    opacity: 0,
+                  }}
+                  animate={{
+                    y: 0,
+                    opacity: 1,
+                  }}
+                  transition={{
+                    delay: 0.5 + i * 0.08,
+                    duration: 0.9,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
                 >
                   {w}&nbsp;
                 </motion.span>
@@ -105,19 +126,39 @@ export function Hero() {
             ))}
           </h1>
 
+          {/* الوصف */}
           <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.05, duration: 0.8 }}
+            initial={{
+              opacity: 0,
+              y: 16,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+            }}
+            transition={{
+              delay: 1.05,
+              duration: 0.8,
+            }}
             className="mt-8 max-w-xl text-base leading-[1.95] text-[#334155] md:text-lg"
           >
             {brand.intro}
           </motion.p>
 
+          {/* الأزرار */}
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.2, duration: 0.8 }}
+            initial={{
+              opacity: 0,
+              y: 16,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+            }}
+            transition={{
+              delay: 1.2,
+              duration: 0.8,
+            }}
             className="mt-10 flex flex-wrap items-center gap-4"
           >
             <Link
@@ -125,8 +166,10 @@ export function Hero() {
               className="group inline-flex items-center gap-3 rounded-md bg-[#15274E] px-8 py-4 text-sm font-semibold text-white shadow-md transition-all duration-300 hover:bg-[#1E3A8A]"
             >
               انضم إلينا
+
               <ArrowLeft className="size-4 transition-transform duration-300 group-hover:-translate-x-1" />
             </Link>
+
             <a
               href="#about"
               className="inline-flex items-center gap-3 rounded-md border border-[#15274E]/30 bg-white/60 px-8 py-4 text-sm font-semibold text-[#15274E] backdrop-blur-sm transition-all duration-300 hover:border-[#15274E] hover:bg-white"
@@ -135,61 +178,189 @@ export function Hero() {
             </a>
           </motion.div>
 
+          {/* السطر السفلي */}
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.45, duration: 0.8 }}
+            initial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
+            }}
+            transition={{
+              delay: 1.45,
+              duration: 0.8,
+            }}
             className="mt-14 hidden items-center gap-4 md:flex"
           >
             <span className="h-px w-14 bg-[#15274E]/40" />
-            <span className="text-xs text-[#64748B]">نبني الكفاءة • نصنع الخبرة • نمكّن الأثر</span>
+
+            <span className="text-xs text-[#64748B]">
+              نبني الكفاءة • نصنع الخبرة • نمكّن الأثر
+            </span>
           </motion.div>
         </div>
 
-        {/* صعود القطع الثلاث المنفصلة والتحامها بالكامل */}
-        <div className="relative mt-12 flex h-[360px] w-[300px] items-center justify-center lg:mt-0 lg:h-[480px] lg:w-[420px]">
-          {logoPillars.map((pillar) => (
+        {/* =====================================================
+            شعار قامات — تأثير التجميع من الخطوط
+        ====================================================== */}
+        <motion.div
+          initial={{
+            opacity: 0,
+          }}
+          animate={{
+            opacity: 1,
+          }}
+          transition={{
+            duration: 0.8,
+            delay: 0.25,
+          }}
+          className="relative mt-12 flex h-[360px] w-[300px] items-center justify-center lg:mt-0 lg:h-[480px] lg:w-[420px]"
+        >
+          <div className="relative h-full w-full overflow-hidden">
+
+            {/* =================================================
+                اللوقو الأصلي
+            ================================================= */}
+            <img
+              src="/logo.png"
+              alt="شعار قامات"
+              className="absolute inset-0 h-full w-full object-contain select-none pointer-events-none"
+            />
+
+            {/* =================================================
+                طبقات الإخفاء
+                كل طبقة تنسحب تدريجيًا وتكشف جزءًا من اللوقو
+            ================================================= */}
+            {Array.from({ length: 12 }).map((_, i) => (
+              <motion.div
+                key={`mask-${i}`}
+                initial={{
+                  scaleY: 1,
+                }}
+                animate={{
+                  scaleY: 0,
+                }}
+                transition={{
+                  duration: 0.65,
+                  delay: 0.55 + i * 0.09,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="absolute left-0 right-0 z-20 origin-top bg-[#FBFBFC]"
+                style={{
+                  top: `${i * 8.34}%`,
+                  height: "8.5%",
+                }}
+              />
+            ))}
+
+            {/* =================================================
+                الخطوط البيضاء المتحركة
+                تظهر وكأنها تجمع أجزاء اللوقو
+            ================================================= */}
+            {Array.from({ length: 13 }).map((_, i) => (
+              <motion.span
+                key={`reveal-line-${i}`}
+                initial={{
+                  scaleX: 0,
+                  opacity: 0,
+                }}
+                animate={{
+                  scaleX: [0, 1, 1, 0],
+                  opacity: [0, 1, 1, 0],
+                }}
+                transition={{
+                  duration: 0.8,
+                  delay: 0.48 + i * 0.09,
+                  ease: [0.22, 1, 0.36, 1],
+                  times: [0, 0.18, 0.75, 1],
+                }}
+                className="absolute left-0 right-0 z-30 h-px origin-right bg-white"
+                style={{
+                  top: `${i * 8.34}%`,
+                  boxShadow:
+                    "0 0 8px rgba(255,255,255,0.75)",
+                }}
+              />
+            ))}
+
+            {/* =================================================
+                خطوط الشبكة العمودية الخفيفة فوق اللوقو
+            ================================================= */}
+            <div className="pointer-events-none absolute inset-0 z-40">
+              {[20, 40, 60, 80].map((left) => (
+                <motion.span
+                  key={left}
+                  initial={{
+                    opacity: 0,
+                    scaleY: 0,
+                  }}
+                  animate={{
+                    opacity: [0, 0.35, 0],
+                    scaleY: [0, 1, 1],
+                  }}
+                  transition={{
+                    duration: 1.3,
+                    delay: 0.65 + left * 0.006,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                  className="absolute top-0 bottom-0 w-px origin-center bg-white"
+                  style={{
+                    left: `${left}%`,
+                  }}
+                />
+              ))}
+            </div>
+
+            {/* =================================================
+                وهج خفيف في آخر لحظة
+            ================================================= */}
             <motion.div
-              key={pillar.id}
               initial={{
-                y: pillar.initialY,
                 opacity: 0,
+                scale: 0.85,
               }}
               animate={{
-                y: 0,
-                opacity: 1,
+                opacity: [0, 0.35, 0],
+                scale: [0.85, 1, 1.08],
               }}
               transition={{
-                duration: pillar.duration,
-                delay: pillar.delay,
-                ease: [0.16, 1, 0.3, 1],
+                duration: 1.2,
+                delay: 1.7,
+                ease: "easeOut",
               }}
-              style={{
-                clipPath: pillar.clip,
-                WebkitClipPath: pillar.clip,
-              }}
-              className="absolute inset-0 flex items-center justify-center pointer-events-none select-none"
-            >
-              <img
-                src="/logo.png"
-                alt="شعار قامات"
-                className="h-full w-auto object-contain"
-              />
-            </motion.div>
-          ))}
-        </div>
+              className="pointer-events-none absolute inset-0 z-50 rounded-full bg-white/20 blur-3xl"
+            />
+          </div>
+        </motion.div>
 
+        {/* =========================
+            زر اكتشف
+        ========================== */}
         <motion.a
           href="#about"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.6, duration: 0.8 }}
-          className="absolute bottom-6 left-5 flex items-center gap-2 text-xs font-medium tracking-[0.2em] text-[#64748B] hover:text-[#15274E] transition-colors md:left-10"
+          initial={{
+            opacity: 0,
+          }}
+          animate={{
+            opacity: 1,
+          }}
+          transition={{
+            delay: 1.6,
+            duration: 0.8,
+          }}
+          className="absolute bottom-6 left-5 flex items-center gap-2 text-xs font-medium tracking-[0.2em] text-[#64748B] transition-colors hover:text-[#15274E] md:left-10"
         >
           اكتشف
+
           <motion.span
-            animate={{ y: [0, 6, 0] }}
-            transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+            animate={{
+              y: [0, 6, 0],
+            }}
+            transition={{
+              duration: 1.8,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
           >
             ↓
           </motion.span>
