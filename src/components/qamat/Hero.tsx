@@ -12,37 +12,33 @@ export function Hero() {
 
   const line = "نبني الكفاءات، نصنع الخبرة، ونمكّن الأثر.";
 
-  // مسارات القص الدقيقة بمحاذاة الفراغ والخط الأبيض الفاصل
-  const logoPieces = [
+  // مسار القص المضلع الدقيق المتتبع لميلان وانحناءات الخط الأبيض الأصلي
+  const logoParts = [
     {
-      id: "left-piece",
-      // الكتلة اليسرى مع الميلان حتى الخط الفاصل الأول
-      clip: "polygon(0% 0%, 36.8% 0%, 36.8% 100%, 0% 100%)",
-      initialY: 280,
-      delay: 0.3,
-      duration: 1.1,
+      id: "left-wing",
+      // يتتبع الفراغ الأبيض المائل حول الكتلة اليسرى
+      clip: "polygon(0% 0%, 37.8% 0%, 37.8% 64%, 39% 75%, 37.8% 100%, 0% 100%)",
+      initialY: 300,
+      delay: 0.35,
     },
     {
-      id: "center-piece",
-      // الكتلة الوسطى (البرج الأطول وحرف قامات) المحصورة بين الخطين
-      clip: "polygon(37.4% 0%, 60.6% 0%, 60.6% 100%, 37.4% 100%)",
-      initialY: 360,
-      delay: 0.5,
-      duration: 1.25,
+      id: "center-core",
+      // الكتلة الوسطى المحصورة بين الخطين المنحنيين الأبيضين
+      clip: "polygon(38.2% 0%, 61.2% 0%, 61.2% 100%, 38.2% 100%)",
+      initialY: 380,
+      delay: 0.55,
     },
     {
-      id: "right-piece",
-      // الكتلة اليمنى بعد الخط الفاصل الثاني
-      clip: "polygon(61.2% 0%, 100% 0%, 100% 100%, 61.2% 100%)",
-      initialY: 440,
-      delay: 0.7,
-      duration: 1.35,
+      id: "right-wing",
+      // الكتلة اليمنى خلف الخط الفاصل الثاني
+      clip: "polygon(61.6% 0%, 100% 0%, 100% 100%, 61.6% 100%)",
+      initialY: 460,
+      delay: 0.75,
     },
   ];
 
   return (
     <section id="hero" ref={ref} className="relative min-h-[100svh] overflow-hidden bg-[#FBFBFC]">
-      {/* شبكة خفيفة */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
         <div
           className="absolute inset-0 opacity-[0.35]"
@@ -54,7 +50,6 @@ export function Hero() {
           }}
         />
 
-        {/* أعمدة قامات الجانبية */}
         <div className="absolute bottom-0 left-[5%] hidden items-end gap-3 md:flex">
           {[42, 72, 108, 148, 190, 130].map((h, i) => (
             <motion.span
@@ -76,7 +71,6 @@ export function Hero() {
         style={{ y, opacity }}
         className="container-q relative flex min-h-[100svh] flex-col justify-between pt-32 pb-20 lg:flex-row lg:items-center"
       >
-        {/* نصوص الهيرو */}
         <div className="max-w-2xl">
           <motion.div
             initial={{ opacity: 0, y: 12 }}
@@ -146,13 +140,13 @@ export function Hero() {
           </motion.div>
         </div>
 
-        {/* صعود القطع الثلاث بدقة حول الخطوط البيضاء */}
-        <div className="relative mt-12 flex h-[360px] w-[300px] items-center justify-center lg:mt-0 lg:h-[460px] lg:w-[400px]">
-          {logoPieces.map((piece) => (
+        {/* عرض وصعود الأجزاء الثلاثة بدقة حول الخط الفاصل */}
+        <div className="relative mt-12 flex h-[380px] w-[320px] items-center justify-center lg:mt-0 lg:h-[480px] lg:w-[420px]">
+          {logoParts.map((part) => (
             <motion.div
-              key={piece.id}
+              key={part.id}
               initial={{
-                y: piece.initialY,
+                y: part.initialY,
                 opacity: 0,
               }}
               animate={{
@@ -160,13 +154,13 @@ export function Hero() {
                 opacity: 1,
               }}
               transition={{
-                duration: piece.duration,
-                delay: piece.delay,
+                duration: 1.25,
+                delay: part.delay,
                 ease: [0.16, 1, 0.3, 1],
               }}
               style={{
-                clipPath: piece.clip,
-                WebkitClipPath: piece.clip,
+                clipPath: part.clip,
+                WebkitClipPath: part.clip,
               }}
               className="absolute inset-0 flex items-center justify-center pointer-events-none select-none"
             >
