@@ -12,6 +12,34 @@ export function Hero() {
 
   const line = "نبني الكفاءات، نصنع الخبرة، ونمكّن الأثر.";
 
+  // مسار القص الدقيق للكتل الثلاث المتتبع للخطوط البيضاء الأصلية للشعار
+  const logoPillars = [
+    {
+      id: "left-pillar",
+      // الكتلة اليسرى مع النقطتين والميلان
+      clip: "polygon(0% 0%, 39% 0%, 39% 60%, 40% 70%, 39% 100%, 0% 100%)",
+      initialY: 300,
+      delay: 0.35,
+      duration: 1.15,
+    },
+    {
+      id: "center-pillar",
+      // الكتلة الوسطى الأطول متداخلة لحماية حواف الحرف
+      clip: "polygon(38.5% 0%, 61.5% 0%, 61.5% 100%, 38.5% 100%)",
+      initialY: 380,
+      delay: 0.55,
+      duration: 1.25,
+    },
+    {
+      id: "right-pillar",
+      // الكتلة اليمنى بعد الفاصل الثاني
+      clip: "polygon(61% 0%, 100% 0%, 100% 100%, 61% 100%)",
+      initialY: 460,
+      delay: 0.75,
+      duration: 1.35,
+    },
+  ];
+
   return (
     <section id="hero" ref={ref} className="relative min-h-[100svh] overflow-hidden bg-[#FBFBFC]">
       {/* خلفية وشبكة هادئة */}
@@ -118,19 +146,38 @@ export function Hero() {
           </motion.div>
         </div>
 
-        {/* صعود وظهور الشعار الأصلي كاملاً ونظيفاً وبدقة تامة من الأسفل */}
-        <motion.div
-          initial={{ y: 180, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 1.2, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="relative mt-12 flex h-[360px] w-[300px] items-center justify-center lg:mt-0 lg:h-[480px] lg:w-[420px]"
-        >
-          <img
-            src="/logo.png"
-            alt="شعار قامات"
-            className="h-full w-auto object-contain select-none pointer-events-none drop-shadow-sm"
-          />
-        </motion.div>
+        {/* صعود القطع الثلاث المنفصلة والتحامها بالكامل */}
+        <div className="relative mt-12 flex h-[360px] w-[300px] items-center justify-center lg:mt-0 lg:h-[480px] lg:w-[420px]">
+          {logoPillars.map((pillar) => (
+            <motion.div
+              key={pillar.id}
+              initial={{
+                y: pillar.initialY,
+                opacity: 0,
+              }}
+              animate={{
+                y: 0,
+                opacity: 1,
+              }}
+              transition={{
+                duration: pillar.duration,
+                delay: pillar.delay,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+              style={{
+                clipPath: pillar.clip,
+                WebkitClipPath: pillar.clip,
+              }}
+              className="absolute inset-0 flex items-center justify-center pointer-events-none select-none"
+            >
+              <img
+                src="/logo.png"
+                alt="شعار قامات"
+                className="h-full w-auto object-contain"
+              />
+            </motion.div>
+          ))}
+        </div>
 
         <motion.a
           href="#about"
