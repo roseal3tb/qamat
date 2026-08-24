@@ -12,34 +12,37 @@ export function Hero() {
 
   const line = "نبني الكفاءات، نصنع الخبرة، ونمكّن الأثر.";
 
-  // إعدادات تقسيم شعار قامات إلى 3 أجزاء وصعود كل جزء من الأسفل
-  const segments = [
+  // تقسيم الشعار إلى 3 أعمدة رأسية تطابق رسمة اللوجو الهندسية
+  const logoPillars = [
     {
-      id: "bottom-segment",
-      clip: "polygon(0% 66%, 100% 66%, 100% 100%, 0% 100%)",
+      id: "left-pillar",
+      // العمود الأيسر (الجزء المنحني والنقطتين)
+      clip: "polygon(0% 0%, 37.5% 0%, 37.5% 100%, 0% 100%)",
       initialY: 260,
-      delay: 0.3,
+      delay: 0.35,
       duration: 1.1,
     },
     {
-      id: "middle-segment",
-      clip: "polygon(0% 33%, 100% 33%, 100% 66%, 0% 66%)",
+      id: "center-tall-pillar",
+      // العمود الأوسط الأطول (حرف قامات الأساسي)
+      clip: "polygon(37.5% 0%, 60% 0%, 60% 100%, 37.5% 100%)",
       initialY: 340,
-      delay: 0.5,
-      duration: 1.2,
+      delay: 0.55,
+      duration: 1.25,
     },
     {
-      id: "top-segment",
-      clip: "polygon(0% 0%, 100% 0%, 100% 33%, 0% 33%)",
+      id: "right-pillar",
+      // العمود الأيمن (الجزء الجانبي المتمم)
+      clip: "polygon(60% 0%, 100% 0%, 100% 100%, 60% 100%)",
       initialY: 420,
-      delay: 0.7,
-      duration: 1.3,
+      delay: 0.75,
+      duration: 1.35,
     },
   ];
 
   return (
     <section id="hero" ref={ref} className="relative min-h-[100svh] overflow-hidden bg-[#FBFBFC]">
-      {/* شبكة خفيفة وأعمدة قامات */}
+      {/* خلفية وشبكة هادئة */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
         <div
           className="absolute inset-0 opacity-[0.35]"
@@ -51,6 +54,7 @@ export function Hero() {
           }}
         />
 
+        {/* أعمدة قامات الجانبية المتنامية */}
         <div className="absolute bottom-0 left-[5%] hidden items-end gap-3 md:flex">
           {[42, 72, 108, 148, 190, 130].map((h, i) => (
             <motion.span
@@ -72,7 +76,7 @@ export function Hero() {
         style={{ y, opacity }}
         className="container-q relative flex min-h-[100svh] flex-col justify-between pt-32 pb-20 lg:flex-row lg:items-center"
       >
-        {/* النصوص والأزرار */}
+        {/* نصوص ومعلومات الهيرو */}
         <div className="max-w-2xl">
           <motion.div
             initial={{ opacity: 0, y: 12 }}
@@ -142,13 +146,13 @@ export function Hero() {
           </motion.div>
         </div>
 
-        {/* تفكك الشعار الواحد إلى 3 أجزاء تصعد من الأسفل وتلتحم في مكانها */}
-        <div className="relative mt-12 flex h-[380px] w-[320px] items-center justify-center lg:mt-0 lg:h-[440px] lg:w-[380px]">
-          {segments.map((seg) => (
+        {/* تجمع الأعمدة الثلاثة لشعار قامات من الأسفل */}
+        <div className="relative mt-12 flex h-[360px] w-[300px] items-center justify-center lg:mt-0 lg:h-[460px] lg:w-[400px]">
+          {logoPillars.map((pillar) => (
             <motion.div
-              key={seg.id}
+              key={pillar.id}
               initial={{
-                y: seg.initialY,
+                y: pillar.initialY,
                 opacity: 0,
               }}
               animate={{
@@ -156,13 +160,13 @@ export function Hero() {
                 opacity: 1,
               }}
               transition={{
-                duration: seg.duration,
-                delay: seg.delay,
+                duration: pillar.duration,
+                delay: pillar.delay,
                 ease: [0.16, 1, 0.3, 1],
               }}
               style={{
-                clipPath: seg.clip,
-                WebkitClipPath: seg.clip,
+                clipPath: pillar.clip,
+                WebkitClipPath: pillar.clip,
               }}
               className="absolute inset-0 flex items-center justify-center pointer-events-none select-none"
             >
