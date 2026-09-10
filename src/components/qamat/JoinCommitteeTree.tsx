@@ -3,9 +3,11 @@ import {
   type JoinCommittee,
   type JoinDepartment,
 } from "@/data/qamatData";
+import { useIsMobile } from "@/hooks/use-mobile";
 import {
   ArrowLeft,
   Cpu,
+  Info,
   Megaphone,
   Settings,
   Share2,
@@ -14,10 +16,16 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
-import { useIsMobile } from "@/hooks/use-mobile";
 
 const DESKTOP_TREE_WIDTH = 1120;
 const DESKTOP_TREE_HEIGHT = 610;
+
+/*
+ * اللجان المكتملة — تظهر في الشجرة وتُعرض مهامها كالمعتاد،
+ * لكن لا يمكن المتابعة للتسجيل فيها.
+ * لإعادة فتح لجنة: احذف اسمها من هذه القائمة.
+ */
+const CLOSED_COMMITTEES: string[] = ["لجنة الاستقطاب"];
 
 const DEPT_ICONS: Record<string, LucideIcon> = {
   "إدارة الموارد البشرية": Users,
@@ -250,6 +258,10 @@ export function JoinCommitteeTree({
   const selectedKey = selection
     ? `${selection.department}::${selection.committee.name}`
     : null;
+
+  const selectionIsClosed = selection
+    ? CLOSED_COMMITTEES.includes(selection.committee.name)
+    : false;
 
   function branchIsActive(branchKey: string) {
     return hovered?.startsWith(`${branchKey}::`) || selectedKey?.startsWith(`${branchKey}::`);
@@ -531,14 +543,29 @@ export function JoinCommitteeTree({
               </p>
             </div>
 
-            <button
-              type="button"
-              onClick={() => onContinue(selection.department, selection.committee.name)}
-              className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-medium text-primary-foreground transition-all duration-300 hover:brightness-110"
-            >
-              اختيار هذه اللجنة والمتابعة
-              <ArrowLeft aria-hidden className="size-4" />
-            </button>
+            {selectionIsClosed ? (
+              /* لجنة مكتملة — لا يمكن المتابعة للتسجيل */
+              <div className="mt-6 flex items-start gap-3 rounded-2xl border border-accent/45 bg-accent/10 p-4 text-start sm:p-5">
+                <span className="mt-0.5 grid size-8 shrink-0 place-items-center rounded-full bg-accent text-accent-foreground">
+                  <Info aria-hidden className="size-4" />
+                </span>
+                <div>
+                  <p className="text-sm font-semibold">تم الاكتفاء من هذه اللجنة</p>
+                  <p className="mt-1 text-xs leading-relaxed text-muted-foreground sm:text-sm">
+                    اكتمل العدد المطلوب، يمكنك اختيار لجنة أخرى تناسبك
+                  </p>
+                </div>
+              </div>
+            ) : (
+              <button
+                type="button"
+                onClick={() => onContinue(selection.department, selection.committee.name)}
+                className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-medium text-primary-foreground transition-all duration-300 hover:brightness-110"
+              >
+                اختيار هذه اللجنة والمتابعة
+                <ArrowLeft aria-hidden className="size-4" />
+              </button>
+            )}
           </section>
         </div>
       )}
