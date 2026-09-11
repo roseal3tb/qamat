@@ -200,7 +200,7 @@ export function JoinCommitteeTree({
 
     if (!("IntersectionObserver" in window)) {
       branchCards.forEach((branchCard) => {
-        const key = branchCard.dataset.branchKey;
+        const key = branchCard.dataset["branchKey"];
         if (key) {
           revealBranch(key);
           setBranchPopping(key, true);
@@ -213,7 +213,7 @@ export function JoinCommitteeTree({
       (entries) => {
         entries.forEach((entry) => {
           const branchCard = entry.target as HTMLElement;
-          const key = branchCard.dataset.branchKey;
+          const key = branchCard.dataset["branchKey"];
           if (!key) return;
 
           if (entry.isIntersecting) {

@@ -259,11 +259,11 @@ export const departments: Department[] = [
     ],
   },
   {
-    name: "اللجنة التقنية",
+    name: "إدارة التقنية",
     tint: NAVY,
     leadership: [
-      { name: "روز العتيبي", role: "قائدة اللجنة التقنية", photo: "" },
-      { name: "بارعه الطيار", role: "نائبة قائدة اللجنة التقنية", photo: "" },
+      { name: "بارعه الطيار", role: "قائدة الإدارة", photo: "" },
+      { name: "روز العتيبي", role: "نائبة الإدارة", photo: "" },
     ],
     committees: [],
   },

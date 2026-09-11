@@ -15,7 +15,7 @@ import { Reveal, SectionLabel, WordsReveal } from "./Reveal";
 /* أيقونة كل إدارة */
 const DEPT_ICONS: Record<string, LucideIcon> = {
   "إدارة الموارد البشرية": Users,
-  "اللجنة التقنية": Cpu,
+  "إدارة التقنية": Cpu,
   "إدارة الإعلام والمحتوى": Megaphone,
   "إدارة العلاقات العامة": Share2,
   "إدارة التشغيل والتطوير": Settings,
