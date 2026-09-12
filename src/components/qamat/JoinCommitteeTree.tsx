@@ -25,7 +25,7 @@ const DESKTOP_TREE_HEIGHT = 610;
  * لكن لا يمكن المتابعة للتسجيل فيها.
  * لإعادة فتح لجنة: احذف اسمها من هذه القائمة.
  */
-const CLOSED_COMMITTEES: string[] = ["لجنة الاستقطاب"];
+const CLOSED_COMMITTEES: string[] = ["لجنة الاستقطاب", "لجنة متابعة الأداء"];
 
 const DEPT_ICONS: Record<string, LucideIcon> = {
   "إدارة الموارد البشرية": Users,
