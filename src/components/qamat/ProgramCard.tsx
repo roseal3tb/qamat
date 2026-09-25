@@ -1,7 +1,7 @@
 import { isProgramOpen, type Program } from "@/data/qamatData";
 import { useNow } from "@/hooks/use-program-open";
 import { motion } from "framer-motion";
-import { ArrowLeft, CalendarDays, CheckCircle2, Clock, MapPin, type LucideIcon } from "lucide-react";
+import { ArrowLeft, CalendarDays, Clock, Lock, MapPin, type LucideIcon } from "lucide-react";
 
 /* -------------------------------------------------------------------------
    العدّاد التنازلي
@@ -73,46 +73,10 @@ function InfoChip({
 }
 
 /* -------------------------------------------------------------------------
-   بطاقة "اكتمل التسجيل" — تظهر بعد إغلاق الباب
-   ------------------------------------------------------------------------- */
-function RegistrationClosed() {
-  return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.96 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-      className="relative mx-auto max-w-md overflow-hidden rounded-2xl border border-accent/35 bg-[color-mix(in_srgb,var(--accent)_9%,var(--card))] px-6 py-8 text-center"
-    >
-      {/* توهّج ذهبي خلف الأيقونة */}
-      <span
-        aria-hidden
-        className="pointer-events-none absolute left-1/2 top-6 size-28 -translate-x-1/2 rounded-full"
-        style={{
-          background: "radial-gradient(circle, rgba(168,141,104,0.28), transparent 70%)",
-        }}
-      />
-
-      <motion.span
-        initial={{ scale: 0, rotate: -12 }}
-        animate={{ scale: 1, rotate: 0 }}
-        transition={{ delay: 0.15, duration: 0.6, ease: [0.34, 1.4, 0.5, 1] }}
-        className="relative mx-auto grid size-14 place-items-center rounded-full bg-accent text-accent-foreground shadow-[0_10px_26px_rgba(168,141,104,0.32)]"
-      >
-        <CheckCircle2 aria-hidden className="size-7" strokeWidth={2} />
-      </motion.span>
-
-      <h3 className="relative mt-5 text-lg font-semibold sm:text-xl">
-        تم إغلاق التسجيل
-      </h3>
-      <p className="relative mx-auto mt-2 max-w-xs text-sm leading-relaxed text-muted-foreground">
-تابعنا لمعرفة برامجنا القادمة
-      </p>
-    </motion.div>
-  );
-}
-
-/* -------------------------------------------------------------------------
    كارد البرنامج
+   -------------------------------------------------------------------------
+   عند الإغلاق: يُخفى العدّاد والزر (فيقصر الكارد إلى المقر)،
+   وتغطّيه طبقة شفافة رصاصية عليها القفل ورسالة الإغلاق.
    ------------------------------------------------------------------------- */
 export function ProgramCard({
   program,
@@ -130,7 +94,7 @@ export function ProgramCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-      className="qamat-surface relative mx-auto w-full max-w-2xl overflow-hidden rounded-[1.75rem] p-7 text-center sm:p-10"
+      className="qamat-surface relative mx-auto w-full max-w-xl overflow-hidden rounded-[1.5rem] p-6 text-center sm:p-8"
     >
       {/* خط ذهبي رفيع أعلى الكارد */}
       <span aria-hidden className="qamat-gold-line absolute inset-x-0 top-0" />
@@ -140,56 +104,70 @@ export function ProgramCard({
         aria-hidden
         className="pointer-events-none absolute -right-16 -top-16 size-56 rounded-full"
         style={{
-          background:
-            "radial-gradient(circle, rgba(168,141,104,0.16), transparent 68%)",
+          background: "radial-gradient(circle, rgba(168,141,104,0.16), transparent 68%)",
         }}
       />
 
       <div className="relative">
-        {/* حالة التسجيل */}
-        <span
-          className={`inline-block rounded-full px-3.5 py-1 text-[0.68rem] font-semibold ${
-            open ? "bg-accent text-accent-foreground" : "bg-muted text-muted-foreground"
-          }`}
-        >
-          {open ? "التسجيل مفتوح" : "التسجيل مغلق"}
-        </span>
+        {/* الترويسة — الشعار يمين، الاسم والشراكة يسار */}
+        <div className="flex items-center gap-4 text-start">
+          <span
+            className="grid size-16 shrink-0 place-items-center overflow-hidden rounded-2xl shadow-[0_10px_26px_rgba(20,48,46,0.16)] ring-1 ring-border sm:size-[4.5rem]"
+            style={{ background: program.partnerBg }}
+          >
+            <img
+              src={program.partnerLogo}
+              alt={program.partner}
+              className="size-full object-contain"
+            />
+          </span>
 
-        {/* شعار الشريك */}
-        <span
-          className="mx-auto mt-6 grid size-20 place-items-center overflow-hidden rounded-[1.25rem] shadow-[0_10px_26px_rgba(20,48,46,0.16)] ring-1 ring-border sm:size-24"
-          style={{ background: program.partnerBg }}
-        >
-          <img
-            src={program.partnerLogo}
-            alt={program.partner}
-            className="size-full object-contain"
-          />
-        </span>
-
-        {/* الاسم والشراكة */}
-        <h2 className="mt-5 text-[clamp(1.4rem,4vw,2rem)] font-semibold leading-snug">
-          {program.name}
-        </h2>
-        <p className="mt-2 text-xs font-medium text-accent-strong sm:text-sm">
-          بالشراكة مع {program.partner}
-        </p>
+          <div className="min-w-0">
+            <h2 className="text-[clamp(1.2rem,3.4vw,1.6rem)] font-semibold leading-snug">
+              {program.name}
+            </h2>
+            <p className="mt-1 text-xs font-medium text-accent-strong sm:text-sm">
+              بالشراكة مع {program.partner}
+            </p>
+          </div>
+        </div>
 
         {/* الوصف */}
-        <p className="mx-auto mt-5 max-w-xl text-sm leading-loose text-muted-foreground md:text-[0.95rem]">
+        <p className="mt-5 text-start text-[0.82rem] leading-relaxed text-muted-foreground sm:text-sm">
           {program.description}
         </p>
 
         {/* المدة والمكان */}
-        <div className="mt-6 flex flex-wrap justify-center gap-2.5">
+        <div className="mt-6 flex flex-wrap justify-start gap-2.5">
           <InfoChip Icon={CalendarDays} text={program.dates} />
           <InfoChip Icon={MapPin} text={program.location} href={program.mapsUrl} />
         </div>
 
-        <span aria-hidden className="qamat-gold-line mx-auto my-8 block w-40" />
+        {/* شريط الإغلاق — يظهر بدل العدّاد والزر */}
+        {!open && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="mt-6 flex items-center justify-center gap-3 rounded-2xl border border-border bg-muted/60 px-5 py-4 text-start"
+          >
+            <span className="grid size-10 shrink-0 place-items-center rounded-full bg-accent text-accent-foreground">
+              <Lock aria-hidden className="size-5" strokeWidth={2} />
+            </span>
+            <div className="min-w-0">
+              <p className="text-sm font-semibold">تم إغلاق التسجيل</p>
+              <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">
+                تابعنا لتكون أول من يعرف عن برامجنا القادمة
+              </p>
+            </div>
+          </motion.div>
+        )}
 
-        {open ? (
+        {/* العدّاد والتسجيل — تظهر فقط عند فتح التسجيل */}
+        {open && (
           <>
+            <span aria-hidden className="qamat-gold-line mx-auto my-8 block w-40" />
+
             <p className="mb-4 inline-flex items-center gap-1.5 text-xs text-muted-foreground">
               <Clock aria-hidden className="size-3.5" strokeWidth={1.8} />
               متبقي على انتهاء التسجيل
@@ -213,10 +191,10 @@ export function ProgramCard({
               يُغلق التسجيل في {program.deadlineLabel}
             </p>
           </>
-        ) : (
-          <RegistrationClosed />
         )}
       </div>
+
+
     </motion.article>
   );
 }
