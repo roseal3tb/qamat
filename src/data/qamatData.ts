@@ -16,10 +16,8 @@ export const navLinks = [
   { label: "الرئيسية", href: "#hero" },
   { label: "التسجيل في برامجنا", href: "/programs" },
   { label: "عن قامات", href: "#about" },
-  { label: "الأهداف", href: "#objectives" },
-  { label: "الرحلة", href: "#journey" },
-  { label: "البرامج", href: "#fields" },
   { label: "قاماتنا", href: "/team" },
+  { label: "تواصل معنا", href: "/contact" },
 ];
 
 export const objectives = [
@@ -197,7 +195,7 @@ export const programs: Program[] = [
     dates: "27 – 30 سبتمبر 2026",
     location: "مقر هيدواي",
     mapsUrl: "https://maps.app.goo.gl/GianrwrvyT3zEaVL8",
-    deadline: "2026-09-26T23:59:59+03:00",
+    deadline: "2026-09-25T00:00:00+03:00",
     deadlineLabel: "26 سبتمبر · 11:59 مساءً",
     sheetUrl:
       "https://script.google.com/macros/s/AKfycbwxEHRRZwz-KZqgxtPvJuk_kJsuVXBJuP_uq5v0e7K0QMRHAIAGtemJ1S44uWamPIN9/exec",
@@ -266,9 +264,6 @@ export const contact = {
 export const footerLinks = [
   { label: "التسجيل في برامجنا", href: "/programs" },
   { label: "عن قامات", href: "#about" },
-  { label: "الأهداف", href: "#objectives" },
-  { label: "الرحلة", href: "#journey" },
-  { label: "البرامج", href: "#fields" },
   { label: "قاماتنا", href: "/team" },
   { label: "تواصل معنا", href: "/contact" },
 ];

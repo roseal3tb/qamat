@@ -298,7 +298,6 @@
   align-items: center;
   gap: 0.55rem;
   font-size: 0.72rem;
-  letter-spacing: 0.18em;
   color: var(--accent-strong);
   font-weight: 600;
 }

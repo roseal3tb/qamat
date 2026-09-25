@@ -1,23 +1,19 @@
 import { fields } from "@/data/qamatData";
+import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { SectionLabel, WordsReveal } from "./Reveal";
+import { ArrowLeft } from "lucide-react";
+import { Reveal, SectionLabel, WordsReveal } from "./Reveal";
 
-/**
- * البرامج كأعمدة — كل برنامج قامة ترتفع.
- * الارتفاعات متفاوتة لتشكيل إيقاع بصري، واللون يتناوب على هوية قامات.
- */
-const PILLARS = [
-  { tint: "186 50% 20%", h: 250 }, // تيل
-  { tint: "35 27% 53%", h: 300 }, // ذهبي
-  { tint: "226 47% 20%", h: 345 }, // كحلي
-  { tint: "186 50% 20%", h: 320 },
-  { tint: "35 27% 53%", h: 275 },
-  { tint: "226 47% 20%", h: 235 },
+/** لون هوية لكل برنامج — يتناوب تيل / ذهبي / كحلي */
+const TINTS = [
+  "186 50% 20%", // تيل
+  "35 27% 53%", // ذهبي
+  "226 47% 20%", // كحلي
 ];
 
 export function Fields() {
   return (
-    <section id="fields" className="border-t border-border py-24 md:py-32">
+    <section id="fields" className="border-t border-border py-20 md:py-28">
       <div className="container-q">
         {/* الترويسة */}
         <div className="text-center">
@@ -27,83 +23,64 @@ export function Fields() {
           </h2>
         </div>
 
-        {/* الأعمدة */}
-        <div className="relative mx-auto mt-16 max-w-5xl md:mt-20">
-          {/* خط الأرضية */}
-          <span
-            aria-hidden
-            className="absolute inset-x-0 bottom-0 hidden h-px md:block"
-            style={{
-              background:
-                "linear-gradient(90deg, transparent, var(--border) 10%, var(--border) 90%, transparent)",
-            }}
-          />
+        {/* شبكة كاردز مربعة */}
+        <div className="mx-auto mt-12 grid max-w-3xl grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 md:mt-14">
+          {fields.map((f, i) => {
+            const tint = TINTS[i % TINTS.length];
 
-          <div className="grid grid-cols-2 items-end gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-6">
-            {fields.map((f, i) => {
-              const p = PILLARS[i % PILLARS.length]!;
-
-              return (
-                <motion.article
-                  key={f.num}
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-70px" }}
-                  transition={{
-                    duration: 1.1,
-                    delay: i * 0.1,
-                    ease: [0.16, 1, 0.3, 1],
-                  }}
-                  style={
-                    {
-                      "--tint": `hsl(${p.tint})`,
-                      "--h": `${p.h}px`,
-                    } as Record<string, string>
-                  }
-                  className="group relative flex h-[180px] flex-col justify-between overflow-hidden rounded-t-[1.75rem] rounded-b-xl border p-4 text-center transition-all duration-500 hover:-translate-y-2 sm:h-[220px] sm:p-5 lg:h-[var(--h)]"
+            return (
+              <motion.article
+                key={f.num}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{
+                  duration: 0.8,
+                  delay: i * 0.07,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+                style={{ "--tint": `hsl(${tint})` } as Record<string, string>}
+                className="qamat-surface group flex aspect-square flex-col items-center justify-center gap-2.5 p-4 text-center"
+              >
+                {/* الرقم */}
+                <span
+                  className="text-[0.62rem] font-medium"
+                  style={{ color: "color-mix(in srgb, var(--tint) 70%, transparent)" }}
                 >
-                  {/* التعبئة اللونية */}
-                  <span
-                    aria-hidden
-                    className="pointer-events-none absolute inset-0 -z-10 transition-opacity duration-500"
-                    style={{
-                      background:
-                        "linear-gradient(to top, color-mix(in srgb, var(--tint) 13%, transparent), color-mix(in srgb, var(--tint) 3%, transparent) 55%, transparent)",
-                    }}
-                  />
-                  <span
-                    aria-hidden
-                    className="pointer-events-none absolute inset-0 -z-10 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                    style={{
-                      background:
-                        "linear-gradient(to top, color-mix(in srgb, var(--tint) 30%, transparent), color-mix(in srgb, var(--tint) 8%, transparent) 60%, transparent)",
-                    }}
-                  />
+                  {f.num}
+                </span>
 
-                  {/* الرقم */}
-                  <span
-                    className="text-[0.68rem] font-medium tracking-[0.16em] transition-colors duration-500"
-                    style={{ color: "color-mix(in srgb, var(--tint) 65%, transparent)" }}
-                  >
-                    {f.num}
-                  </span>
+                {/* الاسم */}
+                <h3 className="text-[0.9rem] font-semibold leading-snug sm:text-base">
+                  {f.name}
+                </h3>
 
-                  {/* الاسم */}
-                  <h3 className="text-[0.95rem] font-semibold leading-snug transition-transform duration-500 group-hover:-translate-y-0.5 sm:text-base lg:text-lg">
-                    {f.name}
-                  </h3>
-
-                  {/* قاعدة العمود */}
-                  <span
-                    aria-hidden
-                    className="mx-auto h-1 w-6 rounded-full transition-all duration-500 group-hover:w-12"
-                    style={{ background: "var(--tint)" }}
-                  />
-                </motion.article>
-              );
-            })}
-          </div>
+                {/* خط قاعدي يمتد عند المرور */}
+                <span
+                  aria-hidden
+                  className="h-0.5 w-5 rounded-full transition-all duration-500 group-hover:w-9"
+                  style={{ background: "var(--tint)" }}
+                />
+              </motion.article>
+            );
+          })}
         </div>
+
+        {/* زر التسجيل في البرامج */}
+        <Reveal delay={0.15}>
+          <div className="mt-12 flex justify-center md:mt-14">
+            <Link
+              to="/programs"
+              className="group inline-flex items-center gap-2.5 rounded-full bg-primary px-8 py-3.5 text-sm font-medium text-primary-foreground shadow-[0_10px_26px_rgba(20,48,46,0.16)] transition-all duration-300 hover:-translate-y-0.5 hover:brightness-110 md:text-base"
+            >
+              سجّل في برامجنا
+              <ArrowLeft
+                aria-hidden
+                className="size-4 transition-transform duration-300 group-hover:-translate-x-1"
+              />
+            </Link>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

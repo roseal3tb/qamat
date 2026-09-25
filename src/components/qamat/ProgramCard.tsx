@@ -1,7 +1,7 @@
 import { isProgramOpen, type Program } from "@/data/qamatData";
 import { useNow } from "@/hooks/use-program-open";
 import { motion } from "framer-motion";
-import { ArrowLeft, CalendarDays, Clock, Lock, MapPin, type LucideIcon } from "lucide-react";
+import { ArrowLeft, CalendarDays, CheckCircle2, Clock, MapPin, type LucideIcon } from "lucide-react";
 
 /* -------------------------------------------------------------------------
    العدّاد التنازلي
@@ -69,6 +69,45 @@ function InfoChip({
       <Icon aria-hidden className="size-3.5 text-accent-strong" strokeWidth={1.8} />
       {text}
     </span>
+  );
+}
+
+/* -------------------------------------------------------------------------
+   بطاقة "اكتمل التسجيل" — تظهر بعد إغلاق الباب
+   ------------------------------------------------------------------------- */
+function RegistrationClosed() {
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.96 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      className="relative mx-auto max-w-md overflow-hidden rounded-2xl border border-accent/35 bg-[color-mix(in_srgb,var(--accent)_9%,var(--card))] px-6 py-8 text-center"
+    >
+      {/* توهّج ذهبي خلف الأيقونة */}
+      <span
+        aria-hidden
+        className="pointer-events-none absolute left-1/2 top-6 size-28 -translate-x-1/2 rounded-full"
+        style={{
+          background: "radial-gradient(circle, rgba(168,141,104,0.28), transparent 70%)",
+        }}
+      />
+
+      <motion.span
+        initial={{ scale: 0, rotate: -12 }}
+        animate={{ scale: 1, rotate: 0 }}
+        transition={{ delay: 0.15, duration: 0.6, ease: [0.34, 1.4, 0.5, 1] }}
+        className="relative mx-auto grid size-14 place-items-center rounded-full bg-accent text-accent-foreground shadow-[0_10px_26px_rgba(168,141,104,0.32)]"
+      >
+        <CheckCircle2 aria-hidden className="size-7" strokeWidth={2} />
+      </motion.span>
+
+      <h3 className="relative mt-5 text-lg font-semibold sm:text-xl">
+        تم إغلاق التسجيل
+      </h3>
+      <p className="relative mx-auto mt-2 max-w-xs text-sm leading-relaxed text-muted-foreground">
+تابعنا لمعرفة برامجنا القادمة
+      </p>
+    </motion.div>
   );
 }
 
@@ -175,10 +214,7 @@ export function ProgramCard({
             </p>
           </>
         ) : (
-          <div className="mx-auto flex max-w-md items-center justify-center gap-2 rounded-2xl border border-border/70 bg-muted/50 py-5 text-sm font-medium text-muted-foreground">
-            <Lock aria-hidden className="size-4" />
-            انتهى التسجيل في هذا البرنامج
-          </div>
+          <RegistrationClosed />
         )}
       </div>
     </motion.article>
