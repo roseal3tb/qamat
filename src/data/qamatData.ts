@@ -324,8 +324,8 @@ export const departments: Department[] = [
     name: "إدارة الموارد البشرية",
     tint: TEAL,
     leadership: [
-    
       { name: "رهف العريفي", role: "قائدة الإدارة", photo: "" },
+      { name: "شادن الرشود", role: "نائبة الإدارة", photo: "" },
     ],
     committees: [
       { name: "فواز الغامدي", role: "قائد لجنة الاستقطاب", photo: "" },
@@ -341,10 +341,9 @@ export const departments: Department[] = [
       { name: "جود العجيمي", role: "نائبة الإدارة", photo: "" },
     ],
     committees: [
-      { name: "حنين الصالحي", role: "قائدة لجنة كتابة المحتوى والتسويق", photo: "" },
+      { name: "حنين الحربي", role: "قائدة لجنة كتابة المحتوى والتسويق", photo: "" },
       { name: "وسن الجهني", role: "نائبة قائدة لجنة كتابة المحتوى والتسويق", photo: "" },
       { name: "شهد سعود", role: "قائدة لجنة التصاميم", photo: "" },
-      { name: "طلال الصالح", role: "قائد لجنة التصوير والمونتاج", photo: "" },
     ],
   },
   {
@@ -352,7 +351,6 @@ export const departments: Department[] = [
     tint: TEAL,
     leadership: [
       { name: "صبا العجمي", role: "قائدة الإدارة", photo: "" },
-      { name: "غيدا العصيمي", role: "نائبة الإدارة", photo: "" },
     ],
     committees: [
       { name: "دانه الصالح", role: "قائدة لجنة الشراكات", photo: "" },
@@ -362,8 +360,13 @@ export const departments: Department[] = [
   {
     name: "إدارة التشغيل والتطوير",
     tint: NAVY,
-    leadership: [{ name: "بندر الحرامله", role: "قائد الإدارة", photo: "" }],
-    committees: [],
+    leadership: [
+      { name: "بندر الحرامله", role: "قائد الإدارة", photo: "" },
+      { name: "تولين الصلوي", role: "نائبة الإدارة", photo: "" },
+    ],
+    committees: [
+      { name: "تركي السهلي", role: "قائد لجنة الابتكار", photo: "" },
+    ],
   },
 ];
 
