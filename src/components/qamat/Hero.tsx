@@ -1,4 +1,5 @@
 import { brand } from "@/data/qamatData";
+import { FeaturedBanner } from "./FeaturedBanner";
 import { useOpenPrograms } from "@/hooks/use-program-open";
 import { Link } from "@tanstack/react-router";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
@@ -111,6 +112,7 @@ export function Hero() {
   return (
     <section id="hero" ref={ref} className="pt-24 md:pt-28">
       <div className="container-q">
+        <FeaturedBanner />
         <div className="qamat-hero relative overflow-hidden">
           <HeroBackdrop />
 
