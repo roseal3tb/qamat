@@ -539,8 +539,8 @@ export type FeaturedMember = {
 export const featuredLeaders: FeaturedLeader[] = [
   {
     name: "رهف العريفي",
-    role: "قائدة",
-    dept: "إدارة العلاقات العامة",
+    role: "قائدة إدارة الموارد البشرية",
+    dept: "إدارة الموارد البشرية",
     photo: "",
   },
   {
