@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as FeaturedRouteImport } from './routes/featured'
 import { Route as JoinRouteImport } from './routes/join'
 import { Route as ProgramsRouteImport } from './routes/programs'
 import { Route as TeamRouteImport } from './routes/team'
@@ -23,6 +24,11 @@ const IndexRoute = IndexRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FeaturedRoute = FeaturedRouteImport.update({
+  id: '/featured',
+  path: '/featured',
   getParentRoute: () => rootRouteImport,
 } as any)
 const JoinRoute = JoinRouteImport.update({
@@ -44,6 +50,7 @@ const TeamRoute = TeamRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
+  '/featured': typeof FeaturedRoute
   '/join': typeof JoinRoute
   '/programs': typeof ProgramsRoute
   '/team': typeof TeamRoute
@@ -51,6 +58,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
+  '/featured': typeof FeaturedRoute
   '/join': typeof JoinRoute
   '/programs': typeof ProgramsRoute
   '/team': typeof TeamRoute
@@ -59,21 +67,30 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
+  '/featured': typeof FeaturedRoute
   '/join': typeof JoinRoute
   '/programs': typeof ProgramsRoute
   '/team': typeof TeamRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/contact' | '/join' | '/programs' | '/team'
+  fullPaths: '/' | '/contact' | '/featured' | '/join' | '/programs' | '/team'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/contact' | '/join' | '/programs' | '/team'
-  id: '__root__' | '/' | '/contact' | '/join' | '/programs' | '/team'
+  to: '/' | '/contact' | '/featured' | '/join' | '/programs' | '/team'
+  id:
+    | '__root__'
+    | '/'
+    | '/contact'
+    | '/featured'
+    | '/join'
+    | '/programs'
+    | '/team'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ContactRoute: typeof ContactRoute
+  FeaturedRoute: typeof FeaturedRoute
   JoinRoute: typeof JoinRoute
   ProgramsRoute: typeof ProgramsRoute
   TeamRoute: typeof TeamRoute
@@ -93,6 +110,13 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/featured': {
+      id: '/featured'
+      path: '/featured'
+      fullPath: '/featured'
+      preLoaderRoute: typeof FeaturedRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/join': {
@@ -122,6 +146,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ContactRoute: ContactRoute,
+  FeaturedRoute: FeaturedRoute,
   JoinRoute: JoinRoute,
   ProgramsRoute: ProgramsRoute,
   TeamRoute: TeamRoute,
