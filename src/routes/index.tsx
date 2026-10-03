@@ -46,7 +46,7 @@ function Index() {
         <Outcomes />
         <Transformation />
         <Impact />
-        <FeaturedMembers />
+    
         <CTA />
       </main>
       <Footer />
