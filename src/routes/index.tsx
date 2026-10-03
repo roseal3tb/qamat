@@ -1,7 +1,6 @@
 import { About } from "@/components/qamat/About";
 import { Audience } from "@/components/qamat/Audience";
 import { CTA } from "@/components/qamat/CTA";
-import { FeaturedMembers } from "@/components/qamat/FeaturedMembers";
 import { Fields } from "@/components/qamat/Fields";
 import { Footer } from "@/components/qamat/Footer";
 import { Hero } from "@/components/qamat/Hero";
