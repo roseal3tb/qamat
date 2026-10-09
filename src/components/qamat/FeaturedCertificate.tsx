@@ -7,14 +7,19 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
    شهادة قامة الشهر — تصميم قامات الرسمي (Canva) كخلفية
    -------------------------------------------------------------------------
    • الخلفية مضمّنة داخل الكود (CERT_BG) — لا تحتاج أي ملف في public.
-   • نركّب اسم العضو فقط فوق سطر "الى ____" ليطابق التصميم 100%.
-   • اسم العضو: Reem Kufi — لون التيل #284A5C (مطابق للتصميم).
-   • التحميل كصورة يحتاج:  bun add html-to-image
+   • نركّب اسم العضو فقط (موسّطًا) ونغطّي الشرطات والنص الافتراضي.
+   • التحميل يتم عبر canvas مباشرة — بدون أي مكتبة خارجية.
    ========================================================================= */
 
 const ART_W = 1600;
 const ART_H = 900;
 const NAME_COLOR = "#284A5C";
+
+/* موضع الاسم والتغطية (بمقاس 1600×900) */
+const NAME_X = 762;
+const NAME_Y = 535;
+const NAME_SIZE = 56;
+const COVER = { x: 470, y: 498, w: 512, h: 74 };
 
 /* تحميل خط الاسم مرة واحدة */
 function useDesignFonts() {
@@ -33,16 +38,9 @@ function useDesignFonts() {
 /* =========================================================================
    اللوحة (1600×900) — خلفية التصميم + اسم العضو
    ========================================================================= */
-export function CertArtboard({
-  person,
-  rootRef,
-}: {
-  person: FeaturedPerson;
-  rootRef?: React.Ref<HTMLDivElement>;
-}) {
+export function CertArtboard({ person }: { person: FeaturedPerson }) {
   return (
     <div
-      ref={rootRef}
       dir="rtl"
       style={{ width: ART_W, height: ART_H, position: "relative", overflow: "hidden" }}
     >
@@ -53,29 +51,29 @@ export function CertArtboard({
         style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
       />
 
-      {/* تغطية نص "أسم العضو" الافتراضي بالأبيض (الخلفية هناك بيضاء تمامًا) */}
+      {/* تغطية الشرطات + النص الافتراضي بالأبيض */}
       <div
         style={{
           position: "absolute",
-          top: 498,
-          left: 600,
-          width: 320,
-          height: 74,
+          top: COVER.y,
+          left: COVER.x,
+          width: COVER.w,
+          height: COVER.h,
           background: "#ffffff",
         }}
       />
 
-      {/* اسم العضو — موسّط على السطر بين "الى" والشرطات */}
+      {/* اسم العضو — موسّط على السطر */}
       <div
         style={{
           position: "absolute",
-          top: 535,
-          left: 762,
+          top: NAME_Y,
+          left: NAME_X,
           transform: "translate(-50%, -50%)",
           textAlign: "center",
           whiteSpace: "nowrap",
           fontFamily: "'Reem Kufi', sans-serif",
-          fontSize: 56,
+          fontSize: NAME_SIZE,
           fontWeight: 700,
           lineHeight: 1,
           color: NAME_COLOR,
@@ -98,7 +96,6 @@ export function CertificateModal({
   onClose: () => void;
 }) {
   useDesignFonts();
-  const artRef = useRef<HTMLDivElement>(null);
   const boxRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(0.3);
   const [copied, setCopied] = useState(false);
@@ -130,26 +127,51 @@ export function CertificateModal({
     };
   }, [onClose]);
 
+  // التحميل عبر canvas — بدون أي مكتبة
   async function download() {
-    if (!artRef.current) return;
     setDownloading(true);
     try {
-      await (document as Document).fonts.ready;
-      const { toPng } = await import("html-to-image");
-      const dataUrl = await toPng(artRef.current, {
-        width: ART_W,
-        height: ART_H,
-        pixelRatio: 2,
-        cacheBust: true,
-        style: { transform: "none", transformOrigin: "top right" },
-      });
+      const s = 2; // دقة مضاعفة
+      const canvas = document.createElement("canvas");
+      canvas.width = ART_W * s;
+      canvas.height = ART_H * s;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) throw new Error("canvas غير مدعوم");
+
+      // الخلفية
+      const img = new Image();
+      img.src = CERT_BG;
+      await img.decode();
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+      // تغطية الشرطات/النص الافتراضي
+      ctx.fillStyle = "#ffffff";
+      ctx.fillRect(COVER.x * s, COVER.y * s, COVER.w * s, COVER.h * s);
+
+      // الاسم
+      try {
+        await (document as Document).fonts.load(`700 ${NAME_SIZE * s}px 'Reem Kufi'`);
+        await (document as Document).fonts.ready;
+      } catch {
+        /* تجاهل */
+      }
+      ctx.fillStyle = NAME_COLOR;
+      ctx.font = `700 ${NAME_SIZE * s}px 'Reem Kufi', sans-serif`;
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.direction = "rtl";
+      ctx.fillText(person.name, NAME_X * s, NAME_Y * s);
+
+      const dataUrl = canvas.toDataURL("image/png");
       const a = document.createElement("a");
       a.download = `شهادة-قامة-الشهر-${person.name}.png`;
       a.href = dataUrl;
+      document.body.appendChild(a);
       a.click();
+      a.remove();
     } catch (err) {
       console.error(err);
-      alert("تعذّر تحميل الصورة. تأكد من تثبيت المكتبة:  bun add html-to-image");
+      alert("تعذّر تحميل الصورة، حاول مرة أخرى.");
     } finally {
       setDownloading(false);
     }
@@ -213,7 +235,7 @@ export function CertificateModal({
                 transformOrigin: "top right",
               }}
             >
-              <CertArtboard person={person} rootRef={artRef} />
+              <CertArtboard person={person} />
             </div>
           </div>
         </div>

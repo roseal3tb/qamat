@@ -169,7 +169,7 @@ const committeeOf = (p: FeaturedPerson) => p.title.split("·").pop()?.trim() || 
 
 /* ---------- الصفحة ---------- */
 export function FeaturedPage() {
-  const { monthName, year } = featuredMonth;
+  const { monthName } = featuredMonth;
   const [openId, setOpenId] = useState<string | null>(null);
   const person = findFeaturedPerson(openId);
 
@@ -247,18 +247,16 @@ export function FeaturedPage() {
               <Crown aria-hidden strokeWidth={1.5} className="size-7 sm:size-8" />
             </span>
 
-            <p className="mt-5 text-xs font-semibold tracking-[0.35em] text-accent sm:text-sm">
-              متميزو الشهر
-            </p>
+            <p className="mt-5 text-sm font-semibold text-accent sm:text-base">متميزو الشهر</p>
             <h1 className="mx-auto mt-3 text-[clamp(2rem,5vw,3.4rem)] font-bold leading-[1.2] text-white">
               <WordsReveal text={`متميزو شهر ${monthName}`} />
             </h1>
             <p className="mx-auto mt-4 max-w-md text-sm leading-loose text-white/70 sm:text-base">
               إدارات وقادة وأعضاء تميّزوا بالتزامهم وجودة عملهم خلال الشهر
             </p>
-            <div className="mt-7 inline-flex items-center gap-2.5 rounded-full border border-accent/50 bg-accent/15 px-5 py-2 text-sm font-semibold text-accent">
-              {monthName} {year}
-            </div>
+            <p className="mx-auto mt-7 max-w-sm text-sm font-medium leading-loose text-accent sm:text-base">
+              إنجازك يستحق أن يُرى، شارك شهادتك واحتفِ بتميّزك
+            </p>
           </div>
         </Reveal>
 
@@ -340,12 +338,6 @@ export function FeaturedPage() {
             </div>
           ))}
         </div>
-
-        <Reveal delay={0.1}>
-          <p className="mt-14 text-center text-sm leading-loose text-muted-foreground">
-            إنجازك يستحق أن يُرى، شارك شهادتك واحتفِ بتميزك
-          </p>
-        </Reveal>
       </div>
 
       {/* نافذة الشهادة */}

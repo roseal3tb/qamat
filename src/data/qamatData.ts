@@ -330,7 +330,7 @@ export const departments: Department[] = [
       { name: "شادن الرشود", role: "نائبة الإدارة", photo: "" },
     ],
     committees: [
-      { name: "فواز الغامدي", role: "قائد لجنة الاستقطاب", photo: "" },
+      { name: "جوان الحربي", role: "قائدة لجنة الاستقطاب", photo: "" },
       { name: "عبدالرحمن الشنيفي", role: "قائد لجنة متابعة الأداء", photo: "" },
     ],
   },
@@ -353,6 +353,7 @@ export const departments: Department[] = [
     tint: TEAL,
     leadership: [
       { name: "صبا العجمي", role: "قائدة الإدارة", photo: "" },
+      { name: "فواز الغامدي", role: "نائب الإدارة", photo: "" },
     ],
     committees: [
       { name: "دانه الصالح", role: "قائدة لجنة الشراكات", photo: "" },
@@ -368,6 +369,7 @@ export const departments: Department[] = [
     ],
     committees: [
       { name: "تركي السهلي", role: "قائد لجنة الابتكار", photo: "" },
+      { name: "الجازي القضيبي", role: "قائدة لجنة التنظيم", photo: "" },
     ],
   },
 ];
@@ -567,7 +569,6 @@ export const featuredPeople: FeaturedPerson[] = [
 
   // ===== الأعضاء =====
   // لجنة التنظيم
-  { id: "aljazi-alqudaibi", name: "الجازي القضيبي", gender: "f", group: "member", title: "عضو · لجنة التنظيم", photo: "" },
   { id: "wasan-aburas", name: "وسن ابو راس", gender: "f", group: "member", title: "عضو · لجنة التنظيم", photo: "" },
   { id: "noura-bentalb", name: "نوره بن طالب", gender: "f", group: "member", title: "عضو · لجنة التنظيم", photo: "" },
   { id: "jood-shraibati", name: "جود شريباتي", gender: "f", group: "member", title: "عضو · لجنة التنظيم", photo: "" },
