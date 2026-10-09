@@ -162,13 +162,36 @@ export function CertificateModal({
       ctx.direction = "rtl";
       ctx.fillText(person.name, NAME_X * s, NAME_Y * s);
 
-      const dataUrl = canvas.toDataURL("image/png");
+      const fileName = `شهادة-قامة-الشهر-${person.name}.png`;
+      const blob: Blob = await new Promise((resolve, reject) =>
+        canvas.toBlob((b) => (b ? resolve(b) : reject(new Error("toBlob"))), "image/png"),
+      );
+
+      // الجوال (iOS/Android): قائمة المشاركة → "حفظ الصورة"
+      const nav = navigator as Navigator & {
+        canShare?: (data?: { files?: File[] }) => boolean;
+        share?: (data: { files?: File[]; title?: string }) => Promise<void>;
+      };
+      const file = new File([blob], fileName, { type: "image/png" });
+      if (nav.share && nav.canShare && nav.canShare({ files: [file] })) {
+        try {
+          await nav.share({ files: [file], title: "شهادة قامة الشهر" });
+          return;
+        } catch (e) {
+          if ((e as { name?: string })?.name === "AbortError") return; // ألغى المستخدم
+          // غير ذلك: نكمل للطريقة البديلة
+        }
+      }
+
+      // اللاب/الديسكتوب: تحميل مباشر
+      const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
-      a.download = `شهادة-قامة-الشهر-${person.name}.png`;
-      a.href = dataUrl;
+      a.href = url;
+      a.download = fileName;
       document.body.appendChild(a);
       a.click();
       a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 4000);
     } catch (err) {
       console.error(err);
       alert("تعذّر تحميل الصورة، حاول مرة أخرى.");
