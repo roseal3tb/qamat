@@ -558,7 +558,7 @@ export const featuredPeople: FeaturedPerson[] = [
 
   // ===== نواب قادة الإدارات =====
   { id: "jood-alojaimi", name: "جود العجيمي", gender: "f", group: "deputy", title: "نائبة إدارة الإعلام والمحتوى", photo: "" },
-  { id: "rose-alotaibi", name: "روز العتيبي", gender: "f", group: "deputy", title: "نائبة إدارة الموارد البشرية", photo: "" },
+  { id: "rose-alotaibi", name: "روز العتيبي", gender: "f", group: "deputy", title: "نائبة إدارة التقنية", photo: "" },
 
   // ===== قادة اللجان =====
   { id: "nouf-alotaibi", name: "نوف العتيبي", gender: "f", group: "committee", title: "قائدة لجنة التعاونات", photo: "" },

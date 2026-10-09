@@ -3,9 +3,8 @@ import { Footer } from "@/components/qamat/Footer";
 import { Navbar } from "@/components/qamat/Navbar";
 import { createFileRoute } from "@tanstack/react-router";
 
-const title = "ظ…طھظ…ظٹط²ظٹظ† ط§ظ„ط´ظ‡ط± | ظ‚ط§ظ…ط§طھ â€” QAMAT";
-const description =
-  "طھط¹ط±ظ‘ظپ ط¹ظ„ظ‰ ط§ظ„ظ‚ط§ط¯ط© ظˆط§ظ„ط£ط¹ط¶ط§ط، ط§ظ„ظ…طھظ…ظٹط²ظٹظ† ظپظٹ ظ…ط¨ط§ط¯ط±ط© ظ‚ط§ظ…ط§طھ.";
+const title = "متميزو الشهر | قامات — QAMAT";
+const description = "تعرّف على القادة والأعضاء المتميزين في مبادرة قامات.";
 
 export const Route = createFileRoute("/featured")({
   head: () => ({
