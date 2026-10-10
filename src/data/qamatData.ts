@@ -569,7 +569,7 @@ export const featuredPeople: FeaturedPerson[] = [
 
   // ===== الأعضاء =====
   // لجنة التنظيم
-  { id: "wasan-aburas", name: "وسن ابو راس", gender: "f", group: "member", title: "عضو · لجنة التنظيم", photo: "" },
+  { id: "wasan-aburas", name: "وسن ابوراس", gender: "f", group: "member", title: "عضو · لجنة التنظيم", photo: "" },
   { id: "noura-bentalb", name: "نوره بن طالب", gender: "f", group: "member", title: "عضو · لجنة التنظيم", photo: "" },
   { id: "jood-shraibati", name: "جود شريباتي", gender: "f", group: "member", title: "عضو · لجنة التنظيم", photo: "" },
   { id: "safana-albalawi", name: "سفانه البلوي", gender: "f", group: "member", title: "عضو · لجنة التنظيم", photo: "" },
