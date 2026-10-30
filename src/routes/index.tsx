@@ -10,6 +10,7 @@ import { Navbar } from "@/components/qamat/Navbar";
 import { Objectives } from "@/components/qamat/Objectives";
 import { Outcomes } from "@/components/qamat/Outcomes";
 import { Partners } from "@/components/qamat/Partners";
+import { Sponsors } from "@/components/qamat/Sponsors";
 import { Transformation } from "@/components/qamat/Transformation";
 import { createFileRoute } from "@tanstack/react-router";
 
@@ -43,6 +44,7 @@ function Index() {
         <Journey />
         <Fields />
         <Partners />
+        <Sponsors />
         <Outcomes />
         <Transformation />
         <Impact />
