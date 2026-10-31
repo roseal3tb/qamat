@@ -55,7 +55,7 @@ function LeaderCard({ person, onOpen }: { person: FeaturedPerson; onOpen: () => 
     <button
       type="button"
       onClick={onOpen}
-      className="qamat-surface group flex h-full w-full flex-col items-center gap-3 rounded-[1.25rem] px-3 py-5 text-center transition-all duration-300 hover:-translate-y-1 hover:border-accent/40"
+      className="qamat-surface group flex cursor-pointer h-full w-full flex-col items-center gap-3 rounded-[1.25rem] px-3 py-5 text-center transition-all duration-300 hover:-translate-y-1 hover:border-accent/40"
     >
       <Avatar name={person.name} photo={person.photo} />
       <div className="space-y-1">
@@ -76,7 +76,7 @@ function MemberCard({ person, onOpen }: { person: FeaturedPerson; onOpen: () => 
     <button
       type="button"
       onClick={onOpen}
-      className="qamat-surface group flex h-full w-full flex-col items-center gap-2.5 rounded-[1.25rem] px-3 py-5 text-center transition-all duration-300 hover:-translate-y-1 hover:border-accent/40"
+      className="qamat-surface group flex cursor-pointer h-full w-full flex-col items-center gap-2.5 rounded-[1.25rem] px-3 py-5 text-center transition-all duration-300 hover:-translate-y-1 hover:border-accent/40"
     >
       <Avatar name={person.name} photo={person.photo} />
       <h3 className="text-sm font-semibold leading-snug">{person.name}</h3>
@@ -208,6 +208,7 @@ export function FeaturedPage() {
   function close() {
     setOpenId(null);
     window.history.replaceState(null, "", window.location.pathname);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   return (

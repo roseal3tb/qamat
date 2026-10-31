@@ -239,7 +239,7 @@ export function CertificateModal({
           type="button"
           aria-label="إغلاق"
           onClick={onClose}
-          className="absolute end-4 top-4 z-10 grid size-9 place-items-center rounded-full border border-border bg-background text-muted-foreground transition-colors hover:text-primary"
+          className="absolute end-4 top-4 z-10 grid cursor-pointer size-9 place-items-center rounded-full border border-border bg-background text-muted-foreground transition-colors hover:text-primary"
         >
           <X aria-hidden className="size-4" />
         </button>
@@ -269,7 +269,7 @@ export function CertificateModal({
             type="button"
             onClick={download}
             disabled={downloading}
-            className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-all duration-300 hover:brightness-110 disabled:opacity-60"
+            className="inline-flex cursor-pointer items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-all duration-300 hover:brightness-110 disabled:cursor-wait disabled:opacity-60"
           >
             <Download aria-hidden className="size-4" />
             {downloading ? "جاري التحضير..." : "تحميل الشهادة"}
@@ -279,7 +279,7 @@ export function CertificateModal({
             type="button"
             onClick={shareX}
             aria-label="مشاركة على X"
-            className="grid size-11 place-items-center rounded-full border border-border bg-background text-foreground transition-all duration-300 hover:-translate-y-0.5 hover:border-accent hover:bg-accent hover:text-accent-foreground"
+            className="grid size-11 cursor-pointer place-items-center rounded-full border border-border bg-background text-foreground transition-all duration-300 hover:-translate-y-0.5 hover:border-accent hover:bg-accent hover:text-accent-foreground"
           >
             <span className="text-sm font-bold">X</span>
           </button>
@@ -287,7 +287,7 @@ export function CertificateModal({
             type="button"
             onClick={shareLinkedIn}
             aria-label="مشاركة على LinkedIn"
-            className="grid size-11 place-items-center rounded-full border border-border bg-background text-foreground transition-all duration-300 hover:-translate-y-0.5 hover:border-accent hover:bg-accent hover:text-accent-foreground"
+            className="grid size-11 cursor-pointer place-items-center rounded-full border border-border bg-background text-foreground transition-all duration-300 hover:-translate-y-0.5 hover:border-accent hover:bg-accent hover:text-accent-foreground"
           >
             <Linkedin aria-hidden className="size-[18px]" />
           </button>
@@ -295,7 +295,7 @@ export function CertificateModal({
             type="button"
             onClick={copyLink}
             aria-label="نسخ الرابط"
-            className="grid size-11 place-items-center rounded-full border border-border bg-background text-foreground transition-all duration-300 hover:-translate-y-0.5 hover:border-accent hover:bg-accent hover:text-accent-foreground"
+            className="grid size-11 cursor-pointer place-items-center rounded-full border border-border bg-background text-foreground transition-all duration-300 hover:-translate-y-0.5 hover:border-accent hover:bg-accent hover:text-accent-foreground"
           >
             {copied ? (
               <Check aria-hidden className="size-[18px] text-primary" />
