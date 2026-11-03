@@ -17,14 +17,14 @@ export function Sponsors() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="group mx-auto mt-12 grid aspect-[2/1] w-full max-w-[420px] place-items-center overflow-hidden rounded-[1.25rem] border border-border/70 bg-card p-5 shadow-[0_1px_2px_rgba(20,48,46,0.03),0_8px_24px_rgba(20,48,46,0.05)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_2px_4px_rgba(20,48,46,0.05),0_16px_40px_rgba(20,48,46,0.1)] sm:p-8 md:mt-16"
+          className="group mx-auto mt-12 flex w-full justify-center md:mt-16"
         >
           <img
             src="/sponsors/sweater.png"
             alt="شعار سويتر"
             loading="lazy"
             decoding="async"
-            className="h-full w-full object-contain transition-transform duration-700 group-hover:scale-[1.05]"
+            className="h-auto w-full max-w-[320px] object-contain transition-transform duration-700 group-hover:scale-[1.03]"
           />
         </motion.div>
       </div>
