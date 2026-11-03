@@ -523,7 +523,7 @@ export const joinInfo = {
    لإضافة صورة: ضعها في public/members/ واكتب المسار في photo.
    ========================================================================= */
 
-export const featuredMonth = { monthName: "سبتمبر", year: "2026" };
+export const featuredMonth = { monthName: "أكتوبر", year: "2026" };
 
 export type Gender = "f" | "m";
 
@@ -543,70 +543,50 @@ export type FeaturedPerson = {
 
 /** الإدارات المميزة — بطاقات فقط، بلا شهادة */
 export const featuredDepartments: { name: string }[] = [
-  { name: "إدارة العلاقات العامة" },
-  { name: "إدارة الإعلام والمحتوى" },
   { name: "إدارة الموارد البشرية" },
+  { name: "إدارة الإعلام والمحتوى" },
 ];
 
 /** الأشخاص المميزون — لكلٍّ شهادة تُفتح بالضغط */
 export const featuredPeople: FeaturedPerson[] = [
   // ===== قادة الإدارات =====
-  { id: "bareah-altayyar", name: "بارعه الطيار", gender: "f", group: "leader", title: "قائدة إدارة التقنية", photo: "" },
-  { id: "hala-hamli", name: "حلا حملي", gender: "f", group: "leader", title: "قائدة إدارة الإعلام والمحتوى", photo: "" },
-  { id: "saba-alajmi", name: "صبا العجمي", gender: "f", group: "leader", title: "قائدة إدارة العلاقات العامة", photo: "" },
   { id: "rahaf-arifi", name: "رهف العريفي", gender: "f", group: "leader", title: "قائدة إدارة الموارد البشرية", photo: "" },
+  { id: "bareah-altayyar", name: "بارعة الطيار", gender: "f", group: "leader", title: "قائدة إدارة التقنية", photo: "" },
 
   // ===== نواب قادة الإدارات =====
-  { id: "jood-alojaimi", name: "جود العجيمي", gender: "f", group: "deputy", title: "نائبة إدارة الإعلام والمحتوى", photo: "" },
-  { id: "rose-alotaibi", name: "روز العتيبي", gender: "f", group: "deputy", title: "نائبة إدارة التقنية", photo: "" },
+  { id: "tolin-alsalwi", name: "تولين الصلوي", gender: "f", group: "deputy", title: "نائبة إدارة التشغيل والتطوير", photo: "" },
+  { id: "shaden-alrashoud", name: "شادن الرشود", gender: "f", group: "deputy", title: "نائبة إدارة الموارد البشرية", photo: "" },
 
   // ===== قادة اللجان =====
-  { id: "nouf-alotaibi", name: "نوف العتيبي", gender: "f", group: "committee", title: "قائدة لجنة التعاونات", photo: "" },
+  { id: "hanin-alsalehi", name: "حنين الصالحي", gender: "f", group: "committee", title: "قائدة لجنة كتابة المحتوى والتسويق", photo: "" },
   { id: "dana-alsaleh", name: "دانه الصالح", gender: "f", group: "committee", title: "قائدة لجنة الشراكات", photo: "" },
-  { id: "hanin-alharbi", name: "حنين الحربي", gender: "f", group: "committee", title: "قائدة لجنة كتابة المحتوى والتسويق", photo: "" },
-  { id: "wasan-aljuhani", name: "وسن الجهني", gender: "f", group: "committee", title: "نائبة لجنة كتابة المحتوى والتسويق", photo: "" },
-  { id: "shahad-saud", name: "شهد سعود", gender: "f", group: "committee", title: "قائدة لجنة التصاميم", photo: "" },
+  { id: "nouf-alotaibi", name: "نوف العتيبي", gender: "f", group: "committee", title: "قائدة لجنة التعاونات", photo: "" },
+  { id: "abdulrahman-alshneifi", name: "عبدالرحمن الشنيفي", gender: "m", group: "committee", title: "قائد لجنة متابعة الأداء", photo: "" },
+  { id: "turki-alsahli", name: "تركي السهلي", gender: "m", group: "committee", title: "قائد لجنة الابتكار والتطوير", photo: "" },
 
   // ===== الأعضاء =====
-  // لجنة التنظيم
-  { id: "wasan-aburas", name: "وسن ابوراس", gender: "f", group: "member", title: "عضو · لجنة التنظيم", photo: "" },
-  { id: "noura-bentalb", name: "نوره بن طالب", gender: "f", group: "member", title: "عضو · لجنة التنظيم", photo: "" },
-  { id: "jood-shraibati", name: "جود شريباتي", gender: "f", group: "member", title: "عضو · لجنة التنظيم", photo: "" },
-  { id: "safana-albalawi", name: "سفانه البلوي", gender: "f", group: "member", title: "عضو · لجنة التنظيم", photo: "" },
-  // لجنة الابتكار والتطوير
-  { id: "ghala-fahad", name: "غلا فهد", gender: "f", group: "member", title: "عضو · لجنة الابتكار والتطوير", photo: "" },
-  { id: "ghala-alomar", name: "غلا العمر", gender: "f", group: "member", title: "عضو · لجنة الابتكار والتطوير", photo: "" },
-  { id: "dana-wael", name: "دانة وائل", gender: "f", group: "member", title: "عضو · لجنة الابتكار والتطوير", photo: "" },
-  { id: "raneem-ibrahim", name: "رنيم ابراهيم", gender: "f", group: "member", title: "عضو · لجنة الابتكار والتطوير", photo: "" },
   // لجنة الاستقطاب
-  { id: "aljori", name: "الجوري المطيري", gender: "f", group: "member", title: "عضو · لجنة الاستقطاب", photo: "" },
-  { id: "shaden", name: "شادن الرشود", gender: "f", group: "member", title: "عضو · لجنة الاستقطاب", photo: "" },
-  { id: "jwan", name: "جوان الحربي", gender: "f", group: "member", title: "عضو · لجنة الاستقطاب", photo: "" },
+  { id: "abdullah-almutairi", name: "عبدالله المطيري", gender: "m", group: "member", title: "عضو · لجنة الاستقطاب", photo: "" },
+  { id: "maram-almutairi", name: "مرام المطيري", gender: "f", group: "member", title: "عضو · لجنة الاستقطاب", photo: "" },
+  // لجنة متابعة الأداء
+  { id: "jouri-alshehri", name: "جوري الشهري", gender: "f", group: "member", title: "عضو · لجنة متابعة الأداء", photo: "" },
+  { id: "reetaj-alqahtani", name: "ريتاج القحطاني", gender: "f", group: "member", title: "عضو · لجنة متابعة الأداء", photo: "" },
+  // لجنة التعاونات
+  { id: "alyaa-alissa", name: "علياء العيسى", gender: "f", group: "member", title: "عضو · لجنة التعاونات", photo: "" },
   // لجنة التصوير والمونتاج
-  { id: "abrar-alshahrani", name: "ابرار الشهراني", gender: "f", group: "member", title: "عضو · لجنة التصوير والمونتاج", photo: "" },
   { id: "saud-alosaimi", name: "سعود العصيمي", gender: "m", group: "member", title: "عضو · لجنة التصوير والمونتاج", photo: "" },
   { id: "haifa-alomair", name: "هيفاء العمير", gender: "f", group: "member", title: "عضو · لجنة التصوير والمونتاج", photo: "" },
-  { id: "roa-alfaraj", name: "رؤى الفراج", gender: "f", group: "member", title: "عضو · لجنة التصوير والمونتاج", photo: "" },
-  // لجنة كتابة المحتوى والتسويق
-  { id: "omar-albassam", name: "عمر البسام", gender: "m", group: "member", title: "عضو · لجنة كتابة المحتوى والتسويق", photo: "" },
-  { id: "faisal-altarifi", name: "فيصل الطريفي", gender: "m", group: "member", title: "عضو · لجنة كتابة المحتوى والتسويق", photo: "" },
+  { id: "abrar-alshahrani", name: "ابرار الشهراني", gender: "f", group: "member", title: "عضو · لجنة التصوير والمونتاج", photo: "" },
   // لجنة التصاميم
-  { id: "atheer-alotaibi", name: "اثير العتيبي", gender: "f", group: "member", title: "عضو · لجنة التصاميم", photo: "" },
-  { id: "alanoud-alsuwailem", name: "العنود السويلم", gender: "f", group: "member", title: "عضو · لجنة التصاميم", photo: "" },
-  { id: "ilaf-alnashwan", name: "ايلاف النشوان", gender: "f", group: "member", title: "عضو · لجنة التصاميم", photo: "" },
-  { id: "dana-alzuaibi", name: "دانه الزعيبي", gender: "f", group: "member", title: "عضو · لجنة التصاميم", photo: "" },
-  { id: "dana-albusaili", name: "دانه البصيلي", gender: "f", group: "member", title: "عضو · لجنة التصاميم", photo: "" },
-  { id: "ghala-alsubaie", name: "غلا السبيعي", gender: "f", group: "member", title: "عضو · لجنة التصاميم", photo: "" },
   { id: "reham-bendawood", name: "رهام بن داود", gender: "f", group: "member", title: "عضو · لجنة التصاميم", photo: "" },
-  { id: "lama-alruwaished", name: "لمى الرويشد", gender: "f", group: "member", title: "عضو · لجنة التصاميم", photo: "" },
-  // لجنة التعاونات
-  { id: "dana-alshamali", name: "دانة الشمالي", gender: "f", group: "member", title: "عضو · لجنة التعاونات", photo: "" },
-  { id: "lana-alqahtani", name: "لانا القحطاني", gender: "f", group: "member", title: "عضو · لجنة التعاونات", photo: "" },
-  // لجنة الشراكات
-  { id: "rahaf-alqahtani", name: "رهف القحطاني", gender: "f", group: "member", title: "عضو · لجنة الشراكات", photo: "" },
-  { id: "salah-almousa", name: "صلاح الموسى", gender: "m", group: "member", title: "عضو · لجنة الشراكات", photo: "" },
-  // لجنة التقنية
-  { id: "daniah-aldosari", name: "دانيه الدوسري", gender: "f", group: "member", title: "عضو · لجنة التقنية", photo: "" },
+  { id: "atheer-alotaibi", name: "اثير العتيبي", gender: "f", group: "member", title: "عضو · لجنة التصاميم", photo: "" },
+  { id: "dana-alzuaibi", name: "دانه الزعيبي", gender: "f", group: "member", title: "عضو · لجنة التصاميم", photo: "" },
+  { id: "sara-alsuwailem", name: "ساره السويلم", gender: "f", group: "member", title: "عضو · لجنة التصاميم", photo: "" },
+  // لجنة الابتكار والتطوير
+  { id: "wajd-alsuhaimi", name: "وجد السهيمي", gender: "f", group: "member", title: "عضو · لجنة الابتكار والتطوير", photo: "" },
+  { id: "maha-alsuhail", name: "مها السهيل", gender: "f", group: "member", title: "عضو · لجنة الابتكار والتطوير", photo: "" },
+  { id: "aljawhara-aldaaj", name: "الجوهرة الداعج", gender: "f", group: "member", title: "عضو · لجنة الابتكار والتطوير", photo: "" },
+  { id: "lina-altuwaijri", name: "لينا التويجري", gender: "f", group: "member", title: "عضو · لجنة الابتكار والتطوير", photo: "" },
 ];
 
 /** يبحث عن شخص مميّز بمعرّفه */
