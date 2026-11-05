@@ -4,36 +4,22 @@ import { Check, Download, Link2, Linkedin, X } from "lucide-react";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 /* =========================================================================
-   شهادة قامة الشهر — تصميم قامات الرسمي (Canva) كخلفية
+   شهادة قامة الشهر — تصميم قامات الجديد
    -------------------------------------------------------------------------
    • الخلفية مضمّنة داخل الكود (CERT_BG) — لا تحتاج أي ملف في public.
-   • نركّب اسم العضو فقط (موسّطًا) ونغطّي الشرطات والنص الافتراضي.
+   • نركّب اسم العضو فقط (موسّطًا) فوق الخط الذهبي.
    • التحميل يتم عبر canvas مباشرة — بدون أي مكتبة خارجية.
    ========================================================================= */
 
 const ART_W = 1600;
 const ART_H = 900;
-const NAME_COLOR = "#284A5C";
+const NAME_COLOR = "#19474C";
+const NAME_FONT = "'IBM Plex Sans Arabic', 'Reem Kufi', sans-serif";
 
-/* موضع الاسم والتغطية (بمقاس 1600×900) */
-const NAME_X = 762;
-const NAME_Y = 535;
-const NAME_SIZE = 56;
-const COVER = { x: 470, y: 498, w: 512, h: 74 };
-
-/* تحميل خط الاسم مرة واحدة */
-function useDesignFonts() {
-  useEffect(() => {
-    const id = "qamat-cert-fonts";
-    if (document.getElementById(id)) return;
-    const link = document.createElement("link");
-    link.id = id;
-    link.rel = "stylesheet";
-    link.href =
-      "https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@500;600;700&display=swap";
-    document.head.appendChild(link);
-  }, []);
-}
+/* موضع الاسم (بمقاس 1600×900) — موسّط فوق الخط الذهبي */
+const NAME_X = 800;
+const NAME_Y = 574;
+const NAME_SIZE = 52;
 
 /* =========================================================================
    اللوحة (1600×900) — خلفية التصميم + اسم العضو
@@ -44,26 +30,14 @@ export function CertArtboard({ person }: { person: FeaturedPerson }) {
       dir="rtl"
       style={{ width: ART_W, height: ART_H, position: "relative", overflow: "hidden" }}
     >
-      {/* خلفية التصميم الرسمي (مضمّنة) */}
+      {/* خلفية التصميم (مضمّنة) */}
       <img
         src={CERT_BG}
         alt="شهادة قامة الشهر"
         style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
       />
 
-      {/* تغطية الشرطات + النص الافتراضي بالأبيض */}
-      <div
-        style={{
-          position: "absolute",
-          top: COVER.y,
-          left: COVER.x,
-          width: COVER.w,
-          height: COVER.h,
-          background: "#ffffff",
-        }}
-      />
-
-      {/* اسم العضو — موسّط على السطر */}
+      {/* اسم العضو — موسّط فوق الخط الذهبي */}
       <div
         style={{
           position: "absolute",
@@ -72,7 +46,7 @@ export function CertArtboard({ person }: { person: FeaturedPerson }) {
           transform: "translate(-50%, -50%)",
           textAlign: "center",
           whiteSpace: "nowrap",
-          fontFamily: "'Reem Kufi', sans-serif",
+          fontFamily: NAME_FONT,
           fontSize: NAME_SIZE,
           fontWeight: 700,
           lineHeight: 1,
@@ -95,7 +69,6 @@ export function CertificateModal({
   person: FeaturedPerson;
   onClose: () => void;
 }) {
-  useDesignFonts();
   const boxRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(0.3);
   const [copied, setCopied] = useState(false);
@@ -144,19 +117,15 @@ export function CertificateModal({
       await img.decode();
       ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-      // تغطية الشرطات/النص الافتراضي
-      ctx.fillStyle = "#ffffff";
-      ctx.fillRect(COVER.x * s, COVER.y * s, COVER.w * s, COVER.h * s);
-
       // الاسم
       try {
-        await (document as Document).fonts.load(`700 ${NAME_SIZE * s}px 'Reem Kufi'`);
+        await (document as Document).fonts.load(`700 ${NAME_SIZE * s}px 'IBM Plex Sans Arabic'`);
         await (document as Document).fonts.ready;
       } catch {
         /* تجاهل */
       }
       ctx.fillStyle = NAME_COLOR;
-      ctx.font = `700 ${NAME_SIZE * s}px 'Reem Kufi', sans-serif`;
+      ctx.font = `700 ${NAME_SIZE * s}px ${NAME_FONT}`;
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
       ctx.direction = "rtl";
@@ -167,7 +136,7 @@ export function CertificateModal({
         canvas.toBlob((b) => (b ? resolve(b) : reject(new Error("toBlob"))), "image/png"),
       );
 
-      // الجوال (iOS/Android): قائمة المشاركة → "حفظ الصورة"
+      // الجوال: قائمة المشاركة → "حفظ الصورة"
       const nav = navigator as Navigator & {
         canShare?: (data?: { files?: File[] }) => boolean;
         share?: (data: { files?: File[]; title?: string }) => Promise<void>;
@@ -178,8 +147,7 @@ export function CertificateModal({
           await nav.share({ files: [file], title: "شهادة قامة الشهر" });
           return;
         } catch (e) {
-          if ((e as { name?: string })?.name === "AbortError") return; // ألغى المستخدم
-          // غير ذلك: نكمل للطريقة البديلة
+          if ((e as { name?: string })?.name === "AbortError") return;
         }
       }
 
@@ -239,7 +207,7 @@ export function CertificateModal({
           type="button"
           aria-label="إغلاق"
           onClick={onClose}
-          className="absolute end-4 top-4 z-10 grid cursor-pointer size-9 place-items-center rounded-full border border-border bg-background text-muted-foreground transition-colors hover:text-primary"
+          className="absolute end-4 top-4 z-10 grid size-9 place-items-center rounded-full border border-border bg-background text-muted-foreground transition-colors hover:text-primary"
         >
           <X aria-hidden className="size-4" />
         </button>
@@ -269,7 +237,7 @@ export function CertificateModal({
             type="button"
             onClick={download}
             disabled={downloading}
-            className="inline-flex cursor-pointer items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-all duration-300 hover:brightness-110 disabled:cursor-wait disabled:opacity-60"
+            className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-all duration-300 hover:brightness-110 disabled:opacity-60"
           >
             <Download aria-hidden className="size-4" />
             {downloading ? "جاري التحضير..." : "تحميل الشهادة"}
@@ -279,7 +247,7 @@ export function CertificateModal({
             type="button"
             onClick={shareX}
             aria-label="مشاركة على X"
-            className="grid size-11 cursor-pointer place-items-center rounded-full border border-border bg-background text-foreground transition-all duration-300 hover:-translate-y-0.5 hover:border-accent hover:bg-accent hover:text-accent-foreground"
+            className="grid size-11 place-items-center rounded-full border border-border bg-background text-foreground transition-all duration-300 hover:-translate-y-0.5 hover:border-accent hover:bg-accent hover:text-accent-foreground"
           >
             <span className="text-sm font-bold">X</span>
           </button>
@@ -287,7 +255,7 @@ export function CertificateModal({
             type="button"
             onClick={shareLinkedIn}
             aria-label="مشاركة على LinkedIn"
-            className="grid size-11 cursor-pointer place-items-center rounded-full border border-border bg-background text-foreground transition-all duration-300 hover:-translate-y-0.5 hover:border-accent hover:bg-accent hover:text-accent-foreground"
+            className="grid size-11 place-items-center rounded-full border border-border bg-background text-foreground transition-all duration-300 hover:-translate-y-0.5 hover:border-accent hover:bg-accent hover:text-accent-foreground"
           >
             <Linkedin aria-hidden className="size-[18px]" />
           </button>
@@ -295,7 +263,7 @@ export function CertificateModal({
             type="button"
             onClick={copyLink}
             aria-label="نسخ الرابط"
-            className="grid size-11 cursor-pointer place-items-center rounded-full border border-border bg-background text-foreground transition-all duration-300 hover:-translate-y-0.5 hover:border-accent hover:bg-accent hover:text-accent-foreground"
+            className="grid size-11 place-items-center rounded-full border border-border bg-background text-foreground transition-all duration-300 hover:-translate-y-0.5 hover:border-accent hover:bg-accent hover:text-accent-foreground"
           >
             {copied ? (
               <Check aria-hidden className="size-[18px] text-primary" />

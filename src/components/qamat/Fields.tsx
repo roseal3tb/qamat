@@ -24,7 +24,7 @@ export function Fields() {
         </div>
 
         {/* شبكة كاردز مربعة */}
-        <div className="mx-auto mt-12 grid max-w-3xl grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 md:mt-14">
+        <div className="mx-auto mt-10 grid max-w-2xl grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 md:mt-12">
           {fields.map((f, i) => {
             const tint = TINTS[i % TINTS.length];
 
@@ -40,18 +40,18 @@ export function Fields() {
                   ease: [0.16, 1, 0.3, 1],
                 }}
                 style={{ "--tint": `hsl(${tint})` } as Record<string, string>}
-                className="qamat-surface group flex aspect-square flex-col items-center justify-center gap-2.5 p-4 text-center"
+                className="qamat-surface group flex min-h-32 flex-col items-center justify-center gap-2 p-3 text-center transition-transform duration-300 hover:-translate-y-1 sm:min-h-36 sm:gap-2.5 sm:p-4"
               >
                 {/* الرقم */}
                 <span
-                  className="text-[0.62rem] font-medium"
+                  className="text-[0.58rem] font-medium sm:text-[0.62rem]"
                   style={{ color: "color-mix(in srgb, var(--tint) 70%, transparent)" }}
                 >
                   {f.num}
                 </span>
 
                 {/* الاسم */}
-                <h3 className="text-[0.9rem] font-semibold leading-snug sm:text-base">
+                <h3 className="text-sm font-semibold leading-snug sm:text-base">
                   {f.name}
                 </h3>
 

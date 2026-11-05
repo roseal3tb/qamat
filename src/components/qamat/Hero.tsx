@@ -1,10 +1,10 @@
 import { brand } from "@/data/qamatData";
-import { FeaturedBanner } from "./FeaturedBanner";
 import { useOpenPrograms } from "@/hooks/use-program-open";
 import { Link } from "@tanstack/react-router";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import { useRef } from "react";
+import { FeaturedBanner } from "./FeaturedBanner";
 
 /* =========================================================================
    اللوقو يتكوّن عمود عمود
@@ -104,7 +104,7 @@ export function Hero() {
     target: ref,
     offset: ["start start", "end start"],
   });
-  const y = useTransform(scrollYProgress, [0, 1], [0, 70]);
+  const y = useTransform(scrollYProgress, [0, 1], [0, 60]);
   const opacity = useTransform(scrollYProgress, [0, 0.85], [1, 0]);
 
   const line = "نبني الكفاءات، نصنع الخبرة، ونمكّن الأثر";
@@ -116,9 +116,9 @@ export function Hero() {
         <div className="qamat-hero relative overflow-hidden">
           <HeroBackdrop />
 
-          {/* ===== الشعار — عنصر خلفي على اليسار ===== */}
-          <div className="pointer-events-none absolute inset-y-0 -left-[14%] flex items-center opacity-25 sm:-left-[8%] sm:opacity-40 md:-left-[7%] md:opacity-100">
-            <LogoBuild className="w-[88vw] sm:w-[54vw] md:w-[44vw] md:max-w-[560px]" />
+          {/* ===== الشعار — عنصر خلفي على اليسار (أصغر) ===== */}
+          <div className="pointer-events-none absolute inset-y-0 -left-[12%] flex items-center opacity-20 sm:-left-[7%] sm:opacity-35 md:-left-[6%] md:opacity-90">
+            <LogoBuild className="w-[62vw] sm:w-[42vw] md:w-[34vw] md:max-w-[420px]" />
           </div>
 
           {/* حجاب فاتح خلف النص ليبقى مقروءًا فوق الشعار */}
@@ -131,10 +131,10 @@ export function Hero() {
             }}
           />
 
-          {/* ===== النص — موسّط ===== */}
+          {/* ===== النص — موسّط (ارتفاع أصغر) ===== */}
           <motion.div
             style={{ y, opacity }}
-            className="relative z-10 mx-auto flex max-w-2xl flex-col items-center px-6 py-20 text-center md:px-10 md:py-28"
+            className="relative z-10 mx-auto flex max-w-2xl flex-col items-center px-6 py-14 text-center md:px-10 md:py-18"
           >
             {/* شارة البرنامج المفتوح — تختفي تلقائيًا بعد إغلاق التسجيل */}
             {featured && (
@@ -142,7 +142,7 @@ export function Hero() {
                 initial={{ opacity: 0, y: -8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.15, duration: 0.7 }}
-                className="mb-7"
+                className="mb-6"
               >
                 <Link
                   to="/programs"
@@ -175,12 +175,12 @@ export function Hero() {
               initial={{ opacity: 0, y: 22 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 1, ease: [0.22, 1, 0.36, 1] }}
-              className="mt-5 text-[clamp(3rem,8vw,5.5rem)] font-semibold leading-[1] tracking-tight"
+              className="mt-4 text-[clamp(2.4rem,6.5vw,4.2rem)] font-semibold leading-[1] tracking-tight"
             >
               {brand.nameAr}
             </motion.h1>
 
-            <p className="mt-6 text-[clamp(1.05rem,2.4vw,1.6rem)] font-medium leading-[1.6]">
+            <p className="mt-5 text-[clamp(1rem,2.2vw,1.35rem)] font-medium leading-[1.6]">
               {line.split(" ").map((w, i) => (
                 <span
                   key={i}
@@ -202,22 +202,13 @@ export function Hero() {
               ))}
             </p>
 
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.15, duration: 0.8 }}
-              className="mt-6 max-w-lg text-sm leading-loose text-muted-foreground md:text-base"
-            >
-              {brand.intro}
-            </motion.p>
-
             {/* مؤشر التمرير — بديل الأزرار */}
             <motion.a
               href="#about"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 1.6, duration: 0.8 }}
-              className="mt-12 flex flex-col items-center gap-2 text-xs text-muted-foreground transition-colors hover:text-accent-strong"
+              transition={{ delay: 1.2, duration: 0.8 }}
+              className="mt-8 flex flex-col items-center gap-2 text-xs text-muted-foreground transition-colors hover:text-accent-strong"
             >
               اكتشف
               <motion.span

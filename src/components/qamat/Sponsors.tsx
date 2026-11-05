@@ -17,14 +17,15 @@ export function Sponsors() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="group mx-auto mt-12 flex w-full justify-center md:mt-16"
+          className="mx-auto mt-10 flex justify-center md:mt-12"
         >
+          {/* الشعار مفرّغ بدون أي خلفية أو بوكس */}
           <img
             src="/sponsors/sweater.png"
             alt="شعار سويتر"
             loading="lazy"
             decoding="async"
-            className="h-auto w-full max-w-[320px] object-contain transition-transform duration-700 group-hover:scale-[1.03]"
+            className="h-16 w-auto object-contain transition-transform duration-500 hover:scale-105 sm:h-20"
           />
         </motion.div>
       </div>
