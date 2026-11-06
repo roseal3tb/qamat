@@ -566,7 +566,7 @@ export const featuredDepartments: { name: string }[] = [
 export const featuredPeople: FeaturedPerson[] = [
   // ===== قادة الإدارات =====
   { id: "rahaf-arifi", name: "رهف العريفي", gender: "f", group: "leader", title: "قائدة إدارة الموارد البشرية", photo: "" },
-  { id: "bareah-altayyar", name: "بارعة الطيار", gender: "f", group: "leader", title: "قائدة إدارة التقنية", photo: "" },
+  { id: "bareah-altayyar", name: "بارعه الطيار", gender: "f", group: "leader", title: "قائدة إدارة التقنية", photo: "" },
 
   // ===== نواب قادة الإدارات =====
   { id: "tolin-alsalwi", name: "تولين الصلوي", gender: "f", group: "deputy", title: "نائبة إدارة التشغيل والتطوير", photo: "" },
@@ -602,6 +602,7 @@ export const featuredPeople: FeaturedPerson[] = [
   { id: "maha-alsuhail", name: "مها السهيل", gender: "f", group: "member", title: "عضو · لجنة الابتكار والتطوير", photo: "" },
   { id: "aljawhara-aldaaj", name: "الجوهرة الداعج", gender: "f", group: "member", title: "عضو · لجنة الابتكار والتطوير", photo: "" },
   { id: "lina-altuwaijri", name: "لينا التويجري", gender: "f", group: "member", title: "عضو · لجنة الابتكار والتطوير", photo: "" },
+  { id: "huda-aldalbahi", name: "هدى الدلبحي", gender: "f", group: "member", title: "عضو · لجنة الابتكار والتطوير", photo: "" },
 ];
 
 /** يبحث عن شخص مميّز بمعرّفه */
